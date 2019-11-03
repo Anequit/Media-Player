@@ -35,6 +35,7 @@
             this.Songname_LBL = new System.Windows.Forms.TextBox();
             this.Volume = new System.Windows.Forms.TrackBar();
             this.volume_lbl = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Volume)).BeginInit();
             this.SuspendLayout();
             // 
@@ -43,6 +44,7 @@
             this.Start_BTN.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Start_BTN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Start_BTN.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.Start_BTN.Location = new System.Drawing.Point(106, 154);
             this.Start_BTN.Name = "Start_BTN";
             this.Start_BTN.Size = new System.Drawing.Size(173, 23);
@@ -56,6 +58,7 @@
             this.Stop_BTN.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Stop_BTN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Stop_BTN.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.Stop_BTN.Location = new System.Drawing.Point(284, 154);
             this.Stop_BTN.Name = "Stop_BTN";
             this.Stop_BTN.Size = new System.Drawing.Size(84, 23);
@@ -69,6 +72,7 @@
             this.Next_BTN.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Next_BTN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Next_BTN.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.Next_BTN.Location = new System.Drawing.Point(373, 154);
             this.Next_BTN.Name = "Next_BTN";
             this.Next_BTN.Size = new System.Drawing.Size(89, 23);
@@ -82,6 +86,7 @@
             this.Back_BTN.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Back_BTN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Back_BTN.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.Back_BTN.Location = new System.Drawing.Point(12, 154);
             this.Back_BTN.Name = "Back_BTN";
             this.Back_BTN.Size = new System.Drawing.Size(89, 23);
@@ -94,9 +99,11 @@
             // 
             this.Songname_LBL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.Songname_LBL.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
             this.Songname_LBL.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Songname_LBL.Cursor = System.Windows.Forms.Cursors.Default;
             this.Songname_LBL.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Songname_LBL.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.Songname_LBL.Location = new System.Drawing.Point(12, 12);
             this.Songname_LBL.Name = "Songname_LBL";
             this.Songname_LBL.ReadOnly = true;
@@ -119,18 +126,29 @@
             // volume_lbl
             // 
             this.volume_lbl.AutoSize = true;
+            this.volume_lbl.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.volume_lbl.Location = new System.Drawing.Point(50, 51);
             this.volume_lbl.Name = "volume_lbl";
             this.volume_lbl.Size = new System.Drawing.Size(25, 13);
             this.volume_lbl.TabIndex = 7;
             this.volume_lbl.Text = "100";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(370, 120);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(87, 13);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Made by Anequit";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
             this.ClientSize = new System.Drawing.Size(474, 189);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.volume_lbl);
             this.Controls.Add(this.Volume);
             this.Controls.Add(this.Songname_LBL);
@@ -159,6 +177,7 @@
         private System.Windows.Forms.TextBox Songname_LBL;
         private System.Windows.Forms.TrackBar Volume;
         private System.Windows.Forms.Label volume_lbl;
+        private System.Windows.Forms.Label label1;
     }
 }
 
