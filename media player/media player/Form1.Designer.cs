@@ -33,6 +33,9 @@
             this.Next_BTN = new System.Windows.Forms.Button();
             this.Back_BTN = new System.Windows.Forms.Button();
             this.Songname_LBL = new System.Windows.Forms.TextBox();
+            this.Volume = new System.Windows.Forms.TrackBar();
+            this.volume_lbl = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.Volume)).BeginInit();
             this.SuspendLayout();
             // 
             // Start_BTN
@@ -101,12 +104,35 @@
             this.Songname_LBL.TabIndex = 5;
             this.Songname_LBL.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // Volume
+            // 
+            this.Volume.Location = new System.Drawing.Point(12, 41);
+            this.Volume.Maximum = 100;
+            this.Volume.Name = "Volume";
+            this.Volume.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.Volume.Size = new System.Drawing.Size(45, 104);
+            this.Volume.TabIndex = 6;
+            this.Volume.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.Volume.Value = 100;
+            this.Volume.Scroll += new System.EventHandler(this.Volume_Scroll);
+            // 
+            // volume_lbl
+            // 
+            this.volume_lbl.AutoSize = true;
+            this.volume_lbl.Location = new System.Drawing.Point(50, 51);
+            this.volume_lbl.Name = "volume_lbl";
+            this.volume_lbl.Size = new System.Drawing.Size(25, 13);
+            this.volume_lbl.TabIndex = 7;
+            this.volume_lbl.Text = "100";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(474, 189);
+            this.Controls.Add(this.volume_lbl);
+            this.Controls.Add(this.Volume);
             this.Controls.Add(this.Songname_LBL);
             this.Controls.Add(this.Back_BTN);
             this.Controls.Add(this.Next_BTN);
@@ -118,6 +144,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MP3 PLAYER";
+            ((System.ComponentModel.ISupportInitialize)(this.Volume)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -130,6 +157,8 @@
         private System.Windows.Forms.Button Next_BTN;
         private System.Windows.Forms.Button Back_BTN;
         private System.Windows.Forms.TextBox Songname_LBL;
+        private System.Windows.Forms.TrackBar Volume;
+        private System.Windows.Forms.Label volume_lbl;
     }
 }
 

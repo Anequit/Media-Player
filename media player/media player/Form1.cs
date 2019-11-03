@@ -45,6 +45,8 @@ namespace media_player
             player.Open(controller.MediaPath(Path, files[index]));
 
             player.MediaEnded += Player_MediaEnded;
+            var Mp3 = controller.GetMediaMp3(Path);
+            Songname_LBL.Text = Mp3[index].Name;
         }
 
         private void Player_MediaEnded(object sender, EventArgs e)
@@ -73,6 +75,8 @@ namespace media_player
 
         private void Next_BTN_Click(object sender, EventArgs e)
         {
+            var Mp3 = controller.GetMediaMp3(Path);
+
             if (index == controller.GetMediaMp3(Path).Count - 1)
                 index = 0;
             else if (index != controller.GetMediaMp3(Path).Count - 1)
@@ -80,11 +84,12 @@ namespace media_player
 
             player.Open(controller.MediaPath(Path, controller.GetMediaMp3(Path)[index]));
             player.Play();
-            Songname_LBL.Text = index.ToString();
+            Songname_LBL.Text = Mp3[index].Name;
         }
 
         private void Back_BTN_Click(object sender, EventArgs e)
         {
+            var Mp3 = controller.GetMediaMp3(Path);
             if (index == 0)
                 index = controller.GetMediaMp3(Path).Count - 1;
             else if (index != 0) 
@@ -92,7 +97,13 @@ namespace media_player
 
             player.Open(controller.MediaPath(Path, controller.GetMediaMp3(Path)[index]));
             player.Play();
-            Songname_LBL.Text = index.ToString();
+            Songname_LBL.Text = Mp3[index].Name;
+        }
+
+        private void Volume_Scroll(object sender, EventArgs e)
+        {
+            volume_lbl.Text = (Volume.Value  / 1).ToString();
+            player.Volume = (Volume.Value * 0.01);
         }
     }
 }
