@@ -38,7 +38,8 @@ namespace media_player
 
             if(files.Count == 0)
             {
-                MessageBox.Show("No files in Media", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Media contains no mp3 files", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Process.Start(@".\Media");
                 Environment.Exit(1);
             }
 
