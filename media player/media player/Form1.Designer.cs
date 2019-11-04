@@ -196,8 +196,9 @@
             this.Controls.Add(this.Next_BTN);
             this.Controls.Add(this.Stop_BTN);
             this.Controls.Add(this.Start_BTN);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(490, 228);
+            this.MinimumSize = new System.Drawing.Size(490, 228);
             this.Name = "Form1";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

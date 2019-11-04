@@ -23,6 +23,7 @@ namespace media_player
         Random random = new Random();
 
         int index = 0;
+        int pastIndex = 0;
         string Path = $@"{Directory.GetCurrentDirectory()}\Media";
 
         bool repeating = false;
@@ -67,7 +68,14 @@ namespace media_player
                         index += 1;
                 }
                 else
+                {
+                    pastIndex = index;
                     index = random.Next(0, Mp3.Count - 1);
+
+                    while(index == pastIndex)
+                        index = random.Next(0, Mp3.Count - 1);
+                }
+                    
                 
             }
             
@@ -98,7 +106,13 @@ namespace media_player
                     index += 1;
             }
             else
-                index = random.Next(0, Mp3.Count() - 1);
+            {
+                pastIndex = index;
+                index = random.Next(0, Mp3.Count - 1);
+
+                while (index == pastIndex)
+                    index = random.Next(0, Mp3.Count - 1);
+            }
 
 
             player.Open(controller.MediaPath(Path, controller.GetMediaMp3(Path)[index]));
@@ -118,7 +132,13 @@ namespace media_player
                     index -= 1;
             }
             else
-                index = random.Next(0, Mp3.Count() - 1);
+            {
+                pastIndex = index;
+                index = random.Next(0, Mp3.Count - 1);
+
+                while (index == pastIndex)
+                    index = random.Next(0, Mp3.Count - 1);
+            }
 
             player.Open(controller.MediaPath(Path, controller.GetMediaMp3(Path)[index]));
             player.Play();
