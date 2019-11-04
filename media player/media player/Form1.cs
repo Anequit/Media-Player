@@ -26,7 +26,7 @@ namespace media_player
         string Path = $@"{Directory.GetCurrentDirectory()}\Media";
 
         bool repeating = false;
-        bool shuffling = true;
+        bool shuffling = false;
 
         public Form1()
         {
