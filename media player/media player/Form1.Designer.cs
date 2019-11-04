@@ -36,6 +36,8 @@
             this.Volume = new System.Windows.Forms.TrackBar();
             this.volume_lbl = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.Repeat_BTN = new System.Windows.Forms.CheckBox();
+            this.Shuffle_BTN = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.Volume)).BeginInit();
             this.SuspendLayout();
             // 
@@ -136,11 +138,47 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(370, 120);
+            this.label1.Location = new System.Drawing.Point(370, 51);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(87, 13);
             this.label1.TabIndex = 8;
             this.label1.Text = "Made by Anequit";
+            // 
+            // Repeat_BTN
+            // 
+            this.Repeat_BTN.Appearance = System.Windows.Forms.Appearance.Button;
+            this.Repeat_BTN.CheckAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.Repeat_BTN.FlatAppearance.BorderColor = System.Drawing.SystemColors.ScrollBar;
+            this.Repeat_BTN.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.Repeat_BTN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Repeat_BTN.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Repeat_BTN.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.Repeat_BTN.Location = new System.Drawing.Point(373, 125);
+            this.Repeat_BTN.Name = "Repeat_BTN";
+            this.Repeat_BTN.Size = new System.Drawing.Size(89, 23);
+            this.Repeat_BTN.TabIndex = 9;
+            this.Repeat_BTN.Text = "Repeat Track";
+            this.Repeat_BTN.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Repeat_BTN.UseVisualStyleBackColor = true;
+            this.Repeat_BTN.CheckedChanged += new System.EventHandler(this.Repeat_BTN_CheckedChanged);
+            // 
+            // Shuffle_BTN
+            // 
+            this.Shuffle_BTN.Appearance = System.Windows.Forms.Appearance.Button;
+            this.Shuffle_BTN.CheckAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.Shuffle_BTN.FlatAppearance.BorderColor = System.Drawing.SystemColors.ScrollBar;
+            this.Shuffle_BTN.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.Shuffle_BTN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Shuffle_BTN.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Shuffle_BTN.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.Shuffle_BTN.Location = new System.Drawing.Point(373, 96);
+            this.Shuffle_BTN.Name = "Shuffle_BTN";
+            this.Shuffle_BTN.Size = new System.Drawing.Size(89, 23);
+            this.Shuffle_BTN.TabIndex = 10;
+            this.Shuffle_BTN.Text = "Shuffle";
+            this.Shuffle_BTN.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Shuffle_BTN.UseVisualStyleBackColor = true;
+            this.Shuffle_BTN.CheckedChanged += new System.EventHandler(this.Shuffle_BTN_CheckedChanged);
             // 
             // Form1
             // 
@@ -148,6 +186,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
             this.ClientSize = new System.Drawing.Size(474, 189);
+            this.Controls.Add(this.Shuffle_BTN);
+            this.Controls.Add(this.Repeat_BTN);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.volume_lbl);
             this.Controls.Add(this.Volume);
@@ -178,6 +218,8 @@
         private System.Windows.Forms.TrackBar Volume;
         private System.Windows.Forms.Label volume_lbl;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox Repeat_BTN;
+        private System.Windows.Forms.CheckBox Shuffle_BTN;
     }
 }
 

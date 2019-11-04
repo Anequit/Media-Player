@@ -20,10 +20,13 @@ namespace media_player
     {
         MediaPlayer player = new MediaPlayer();
         MediaController controller = new MediaController();
+        Random random = new Random();
 
         int index = 0;
         string Path = $@"{Directory.GetCurrentDirectory()}\Media";
-        
+
+        bool repeating = false;
+        bool shuffling = true;
 
         public Form1()
         {
@@ -54,11 +57,20 @@ namespace media_player
         {
             var Mp3 = controller.GetMediaMp3(Path);
 
-            if (index == Mp3.Count - 1)
-                index = 0;
-            else if (index != Mp3.Count - 1)
-                index += 1;
-
+            if (!repeating)
+            {
+                if (!shuffling)
+                {
+                    if (index == Mp3.Count - 1)
+                        index = 0;
+                    else if (index != Mp3.Count - 1)
+                        index += 1;
+                }
+                else
+                    index = random.Next(0, Mp3.Count - 1);
+                
+            }
+            
             player.Open(controller.MediaPath(Path, Mp3[index]));
             player.Play();
             Songname_LBL.Text = Mp3[index].Name;
@@ -78,10 +90,16 @@ namespace media_player
         {
             var Mp3 = controller.GetMediaMp3(Path);
 
-            if (index == controller.GetMediaMp3(Path).Count - 1)
-                index = 0;
-            else if (index != controller.GetMediaMp3(Path).Count - 1)
-                index += 1;
+            if (!shuffling)
+            {
+                if (index == controller.GetMediaMp3(Path).Count - 1)
+                    index = 0;
+                else if (index != controller.GetMediaMp3(Path).Count - 1)
+                    index += 1;
+            }
+            else
+                index = random.Next(0, Mp3.Count() - 1);
+
 
             player.Open(controller.MediaPath(Path, controller.GetMediaMp3(Path)[index]));
             player.Play();
@@ -91,10 +109,16 @@ namespace media_player
         private void Back_BTN_Click(object sender, EventArgs e)
         {
             var Mp3 = controller.GetMediaMp3(Path);
-            if (index == 0)
-                index = controller.GetMediaMp3(Path).Count - 1;
-            else if (index != 0) 
-                index -= 1;
+
+            if (!shuffling)
+            {
+                if (index == 0)
+                    index = controller.GetMediaMp3(Path).Count - 1;
+                else if (index != 0)
+                    index -= 1;
+            }
+            else
+                index = random.Next(0, Mp3.Count() - 1);
 
             player.Open(controller.MediaPath(Path, controller.GetMediaMp3(Path)[index]));
             player.Play();
@@ -105,6 +129,24 @@ namespace media_player
         {
             volume_lbl.Text = (Volume.Value  / 1).ToString();
             player.Volume = (Volume.Value * 0.01);
+        }
+
+        private void Repeat_BTN_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Repeat_BTN.CheckState == CheckState.Checked)
+                repeating = true;
+
+            if (Repeat_BTN.CheckState == CheckState.Unchecked)
+                repeating = false;
+        }
+
+        private void Shuffle_BTN_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Shuffle_BTN.CheckState == CheckState.Checked)
+                shuffling = true;
+
+            if (Shuffle_BTN.CheckState == CheckState.Unchecked)
+                shuffling = false;
         }
     }
 }
