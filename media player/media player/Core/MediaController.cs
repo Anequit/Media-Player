@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
 
 namespace media_player.Core
 {
-    class MediaController
+    public class MediaController
     {
         public Uri MediaPath(string path, FileInfo file)
             => new Uri($@"{path}\{file.Name}");

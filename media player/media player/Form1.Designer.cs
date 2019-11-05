@@ -122,7 +122,7 @@
             this.Volume.Size = new System.Drawing.Size(45, 104);
             this.Volume.TabIndex = 6;
             this.Volume.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
-            this.Volume.Value = 100;
+            this.Volume.Value = 50;
             this.Volume.Scroll += new System.EventHandler(this.Volume_Scroll);
             // 
             // volume_lbl
@@ -131,9 +131,9 @@
             this.volume_lbl.ForeColor = System.Drawing.SystemColors.ScrollBar;
             this.volume_lbl.Location = new System.Drawing.Point(50, 51);
             this.volume_lbl.Name = "volume_lbl";
-            this.volume_lbl.Size = new System.Drawing.Size(25, 13);
+            this.volume_lbl.Size = new System.Drawing.Size(13, 13);
             this.volume_lbl.TabIndex = 7;
-            this.volume_lbl.Text = "100";
+            this.volume_lbl.Text = "0";
             // 
             // label1
             // 

@@ -21,6 +21,7 @@ namespace media_player
         MediaPlayer player = new MediaPlayer();
         MediaController controller = new MediaController();
         Random random = new Random();
+        IndexHelper indexHelper = new IndexHelper();
 
         int index = 0;
         int pastIndex = 0;
@@ -50,8 +51,11 @@ namespace media_player
             player.Open(controller.MediaPath(Path, files[index]));
 
             player.MediaEnded += Player_MediaEnded;
+
             var Mp3 = controller.GetMediaMp3(Path);
+
             Songname_LBL.Text = Mp3[index].Name;
+            volume_lbl.Text = (Volume.Value / 1).ToString();
         }
 
         private void Player_MediaEnded(object sender, EventArgs e)
@@ -61,22 +65,9 @@ namespace media_player
             if (!repeating)
             {
                 if (!shuffling)
-                {
-                    if (index == Mp3.Count - 1)
-                        index = 0;
-                    else if (index != Mp3.Count - 1)
-                        index += 1;
-                }
+                    index = indexHelper.IndexQueueNext(index, Path, controller);
                 else
-                {
-                    pastIndex = index;
-                    index = random.Next(0, Mp3.Count - 1);
-
-                    while(index == pastIndex)
-                        index = random.Next(0, Mp3.Count - 1);
-                }
-                    
-                
+                    index = indexHelper.ShuffleIndex(index, pastIndex, random, Mp3);
             }
             
             player.Open(controller.MediaPath(Path, Mp3[index]));
@@ -99,22 +90,10 @@ namespace media_player
             var Mp3 = controller.GetMediaMp3(Path);
 
             if (!shuffling)
-            {
-                if (index == controller.GetMediaMp3(Path).Count - 1)
-                    index = 0;
-                else if (index != controller.GetMediaMp3(Path).Count - 1)
-                    index += 1;
-            }
+                index = indexHelper.IndexQueueNext(index, Path, controller);
             else
-            {
-                pastIndex = index;
-                index = random.Next(0, Mp3.Count - 1);
-
-                while (index == pastIndex)
-                    index = random.Next(0, Mp3.Count - 1);
-            }
-
-
+                index = indexHelper.ShuffleIndex(index, pastIndex, random, Mp3);
+            
             player.Open(controller.MediaPath(Path, controller.GetMediaMp3(Path)[index]));
             player.Play();
             Songname_LBL.Text = Mp3[index].Name;
@@ -122,23 +101,12 @@ namespace media_player
 
         private void Back_BTN_Click(object sender, EventArgs e)
         {
-            var Mp3 = controller.GetMediaMp3(Path);
+            List<FileInfo> Mp3 = controller.GetMediaMp3(Path);
 
             if (!shuffling)
-            {
-                if (index == 0)
-                    index = controller.GetMediaMp3(Path).Count - 1;
-                else if (index != 0)
-                    index -= 1;
-            }
+                index = indexHelper.IndexQueueBack(index, Path, controller);
             else
-            {
-                pastIndex = index;
-                index = random.Next(0, Mp3.Count - 1);
-
-                while (index == pastIndex)
-                    index = random.Next(0, Mp3.Count - 1);
-            }
+                index = indexHelper.ShuffleIndex(index, pastIndex, random, Mp3);
 
             player.Open(controller.MediaPath(Path, controller.GetMediaMp3(Path)[index]));
             player.Play();
