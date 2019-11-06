@@ -16,7 +16,7 @@ using System.Diagnostics;
 
 namespace media_player
 {
-    public partial class Form1 : Form
+    public partial class Mp3_Player : Form
     {
         MediaPlayer player = new MediaPlayer();
         MediaController controller = new MediaController();
@@ -30,7 +30,7 @@ namespace media_player
         bool repeating = false;
         bool shuffling = false;
 
-        public Form1()
+        public Mp3_Player()
         {
             InitializeComponent();
 
@@ -87,6 +87,7 @@ namespace media_player
 
         private void Next_BTN_Click(object sender, EventArgs e)
         {
+
             var Mp3 = controller.GetMediaMp3(Path);
 
             if (!shuffling)
