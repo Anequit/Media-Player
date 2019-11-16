@@ -17,9 +17,7 @@ namespace media_player.Core
             foreach (var file in DirInfo.GetFiles()) // Gathers files
             {
                 if (file.Extension == ".mp3") // Gathers mp3 files
-                {
                     files.Add(file);
-                }
             }
 
             return files;
