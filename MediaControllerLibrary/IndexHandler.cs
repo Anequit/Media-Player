@@ -9,14 +9,17 @@ namespace MediaControllerLibrary
 {
     public class IndexHandler
     {
+        private readonly Random randomizer;
+
         private int currentIndex = 0;
         private int previousIndex;
-
         private int indexMax = 0;
         private readonly int indexMin = 0;
 
         public IndexHandler(List<IEnumerable> enumerables)
         {
+            randomizer = new Random();
+
             UpdateIndex(enumerables);
         }
 
@@ -73,7 +76,12 @@ namespace MediaControllerLibrary
         {
             // Shuffle the index by generating a random index number between 0 and the max ammount
 
-
+            previousIndex = currentIndex;
+            
+            do
+            {
+                currentIndex = randomizer.Next(indexMin, indexMax);    
+            } while (previousIndex == currentIndex);
         }
     }
 }
