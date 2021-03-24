@@ -41,12 +41,6 @@ namespace MediaControllerLibrary
 
         }
 
-
-        /// <summary>
-        /// Inverts a boolean
-        /// </summary>
-        /// <param name="boolean"></param>
-        /// <returns></returns>
         private bool BoolInvert(bool boolean)
         {
             if (boolean)
