@@ -24,7 +24,9 @@ namespace MediaControllerLibrary
         /// <summary>
         /// Returns a built FileList with FileModels
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// List of FileModels
+        /// </returns>
         public List<FileModel> GetFileList()
         {
             if(FileList == null)
