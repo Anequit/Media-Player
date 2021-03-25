@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaControllerLibrary", "MediaControllerLibrary\MediaControllerLibrary.csproj", "{B3E25845-0C49-41DC-8263-3FACFE487E0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaPlayerUI", "MediaPlayerUI\MediaPlayerUI.csproj", "{63E0D53D-B3B8-4897-B37C-E83D8ECC235E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaPlayerUI", "MediaPlayerUI\MediaPlayerUI.csproj", "{63E0D53D-B3B8-4897-B37C-E83D8ECC235E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
