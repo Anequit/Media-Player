@@ -53,7 +53,7 @@ namespace MediaControllerLibrary
                 FileModel fileListItem = new FileModel()
                 {
                     Name = file.Name,
-                    Path = file.FullName
+                    Path = new Uri(file.FullName)
                 };
 
                 FileList.Add(fileListItem);
