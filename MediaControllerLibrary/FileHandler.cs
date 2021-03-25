@@ -10,7 +10,7 @@ namespace MediaControllerLibrary
     {
         private readonly FileType fileType;
         private readonly string folderPath;
-        readonly List<FileModel> FileList = new();
+        readonly List<FileModel> FileList = new List<FileModel>();
 
         public FileHandler(string folderPath, FileType fileType)
         {
@@ -26,7 +26,7 @@ namespace MediaControllerLibrary
         /// </returns>
         public List<FileModel> GetFileList()
         {
-            if(FileList == null)
+            if(FileList.Count == 0)
                 throw new Exception("FileList is null");
 
             return FileList;
@@ -42,7 +42,7 @@ namespace MediaControllerLibrary
             // Add each supported file to the file list
             ClearFileList();
 
-            DirectoryInfo directoryInfo = new(folderPath);
+            DirectoryInfo directoryInfo = new DirectoryInfo(folderPath);
 
             foreach(var file in directoryInfo.GetFiles())
             {
@@ -50,7 +50,7 @@ namespace MediaControllerLibrary
                     return;
                 }
 
-                FileModel fileListItem = new()
+                FileModel fileListItem = new FileModel()
                 {
                     Name = file.Name,
                     Path = file.FullName

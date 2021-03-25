@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MediaControllerLibrary.Models;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -13,11 +14,11 @@ namespace MediaControllerLibrary
         private int indexMax = 0;
         private readonly int indexMin = 0;
 
-        public IndexHandler(List<IEnumerable> enumerables)
+        public IndexHandler(List<FileModel> fileModels)
         {
             randomizer = new Random();
 
-            UpdateIndex(enumerables);
+            UpdateIndex(fileModels);
         }
 
         /// <summary>
@@ -32,9 +33,9 @@ namespace MediaControllerLibrary
         /// <summary>
         /// Updates the index max
         /// </summary>
-        /// <param name="enumerables"></param>
-        public void UpdateIndex(List<IEnumerable> enumerables)
-            => indexMax = enumerables.Count - 1;
+        /// <param name="fileModels"></param>
+        public void UpdateIndex(List<FileModel> fileModels)
+            => indexMax = fileModels.Count - 1;
 
         /// <summary>
         /// Moves index back by 1

@@ -12,6 +12,7 @@ namespace MediaPlayerUI
 {
     public partial class MediaPlayerForm : Form
     {
+
         /**
         MediaPlayer player = new MediaPlayer();
         MediaController controller = new MediaController();
@@ -29,6 +30,12 @@ namespace MediaPlayerUI
         public MediaPlayerForm()
         {
             InitializeComponent();
+
+            // On start up initialize FileHandler and fetch mp3 files
+            //  
+            //
+
+
             /**
             if (!Directory.Exists(@".\Media"))
             {
@@ -76,7 +83,7 @@ namespace MediaPlayerUI
 
         private void Start_BTN_Click(object sender, EventArgs e)
         {
-            //player.Play();
+
         }
 
         private void Stop_BTN_Click(object sender, EventArgs e)
