@@ -44,16 +44,16 @@ namespace MediaPlayerUI
             // 
             // Start_BTN
             // 
-            this.Start_BTN.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.Start_BTN.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Start_BTN.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.Start_BTN.BackColor = System.Drawing.SystemColors.Control;
             this.Start_BTN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.Start_BTN.CausesValidation = false;
             this.Start_BTN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Start_BTN.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.Start_BTN.Location = new System.Drawing.Point(106, 158);
+            this.Start_BTN.ForeColor = System.Drawing.SystemColors.MenuText;
+            this.Start_BTN.Location = new System.Drawing.Point(111, 158);
             this.Start_BTN.Name = "Start_BTN";
-            this.Start_BTN.Size = new System.Drawing.Size(177, 23);
+            this.Start_BTN.Size = new System.Drawing.Size(167, 23);
             this.Start_BTN.TabIndex = 0;
             this.Start_BTN.TabStop = false;
             this.Start_BTN.Text = "▶";
@@ -63,11 +63,12 @@ namespace MediaPlayerUI
             // 
             // Stop_BTN
             // 
-            this.Stop_BTN.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.Stop_BTN.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Stop_BTN.CausesValidation = false;
+            this.Stop_BTN.FlatAppearance.BorderColor = System.Drawing.SystemColors.MenuText;
             this.Stop_BTN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Stop_BTN.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.Stop_BTN.ForeColor = System.Drawing.SystemColors.MenuText;
             this.Stop_BTN.Location = new System.Drawing.Point(284, 158);
             this.Stop_BTN.Name = "Stop_BTN";
             this.Stop_BTN.Size = new System.Drawing.Size(88, 23);
@@ -79,11 +80,11 @@ namespace MediaPlayerUI
             // 
             // Next_BTN
             // 
-            this.Next_BTN.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.Next_BTN.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Next_BTN.CausesValidation = false;
             this.Next_BTN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Next_BTN.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.Next_BTN.ForeColor = System.Drawing.SystemColors.MenuText;
             this.Next_BTN.Location = new System.Drawing.Point(374, 158);
             this.Next_BTN.Name = "Next_BTN";
             this.Next_BTN.Size = new System.Drawing.Size(93, 23);
@@ -95,11 +96,11 @@ namespace MediaPlayerUI
             // 
             // Back_BTN
             // 
-            this.Back_BTN.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.Back_BTN.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Back_BTN.CausesValidation = false;
             this.Back_BTN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Back_BTN.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.Back_BTN.ForeColor = System.Drawing.SystemColors.MenuText;
             this.Back_BTN.Location = new System.Drawing.Point(12, 158);
             this.Back_BTN.Name = "Back_BTN";
             this.Back_BTN.Size = new System.Drawing.Size(93, 23);
@@ -111,9 +112,9 @@ namespace MediaPlayerUI
             // 
             // Songname_LBL
             // 
-            this.Songname_LBL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.Songname_LBL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Songname_LBL.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(45)))));
+            this.Songname_LBL.BackColor = System.Drawing.SystemColors.ControlLight;
             this.Songname_LBL.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Songname_LBL.CausesValidation = false;
             this.Songname_LBL.Cursor = System.Windows.Forms.Cursors.Default;
@@ -130,6 +131,7 @@ namespace MediaPlayerUI
             // 
             // Volume
             // 
+            this.Volume.BackColor = System.Drawing.SystemColors.Control;
             this.Volume.CausesValidation = false;
             this.Volume.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.Volume.LargeChange = 20;
@@ -148,8 +150,8 @@ namespace MediaPlayerUI
             // volume_lbl
             // 
             this.volume_lbl.AutoSize = true;
-            this.volume_lbl.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.volume_lbl.Location = new System.Drawing.Point(44, 86);
+            this.volume_lbl.ForeColor = System.Drawing.SystemColors.MenuText;
+            this.volume_lbl.Location = new System.Drawing.Point(44, 85);
             this.volume_lbl.Name = "volume_lbl";
             this.volume_lbl.Size = new System.Drawing.Size(13, 13);
             this.volume_lbl.TabIndex = 7;
@@ -170,14 +172,14 @@ namespace MediaPlayerUI
             this.Repeat_BTN.Appearance = System.Windows.Forms.Appearance.Button;
             this.Repeat_BTN.CausesValidation = false;
             this.Repeat_BTN.CheckAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.Repeat_BTN.FlatAppearance.BorderColor = System.Drawing.SystemColors.ScrollBar;
-            this.Repeat_BTN.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.Repeat_BTN.FlatAppearance.BorderColor = System.Drawing.SystemColors.MenuText;
+            this.Repeat_BTN.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ControlLight;
             this.Repeat_BTN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Repeat_BTN.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Repeat_BTN.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.Repeat_BTN.Location = new System.Drawing.Point(106, 125);
+            this.Repeat_BTN.ForeColor = System.Drawing.SystemColors.MenuText;
+            this.Repeat_BTN.Location = new System.Drawing.Point(284, 133);
             this.Repeat_BTN.Name = "Repeat_BTN";
-            this.Repeat_BTN.Size = new System.Drawing.Size(89, 23);
+            this.Repeat_BTN.Size = new System.Drawing.Size(88, 23);
             this.Repeat_BTN.TabIndex = 9;
             this.Repeat_BTN.TabStop = false;
             this.Repeat_BTN.Text = "Repeat Track";
@@ -190,14 +192,14 @@ namespace MediaPlayerUI
             this.Shuffle_BTN.Appearance = System.Windows.Forms.Appearance.Button;
             this.Shuffle_BTN.CausesValidation = false;
             this.Shuffle_BTN.CheckAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.Shuffle_BTN.FlatAppearance.BorderColor = System.Drawing.SystemColors.ScrollBar;
-            this.Shuffle_BTN.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.Shuffle_BTN.FlatAppearance.BorderColor = System.Drawing.SystemColors.MenuText;
+            this.Shuffle_BTN.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ControlLight;
             this.Shuffle_BTN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Shuffle_BTN.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Shuffle_BTN.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.Shuffle_BTN.Location = new System.Drawing.Point(201, 125);
+            this.Shuffle_BTN.ForeColor = System.Drawing.SystemColors.MenuText;
+            this.Shuffle_BTN.Location = new System.Drawing.Point(374, 133);
             this.Shuffle_BTN.Name = "Shuffle_BTN";
-            this.Shuffle_BTN.Size = new System.Drawing.Size(78, 23);
+            this.Shuffle_BTN.Size = new System.Drawing.Size(93, 23);
             this.Shuffle_BTN.TabIndex = 10;
             this.Shuffle_BTN.TabStop = false;
             this.Shuffle_BTN.Text = "Shuffle";
@@ -205,11 +207,11 @@ namespace MediaPlayerUI
             this.Shuffle_BTN.UseVisualStyleBackColor = true;
             this.Shuffle_BTN.CheckedChanged += new System.EventHandler(this.Shuffle_BTN_CheckedChanged);
             // 
-            // Mp3_Player
+            // MediaPlayerForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(474, 189);
             this.Controls.Add(this.Shuffle_BTN);
             this.Controls.Add(this.Repeat_BTN);
@@ -225,7 +227,7 @@ namespace MediaPlayerUI
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(490, 228);
             this.MinimumSize = new System.Drawing.Size(490, 228);
-            this.Name = "Mp3_Player";
+            this.Name = "MediaPlayerForm";
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
