@@ -19,8 +19,8 @@ namespace MediaPlayerUI
 
             mediaHandler = new MediaHandler(fileHandler.GetFileList());
 
-            Songname_LBL.Text = mediaHandler.GetCurrentSong();
-            volume_lbl.Text = $"{Volume.Value / 1}";
+            Songname_Label.Text = mediaHandler.GetCurrentSong();
+            Volume_Label.Text = $"{Volume_TrackBar.Value / 1}";
         }
 
         private void Start_BTN_Click(object sender, EventArgs e) => mediaHandler.Play();
@@ -29,20 +29,20 @@ namespace MediaPlayerUI
 
         private void Next_BTN_Click(object sender, EventArgs e)
         {
-            Songname_LBL.Text = mediaHandler.GetCurrentSong();
+            Songname_Label.Text = mediaHandler.GetCurrentSong();
             mediaHandler.Next();
         }
 
         private void Back_BTN_Click(object sender, EventArgs e)
         {
-            Songname_LBL.Text = mediaHandler.GetCurrentSong();
+            Songname_Label.Text = mediaHandler.GetCurrentSong();
             mediaHandler.Back();
         }
 
         private void Volume_Scroll(object sender, EventArgs e)
         {
-            volume_lbl.Text = $"{Volume.Value / 1}";
-            mediaHandler.ChangeVolume(Volume.Value);
+            Volume_Label.Text = $"{Volume_TrackBar.Value / 1}";
+            mediaHandler.ChangeVolume(Volume_TrackBar.Value);
         }
 
         private void Repeat_BTN_CheckedChanged(object sender, EventArgs e) => mediaHandler.ToggleRepeat();
