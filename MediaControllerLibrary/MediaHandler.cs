@@ -44,12 +44,14 @@ namespace MediaControllerLibrary
                 indexHandler.IndexNext();
 
             Open();
+            Play();
         }
 
         public void Back()
         {
             indexHandler.IndexBack();
             Open();
+            Play();
         }
         
         public void Open() => player.Open(fileModels[indexHandler.GetCurrentIndex()].Path);
