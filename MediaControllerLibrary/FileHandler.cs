@@ -38,9 +38,6 @@ namespace MediaControllerLibrary
         /// </summary>
         public void BuildFileList()
         {
-            // Fetch files with the chosen filetype
-            // map each file to a FileModel then
-            // Add each supported file to the file list
             ClearFileList();
 
             DirectoryInfo directoryInfo = new DirectoryInfo(folderPath);

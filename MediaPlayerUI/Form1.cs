@@ -1,34 +1,12 @@
 ﻿using MediaControllerLibrary;
 using MediaControllerLibrary.Entities;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MediaPlayerUI
 {
     public partial class MediaPlayerForm : Form
     {
-
-        /**
-        MediaPlayer player = new MediaPlayer();
-        MediaController controller = new MediaController();
-        Random random = new Random();
-        IndexHelper indexHelper = new IndexHelper();
-
-        int index = 0;
-        int pastIndex = 0;
-        string Path = $@"{Directory.GetCurrentDirectory()}\Media";
-
-        bool repeating = false;
-        bool shuffling = false;
-
-        **/
         readonly FileHandler fileHandler;
         readonly MediaHandler mediaHandler;
 
@@ -41,8 +19,8 @@ namespace MediaPlayerUI
 
             mediaHandler = new MediaHandler(fileHandler.GetFileList());
 
-            Songname_LBL.Text = mediaHandler.GetCurrentSong();
-            volume_lbl.Text = (Volume.Value / 1).ToString();
+            Songname_Label.Text = mediaHandler.GetCurrentSong();
+            Volume_Label.Text = $"{Volume_TrackBar.Value / 1}";
         }
 
         private void Start_BTN_Click(object sender, EventArgs e) => mediaHandler.Play();
@@ -51,20 +29,20 @@ namespace MediaPlayerUI
 
         private void Next_BTN_Click(object sender, EventArgs e)
         {
-            Songname_LBL.Text = mediaHandler.GetCurrentSong();
+            Songname_Label.Text = mediaHandler.GetCurrentSong();
             mediaHandler.Next();
         }
 
         private void Back_BTN_Click(object sender, EventArgs e)
         {
-            Songname_LBL.Text = mediaHandler.GetCurrentSong();
+            Songname_Label.Text = mediaHandler.GetCurrentSong();
             mediaHandler.Back();
         }
 
         private void Volume_Scroll(object sender, EventArgs e)
         {
-            volume_lbl.Text = (Volume.Value / 1).ToString();
-            mediaHandler.ChangeVolume(Volume.Value);
+            Volume_Label.Text = $"{Volume_TrackBar.Value / 1}";
+            mediaHandler.ChangeVolume(Volume_TrackBar.Value);
         }
 
         private void Repeat_BTN_CheckedChanged(object sender, EventArgs e) => mediaHandler.ToggleRepeat();

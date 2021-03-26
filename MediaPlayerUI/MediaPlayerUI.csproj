@@ -4,6 +4,14 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net48</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
+    <Platforms>AnyCPU;x64</Platforms>
+    <Version>2.0</Version>
+    <Authors>Anequit</Authors>
+    <Company>Anequit</Company>
+    <Product>Lightweight Media Player</Product>
+    <Description>A lightweight media player for computers with not so powerful components.</Description>
+    <PackageProjectUrl>https://github.com/Anequit/dotnet-media-player</PackageProjectUrl>
+    <RepositoryUrl></RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
