@@ -47,7 +47,7 @@ namespace MediaPlayerUI
 
         private void Start_BTN_Click(object sender, EventArgs e) => mediaHandler.Play();
 
-        private void Stop_BTN_Click(object sender, EventArgs e) => mediaHandler.Stop();
+        private void Stop_BTN_Click(object sender, EventArgs e) => mediaHandler.Pause();
 
         private void Next_BTN_Click(object sender, EventArgs e)
         {
