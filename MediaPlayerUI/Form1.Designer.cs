@@ -119,7 +119,7 @@ namespace MediaPlayerUI
             this.Songname_LBL.CausesValidation = false;
             this.Songname_LBL.Cursor = System.Windows.Forms.Cursors.Default;
             this.Songname_LBL.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Songname_LBL.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.Songname_LBL.ForeColor = System.Drawing.SystemColors.MenuText;
             this.Songname_LBL.HideSelection = false;
             this.Songname_LBL.Location = new System.Drawing.Point(12, 12);
             this.Songname_LBL.Name = "Songname_LBL";
@@ -161,7 +161,7 @@ namespace MediaPlayerUI
             // 
             this.label1.AutoSize = true;
             this.label1.CausesValidation = false;
-            this.label1.Location = new System.Drawing.Point(14, 138);
+            this.label1.Location = new System.Drawing.Point(12, 142);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(87, 13);
             this.label1.TabIndex = 8;
