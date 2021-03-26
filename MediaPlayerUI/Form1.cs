@@ -29,14 +29,14 @@ namespace MediaPlayerUI
 
         private void Next_BTN_Click(object sender, EventArgs e)
         {
-            Songname_Label.Text = mediaHandler.GetCurrentSong();
             mediaHandler.Next();
+            Songname_Label.Text = mediaHandler.GetCurrentSong();
         }
 
         private void Back_BTN_Click(object sender, EventArgs e)
         {
-            Songname_Label.Text = mediaHandler.GetCurrentSong();
             mediaHandler.Back();
+            Songname_Label.Text = mediaHandler.GetCurrentSong();
         }
 
         private void Volume_Scroll(object sender, EventArgs e)

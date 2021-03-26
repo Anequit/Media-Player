@@ -26,22 +26,7 @@ namespace MediaControllerLibrary
             Open();
         }
 
-        private void Player_MediaEnded(object sender, EventArgs e)
-        {
-            if (repeating)
-            {
-                Play();
-            }
-            else if (shuffling)
-            {
-                indexHandler.RandomizeIndex();
-                Next();
-            }
-            else
-            {
-                Next();
-            }
-        }
+        private void Player_MediaEnded(object sender, EventArgs e) => Next();
 
         public string GetCurrentSong() => fileModels[indexHandler.GetCurrentIndex()].Name;
 
@@ -53,7 +38,11 @@ namespace MediaControllerLibrary
 
         public void Next()
         {
-            indexHandler.IndexNext();
+            if (shuffling)
+                indexHandler.RandomizeIndex();
+            else if (!repeating)
+                indexHandler.IndexNext();
+
             Open();
         }
 
