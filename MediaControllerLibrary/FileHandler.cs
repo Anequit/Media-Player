@@ -3,6 +3,7 @@ using MediaControllerLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows.Forms;
 
 namespace MediaControllerLibrary
 {
@@ -12,10 +13,10 @@ namespace MediaControllerLibrary
         private readonly string folderPath;
         readonly List<FileModel> FileList = new List<FileModel>();
 
-        public FileHandler(string folderPath, FileType fileType)
+        public FileHandler(FileType fileType)
         {
             this.fileType = fileType;
-            this.folderPath = folderPath;
+            folderPath = OpenFolderDialog();
         }
 
         /// <summary>
@@ -46,8 +47,8 @@ namespace MediaControllerLibrary
 
             foreach(var file in directoryInfo.GetFiles())
             {
-                if(file.Extension != fileType.ToString()) {
-                    return;
+                if(file.Extension != $".{fileType}") {
+                    continue;
                 }
 
                 FileModel fileListItem = new FileModel()
@@ -57,6 +58,19 @@ namespace MediaControllerLibrary
                 };
 
                 FileList.Add(fileListItem);
+            }
+        }
+
+        private string OpenFolderDialog()
+        {
+            using(FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog())
+            {
+                folderBrowserDialog.ShowNewFolderButton = false;
+                folderBrowserDialog.Description = "Media location.";
+
+                folderBrowserDialog.ShowDialog();
+
+                return folderBrowserDialog.SelectedPath;
             }
         }
 

@@ -70,7 +70,7 @@ namespace MediaControllerLibrary
         /// <summary>
         /// Sets current index to a random number.
         /// </summary>
-        public void RandomIndex()
+        public void RandomizeIndex()
         {
             // Shuffle the index by generating a random index number between 0 and the max ammount
 
