@@ -232,6 +232,7 @@ namespace MediaPlayerUI
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(474, 189);
             this.Controls.Add(Shuffle_Button);
             this.Controls.Add(Repeat_Button);
@@ -244,6 +245,7 @@ namespace MediaPlayerUI
             this.Controls.Add(Pause_Button);
             this.Controls.Add(Start_Button);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.ImeMode = System.Windows.Forms.ImeMode.Off;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(490, 228);
             this.MinimumSize = new System.Drawing.Size(490, 228);
