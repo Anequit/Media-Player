@@ -29,86 +29,102 @@ namespace MediaPlayerUI
         /// </summary>
         private void InitializeComponent()
         {
-            this.Start_Button = new System.Windows.Forms.Button();
-            this.Pause_Button = new System.Windows.Forms.Button();
-            this.Next_Button = new System.Windows.Forms.Button();
-            this.Back_Button = new System.Windows.Forms.Button();
+            System.Windows.Forms.Button Start_Button;
+            System.Windows.Forms.Button Pause_Button;
+            System.Windows.Forms.Button Next_Button;
+            System.Windows.Forms.Button Back_Button;
+            System.Windows.Forms.CheckBox Repeat_Button;
+            System.Windows.Forms.CheckBox Shuffle_Button;
             this.Songname_Label = new System.Windows.Forms.TextBox();
             this.Volume_TrackBar = new System.Windows.Forms.TrackBar();
             this.Volume_Label = new System.Windows.Forms.Label();
             this.Watermark_LBL = new System.Windows.Forms.Label();
-            this.Repeat_Button = new System.Windows.Forms.CheckBox();
-            this.Shuffle_Button = new System.Windows.Forms.CheckBox();
+            Start_Button = new System.Windows.Forms.Button();
+            Pause_Button = new System.Windows.Forms.Button();
+            Next_Button = new System.Windows.Forms.Button();
+            Back_Button = new System.Windows.Forms.Button();
+            Repeat_Button = new System.Windows.Forms.CheckBox();
+            Shuffle_Button = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.Volume_TrackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // Start_Button
             // 
-            this.Start_Button.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            Start_Button.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Start_Button.BackColor = System.Drawing.SystemColors.Control;
-            this.Start_Button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.Start_Button.CausesValidation = false;
-            this.Start_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Start_Button.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.Start_Button.Location = new System.Drawing.Point(111, 158);
-            this.Start_Button.Name = "Start_Button";
-            this.Start_Button.Size = new System.Drawing.Size(167, 23);
-            this.Start_Button.TabIndex = 0;
-            this.Start_Button.TabStop = false;
-            this.Start_Button.Text = "▶";
-            this.Start_Button.UseMnemonic = false;
-            this.Start_Button.UseVisualStyleBackColor = false;
-            this.Start_Button.Click += new System.EventHandler(this.Start_BTN_Click);
+            Start_Button.BackColor = System.Drawing.SystemColors.Control;
+            Start_Button.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            Start_Button.CausesValidation = false;
+            Start_Button.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            Start_Button.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ControlLight;
+            Start_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            Start_Button.ForeColor = System.Drawing.SystemColors.MenuText;
+            Start_Button.Location = new System.Drawing.Point(111, 158);
+            Start_Button.Name = "Start_Button";
+            Start_Button.Size = new System.Drawing.Size(167, 23);
+            Start_Button.TabIndex = 0;
+            Start_Button.TabStop = false;
+            Start_Button.Text = "▶";
+            Start_Button.UseMnemonic = false;
+            Start_Button.UseVisualStyleBackColor = false;
+            Start_Button.Click += new System.EventHandler(this.Start_BTN_Click);
             // 
             // Pause_Button
             // 
-            this.Pause_Button.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            Pause_Button.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Pause_Button.CausesValidation = false;
-            this.Pause_Button.FlatAppearance.BorderColor = System.Drawing.SystemColors.MenuText;
-            this.Pause_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Pause_Button.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.Pause_Button.Location = new System.Drawing.Point(284, 158);
-            this.Pause_Button.Name = "Pause_Button";
-            this.Pause_Button.Size = new System.Drawing.Size(88, 23);
-            this.Pause_Button.TabIndex = 1;
-            this.Pause_Button.TabStop = false;
-            this.Pause_Button.Text = "❙❙";
-            this.Pause_Button.UseVisualStyleBackColor = true;
-            this.Pause_Button.Click += new System.EventHandler(this.Stop_BTN_Click);
+            Pause_Button.CausesValidation = false;
+            Pause_Button.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            Pause_Button.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ControlLight;
+            Pause_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            Pause_Button.ForeColor = System.Drawing.SystemColors.MenuText;
+            Pause_Button.Location = new System.Drawing.Point(284, 158);
+            Pause_Button.Name = "Pause_Button";
+            Pause_Button.Size = new System.Drawing.Size(88, 23);
+            Pause_Button.TabIndex = 1;
+            Pause_Button.TabStop = false;
+            Pause_Button.Text = "❙❙";
+            Pause_Button.UseMnemonic = false;
+            Pause_Button.UseVisualStyleBackColor = false;
+            Pause_Button.Click += new System.EventHandler(this.Stop_BTN_Click);
             // 
             // Next_Button
             // 
-            this.Next_Button.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            Next_Button.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Next_Button.CausesValidation = false;
-            this.Next_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Next_Button.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.Next_Button.Location = new System.Drawing.Point(374, 158);
-            this.Next_Button.Name = "Next_Button";
-            this.Next_Button.Size = new System.Drawing.Size(93, 23);
-            this.Next_Button.TabIndex = 2;
-            this.Next_Button.TabStop = false;
-            this.Next_Button.Text = "↪";
-            this.Next_Button.UseVisualStyleBackColor = true;
-            this.Next_Button.Click += new System.EventHandler(this.Next_BTN_Click);
+            Next_Button.CausesValidation = false;
+            Next_Button.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            Next_Button.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ControlLight;
+            Next_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            Next_Button.ForeColor = System.Drawing.SystemColors.MenuText;
+            Next_Button.Location = new System.Drawing.Point(374, 158);
+            Next_Button.Name = "Next_Button";
+            Next_Button.Size = new System.Drawing.Size(93, 23);
+            Next_Button.TabIndex = 2;
+            Next_Button.TabStop = false;
+            Next_Button.Text = "↪";
+            Next_Button.UseMnemonic = false;
+            Next_Button.UseVisualStyleBackColor = false;
+            Next_Button.Click += new System.EventHandler(this.Next_BTN_Click);
             // 
             // Back_Button
             // 
-            this.Back_Button.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            Back_Button.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Back_Button.CausesValidation = false;
-            this.Back_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Back_Button.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.Back_Button.Location = new System.Drawing.Point(12, 158);
-            this.Back_Button.Name = "Back_Button";
-            this.Back_Button.Size = new System.Drawing.Size(93, 23);
-            this.Back_Button.TabIndex = 3;
-            this.Back_Button.TabStop = false;
-            this.Back_Button.Text = "↩";
-            this.Back_Button.UseVisualStyleBackColor = true;
-            this.Back_Button.Click += new System.EventHandler(this.Back_BTN_Click);
+            Back_Button.CausesValidation = false;
+            Back_Button.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            Back_Button.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ControlLight;
+            Back_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            Back_Button.ForeColor = System.Drawing.SystemColors.MenuText;
+            Back_Button.Location = new System.Drawing.Point(12, 158);
+            Back_Button.Name = "Back_Button";
+            Back_Button.Size = new System.Drawing.Size(93, 23);
+            Back_Button.TabIndex = 3;
+            Back_Button.TabStop = false;
+            Back_Button.Text = "↩";
+            Back_Button.UseMnemonic = false;
+            Back_Button.UseVisualStyleBackColor = false;
+            Back_Button.Click += new System.EventHandler(this.Back_BTN_Click);
             // 
             // Songname_Label
             // 
@@ -169,43 +185,47 @@ namespace MediaPlayerUI
             // 
             // Repeat_Button
             // 
-            this.Repeat_Button.Appearance = System.Windows.Forms.Appearance.Button;
-            this.Repeat_Button.CausesValidation = false;
-            this.Repeat_Button.CheckAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.Repeat_Button.FlatAppearance.BorderColor = System.Drawing.SystemColors.MenuText;
-            this.Repeat_Button.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ControlLight;
-            this.Repeat_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Repeat_Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Repeat_Button.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.Repeat_Button.Location = new System.Drawing.Point(284, 133);
-            this.Repeat_Button.Name = "Repeat_Button";
-            this.Repeat_Button.Size = new System.Drawing.Size(88, 23);
-            this.Repeat_Button.TabIndex = 9;
-            this.Repeat_Button.TabStop = false;
-            this.Repeat_Button.Text = "Repeat Track";
-            this.Repeat_Button.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.Repeat_Button.UseVisualStyleBackColor = true;
-            this.Repeat_Button.CheckedChanged += new System.EventHandler(this.Repeat_BTN_CheckedChanged);
+            Repeat_Button.Appearance = System.Windows.Forms.Appearance.Button;
+            Repeat_Button.CausesValidation = false;
+            Repeat_Button.CheckAlign = System.Drawing.ContentAlignment.TopCenter;
+            Repeat_Button.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            Repeat_Button.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ControlLight;
+            Repeat_Button.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ControlLight;
+            Repeat_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            Repeat_Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            Repeat_Button.ForeColor = System.Drawing.SystemColors.MenuText;
+            Repeat_Button.Location = new System.Drawing.Point(284, 133);
+            Repeat_Button.Name = "Repeat_Button";
+            Repeat_Button.Size = new System.Drawing.Size(88, 23);
+            Repeat_Button.TabIndex = 9;
+            Repeat_Button.TabStop = false;
+            Repeat_Button.Text = "Repeat Track";
+            Repeat_Button.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            Repeat_Button.UseMnemonic = false;
+            Repeat_Button.UseVisualStyleBackColor = false;
+            Repeat_Button.CheckedChanged += new System.EventHandler(this.Repeat_BTN_CheckedChanged);
             // 
             // Shuffle_Button
             // 
-            this.Shuffle_Button.Appearance = System.Windows.Forms.Appearance.Button;
-            this.Shuffle_Button.CausesValidation = false;
-            this.Shuffle_Button.CheckAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.Shuffle_Button.FlatAppearance.BorderColor = System.Drawing.SystemColors.MenuText;
-            this.Shuffle_Button.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ControlLight;
-            this.Shuffle_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Shuffle_Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Shuffle_Button.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.Shuffle_Button.Location = new System.Drawing.Point(374, 133);
-            this.Shuffle_Button.Name = "Shuffle_Button";
-            this.Shuffle_Button.Size = new System.Drawing.Size(93, 23);
-            this.Shuffle_Button.TabIndex = 10;
-            this.Shuffle_Button.TabStop = false;
-            this.Shuffle_Button.Text = "Shuffle";
-            this.Shuffle_Button.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.Shuffle_Button.UseVisualStyleBackColor = true;
-            this.Shuffle_Button.CheckedChanged += new System.EventHandler(this.Shuffle_BTN_CheckedChanged);
+            Shuffle_Button.Appearance = System.Windows.Forms.Appearance.Button;
+            Shuffle_Button.CausesValidation = false;
+            Shuffle_Button.CheckAlign = System.Drawing.ContentAlignment.TopCenter;
+            Shuffle_Button.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            Shuffle_Button.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ControlLight;
+            Shuffle_Button.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ControlLight;
+            Shuffle_Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            Shuffle_Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            Shuffle_Button.ForeColor = System.Drawing.SystemColors.MenuText;
+            Shuffle_Button.Location = new System.Drawing.Point(374, 133);
+            Shuffle_Button.Name = "Shuffle_Button";
+            Shuffle_Button.Size = new System.Drawing.Size(93, 23);
+            Shuffle_Button.TabIndex = 10;
+            Shuffle_Button.TabStop = false;
+            Shuffle_Button.Text = "Shuffle";
+            Shuffle_Button.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            Shuffle_Button.UseMnemonic = false;
+            Shuffle_Button.UseVisualStyleBackColor = false;
+            Shuffle_Button.CheckedChanged += new System.EventHandler(this.Shuffle_BTN_CheckedChanged);
             // 
             // MediaPlayerForm
             // 
@@ -213,16 +233,16 @@ namespace MediaPlayerUI
             this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(474, 189);
-            this.Controls.Add(this.Shuffle_Button);
-            this.Controls.Add(this.Repeat_Button);
+            this.Controls.Add(Shuffle_Button);
+            this.Controls.Add(Repeat_Button);
             this.Controls.Add(this.Watermark_LBL);
             this.Controls.Add(this.Volume_Label);
             this.Controls.Add(this.Volume_TrackBar);
             this.Controls.Add(this.Songname_Label);
-            this.Controls.Add(this.Back_Button);
-            this.Controls.Add(this.Next_Button);
-            this.Controls.Add(this.Pause_Button);
-            this.Controls.Add(this.Start_Button);
+            this.Controls.Add(Back_Button);
+            this.Controls.Add(Next_Button);
+            this.Controls.Add(Pause_Button);
+            this.Controls.Add(Start_Button);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(490, 228);
@@ -239,17 +259,10 @@ namespace MediaPlayerUI
         }
 
         #endregion
-
-        private System.Windows.Forms.Button Start_Button;
-        private System.Windows.Forms.Button Pause_Button;
-        private System.Windows.Forms.Button Next_Button;
-        private System.Windows.Forms.Button Back_Button;
         private System.Windows.Forms.TextBox Songname_Label;
         private System.Windows.Forms.TrackBar Volume_TrackBar;
         private System.Windows.Forms.Label Volume_Label;
         private System.Windows.Forms.Label Watermark_LBL;
-        private System.Windows.Forms.CheckBox Repeat_Button;
-        private System.Windows.Forms.CheckBox Shuffle_Button;
     }
 }
 
