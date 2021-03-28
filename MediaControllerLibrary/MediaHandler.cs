@@ -10,9 +10,11 @@ namespace MediaControllerLibrary
         private readonly MediaPlayer player;
         private readonly IndexHandler indexHandler;
         private readonly List<FileModel> fileModels;
-
+        
         private bool repeating = false;
         private bool shuffling = false;
+
+        public event EventHandler SongChangedEvent;
 
         public MediaHandler(List<FileModel> fileModels)
         {
@@ -45,6 +47,8 @@ namespace MediaControllerLibrary
 
             Open();
             Play();
+
+            SongChangedEvent.Invoke(this, EventArgs.Empty);
         }
 
         public void Back()
@@ -61,6 +65,8 @@ namespace MediaControllerLibrary
         public void ToggleRepeat() => repeating = BoolInvert(repeating);
 
         public void ChangeVolume(int volume) => player.Volume = volume * 0.01;
+
+        public void ChangeSpeed(int speed) => player.SpeedRatio = speed;
 
         private bool BoolInvert(bool boolean)
         {
