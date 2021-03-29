@@ -66,8 +66,6 @@ namespace MediaControllerLibrary
 
         public void ChangeVolume(int volume) => player.Volume = volume * 0.01;
 
-        public void ChangeSpeed(int speed) => player.SpeedRatio = speed;
-
         private bool BoolInvert(bool boolean)
         {
             if (boolean)

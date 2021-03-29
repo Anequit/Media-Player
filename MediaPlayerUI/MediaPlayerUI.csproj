@@ -13,7 +13,7 @@
     <PackageProjectUrl>https://github.com/Anequit/dotnet-media-player</PackageProjectUrl>
     <RepositoryUrl></RepositoryUrl>
   </PropertyGroup>
-
+  
   <ItemGroup>
     <ProjectReference Include="..\MediaControllerLibrary\MediaControllerLibrary.csproj" />
   </ItemGroup>
