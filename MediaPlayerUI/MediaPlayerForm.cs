@@ -19,8 +19,6 @@ namespace MediaPlayerUI
             else
                 fileHandler = new FileHandler(FileType.mp3);
 
-            fileHandler.BuildFileList();
-
             mediaHandler = new MediaHandler(fileHandler.GetFileList());
 
             mediaHandler.VolumeChangedEvent += MediaHandler_VolumeChangedEvent;

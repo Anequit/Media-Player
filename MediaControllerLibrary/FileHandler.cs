@@ -18,6 +18,7 @@ namespace MediaControllerLibrary
             this.fileType = fileType;
 
             folderPath = OpenFolderDialog();
+            BuildFileList();
         }
 
         public FileHandler(FileType fileType, string filePath)
@@ -25,6 +26,7 @@ namespace MediaControllerLibrary
             this.fileType = fileType;
 
             folderPath = new FileInfo(filePath).DirectoryName;
+            BuildFileList();
         }
 
         /// <summary>
