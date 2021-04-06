@@ -16,7 +16,14 @@ namespace MediaControllerLibrary
         public FileHandler(FileType fileType)
         {
             this.fileType = fileType;
+
             folderPath = OpenFolderDialog();
+        }
+
+        public FileHandler(FileType fileType, string folderPath)
+        {
+            this.fileType = fileType;
+            this.folderPath = Path.GetDirectoryName(folderPath);
         }
 
         /// <summary>
@@ -50,7 +57,7 @@ namespace MediaControllerLibrary
 
                 FileModel fileListItem = new FileModel()
                 {
-                    Name = file.Name,
+                    Name = Path.GetFileNameWithoutExtension(file.Name),
                     Path = new Uri(file.FullName)
                 };
 

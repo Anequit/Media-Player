@@ -15,6 +15,7 @@ namespace MediaControllerLibrary
         private bool shuffling = false;
 
         public event EventHandler SongChangedEvent;
+        public event EventHandler VolumeChangedEvent;
 
         public MediaHandler(List<FileModel> fileModels)
         {
@@ -82,12 +83,17 @@ namespace MediaControllerLibrary
             indexHandler.IndexBack();
             Open();
             Play();
+
+            SongChangedEvent.Invoke(this, EventArgs.Empty);
         }
-        
+
         /// <summary>
         /// Loads the current song.
         /// </summary>
-        public void Open() => player.Open(fileModels[indexHandler.GetCurrentIndex()].Path);
+        public void Open()
+        {
+            player.Open(fileModels[indexHandler.GetCurrentIndex()].Path);
+        }
 
         /// <summary>
         /// Toggles shuffle on and off.
@@ -103,6 +109,11 @@ namespace MediaControllerLibrary
         /// Changes the volume of the media player.
         /// </summary>
         /// <param name="volume"></param>
-        public void ChangeVolume(int volume) => player.Volume = volume * 0.01;
+        public void ChangeVolume(int volume)
+        {
+            player.Volume = volume * 0.01;
+
+            VolumeChangedEvent.Invoke(this, EventArgs.Empty);
+        }
     }
 }
