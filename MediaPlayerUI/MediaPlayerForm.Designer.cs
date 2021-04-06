@@ -302,6 +302,7 @@ namespace MediaPlayerUI
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MP3 Player";
+            this.Load += new System.EventHandler(this.MediaPlayerForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Volume_TrackBar)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

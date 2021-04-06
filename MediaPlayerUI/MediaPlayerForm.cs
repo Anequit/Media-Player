@@ -14,7 +14,7 @@ namespace MediaPlayerUI
         {
             InitializeComponent();
 
-            if (Environment.GetCommandLineArgs().Length >= 2)
+            if (Environment.GetCommandLineArgs().Length == 2)
                 fileHandler = new FileHandler(FileType.mp3, Environment.GetCommandLineArgs()[1]);
             else
                 fileHandler = new FileHandler(FileType.mp3);
@@ -26,6 +26,11 @@ namespace MediaPlayerUI
             mediaHandler.VolumeChangedEvent += MediaHandler_VolumeChangedEvent;
             mediaHandler.SongChangedEvent += MediaHandler_SongChangedEvent;
 
+            MessageBox.Show(mediaHandler.GetCurrentSong());
+        }
+
+        private void MediaPlayerForm_Load(object sender, EventArgs e)
+        {
             ActiveForm.Text = $"MP3 Player - {mediaHandler.GetCurrentSong()}";
             Songname_Label.Text = mediaHandler.GetCurrentSong();
         }
@@ -51,6 +56,5 @@ namespace MediaPlayerUI
         private void Repeat_BTN_CheckedChanged(object sender, EventArgs e) => mediaHandler.ToggleRepeat();
 
         private void Shuffle_BTN_CheckedChanged(object sender, EventArgs e) => mediaHandler.ToggleShuffle();
-
     }
 }
