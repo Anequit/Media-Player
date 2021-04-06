@@ -16,6 +16,8 @@ namespace MediaControllerLibrary
 
         public event EventHandler SongChangedEvent;
         public event EventHandler VolumeChangedEvent;
+        public event EventHandler MediaPlayingEvent;
+        public event EventHandler MediaPausedEvent;
 
         public MediaHandler(List<FileModel> fileModels)
         {
@@ -47,12 +49,20 @@ namespace MediaControllerLibrary
         /// <summary>
         /// Starts playing the MediaPlayer.
         /// </summary>
-        public void Play() => player.Play();
+        public void Play()
+        {
+            player.Play();
+            MediaPlayingEvent.Invoke(this, EventArgs.Empty);
+        }
 
         /// <summary>
         /// Pauses the MediaPlayer.
         /// </summary>
-        public void Pause() => player.Pause();
+        public void Pause()
+        {
+            player.Pause();
+            MediaPausedEvent.Invoke(this, EventArgs.Empty);
+        }
 
         /// <summary>
         /// Stops the MediaPlayer.

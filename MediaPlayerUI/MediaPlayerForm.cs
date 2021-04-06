@@ -25,21 +25,19 @@ namespace MediaPlayerUI
 
             mediaHandler.VolumeChangedEvent += MediaHandler_VolumeChangedEvent;
             mediaHandler.SongChangedEvent += MediaHandler_SongChangedEvent;
+            mediaHandler.MediaPlayingEvent += MediaHandler_MediaPlayingEvent;
+            mediaHandler.MediaPausedEvent += MediaHandler_MediaPausedEvent;
 
             MessageBox.Show(mediaHandler.GetCurrentSong());
         }
 
-        private void MediaPlayerForm_Load(object sender, EventArgs e)
-        {
-            ActiveForm.Text = $"MP3 Player - {mediaHandler.GetCurrentSong()}";
-            Songname_Label.Text = mediaHandler.GetCurrentSong();
-        }
+        private void MediaHandler_MediaPlayingEvent(object sender, EventArgs e) => ActiveForm.Text = $"Playing - {mediaHandler.GetCurrentSong()}";
+        
+        private void MediaHandler_MediaPausedEvent(object sender, EventArgs e) => ActiveForm.Text = $"Paused - {mediaHandler.GetCurrentSong()}";
 
-        private void MediaHandler_SongChangedEvent(object sender, EventArgs e)
-        {
-            ActiveForm.Text = $"MP3 Player - {mediaHandler.GetCurrentSong()}";
-            Songname_Label.Text = mediaHandler.GetCurrentSong();
-        }
+        private void MediaPlayerForm_Load(object sender, EventArgs e) => Songname_Label.Text = mediaHandler.GetCurrentSong();
+
+        private void MediaHandler_SongChangedEvent(object sender, EventArgs e) => Songname_Label.Text = mediaHandler.GetCurrentSong();
 
         private void MediaHandler_VolumeChangedEvent(object sender, EventArgs e) => Volume_Label.Text = $"Volume: {Volume_TrackBar.Value / 1}";
 
