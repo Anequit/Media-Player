@@ -78,7 +78,7 @@ namespace MediaControllerLibrary
             do
             {
                 currentIndex = randomizer.Next(indexMin, indexMax);    
-            } while (previousIndex == currentIndex);
+            } while (previousIndex == currentIndex && indexMax != 0);
         }
     }
 }
