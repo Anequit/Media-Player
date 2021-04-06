@@ -34,7 +34,7 @@ namespace MediaControllerLibrary
         /// </summary>
         /// <param name="fileModels"></param>
         public void UpdateIndex(List<FileModel> fileModels)
-            => indexMax = fileModels.Count - 1;
+            => indexMax = fileModels.Count - 1; // Takes the fileModels count and then subtracts 1 because it starts counting at 0.
 
         /// <summary>
         /// Moves index back by 1
@@ -71,14 +71,14 @@ namespace MediaControllerLibrary
         /// </summary>
         public void RandomizeIndex()
         {
-            // Shuffle the index by generating a random index number between 0 and the max ammount
+            // Shuffle the index by generating a random index number between 0 and the max ammount and if the index is greater than 0
 
             previousIndex = currentIndex;
             
             do
             {
                 currentIndex = randomizer.Next(indexMin, indexMax);    
-            } while (previousIndex == currentIndex && indexMax != 0);
+            } while (previousIndex == currentIndex && indexMax > 0); 
         }
     }
 }
