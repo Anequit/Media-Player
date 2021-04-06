@@ -20,10 +20,11 @@ namespace MediaControllerLibrary
             folderPath = OpenFolderDialog();
         }
 
-        public FileHandler(FileType fileType, string folderPath)
+        public FileHandler(FileType fileType, string filePath)
         {
             this.fileType = fileType;
-            this.folderPath = Path.GetDirectoryName(folderPath);
+
+            folderPath = new FileInfo(filePath).DirectoryName;
         }
 
         /// <summary>
