@@ -25,10 +25,13 @@ namespace MediaControllerLibrary
 
             indexHandler = new IndexHandler(fileModels);
             player = new MediaPlayer();
-
-            player.MediaEnded += Player_MediaEnded;
+            
+            if(Environment.GetCommandLineArgs().Length == 2)
+                SetSelectedSong();
 
             Open();
+
+            player.MediaEnded += Player_MediaEnded;
         }
 
         /// <summary>
@@ -100,10 +103,7 @@ namespace MediaControllerLibrary
         /// <summary>
         /// Loads the current song.
         /// </summary>
-        public void Open()
-        {
-            player.Open(fileModels[indexHandler.GetCurrentIndex()].Path);
-        }
+        public void Open() => player.Open(fileModels[indexHandler.GetCurrentIndex()].Path);
 
         /// <summary>
         /// Toggles shuffle on and off.
@@ -125,5 +125,10 @@ namespace MediaControllerLibrary
 
             VolumeChangedEvent.Invoke(this, EventArgs.Empty);
         }
+
+        /// <summary>
+        /// Takes command line args and finds a matching fileModel path, then sets the index to that song.
+        /// </summary>
+        private void SetSelectedSong() => indexHandler.SetCurrentIndex(fileModels.FindIndex(x => x.Path == new Uri(Environment.GetCommandLineArgs()[1])));
     }
 }

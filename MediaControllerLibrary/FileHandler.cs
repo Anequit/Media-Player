@@ -17,15 +17,11 @@ namespace MediaControllerLibrary
         {
             this.fileType = fileType;
 
-            folderPath = OpenFolderDialog();
-            BuildFileList();
-        }
+            if(Environment.GetCommandLineArgs().Length == 2)
+                folderPath = new FileInfo(Environment.GetCommandLineArgs()[1]).DirectoryName;
+            else
+                folderPath = OpenFolderDialog();
 
-        public FileHandler(FileType fileType, string filePath)
-        {
-            this.fileType = fileType;
-
-            folderPath = new FileInfo(filePath).DirectoryName;
             BuildFileList();
         }
 
@@ -37,16 +33,16 @@ namespace MediaControllerLibrary
         /// </returns>
         public List<FileModel> GetFileList()
         {
-            if(FileList.Count == 0)
+            if (FileList.Count == 0)
                 throw new Exception("FileList is null");
-
+            
             return FileList;
         }
 
         /// <summary>
         /// Adds files that match the extension provided at FileHandler creation.
         /// </summary>
-        public void BuildFileList()
+        private void BuildFileList()
         {
             ClearFileList();
 

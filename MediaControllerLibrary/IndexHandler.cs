@@ -28,13 +28,20 @@ namespace MediaControllerLibrary
         /// </returns>
         public int GetCurrentIndex() 
             => currentIndex;
-        
+
+        public void SetCurrentIndex(int index)
+        {
+            if (index > indexMax || index < indexMin)
+                return;
+
+            currentIndex = index;
+        }
+
         /// <summary>
         /// Updates the index max
         /// </summary>
         /// <param name="fileModels"></param>
-        public void UpdateIndex(List<FileModel> fileModels)
-            => indexMax = fileModels.Count - 1; // Takes the fileModels count and then subtracts 1 because it starts counting at 0.
+        public void UpdateIndex(List<FileModel> fileModels) => indexMax = fileModels.Count - 1; // Takes the fileModels count and then subtracts 1 because it starts counting at 0.
 
         /// <summary>
         /// Moves index back by 1

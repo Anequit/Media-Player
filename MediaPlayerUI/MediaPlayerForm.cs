@@ -14,10 +14,7 @@ namespace MediaPlayerUI
         {
             InitializeComponent();
 
-            if (Environment.GetCommandLineArgs().Length == 2)
-                fileHandler = new FileHandler(FileType.mp3, Environment.GetCommandLineArgs()[1]);
-            else
-                fileHandler = new FileHandler(FileType.mp3);
+            fileHandler = new FileHandler(FileType.mp3);
 
             mediaHandler = new MediaHandler(fileHandler.GetFileList());
 
@@ -25,8 +22,6 @@ namespace MediaPlayerUI
             mediaHandler.SongChangedEvent += MediaHandler_SongChangedEvent;
             mediaHandler.MediaPlayingEvent += MediaHandler_MediaPlayingEvent;
             mediaHandler.MediaPausedEvent += MediaHandler_MediaPausedEvent;
-
-            MessageBox.Show(mediaHandler.GetCurrentSong());
         }
 
         private void MediaHandler_MediaPlayingEvent(object sender, EventArgs e) => ActiveForm.Text = $"Playing - {mediaHandler.GetCurrentSong()}";
