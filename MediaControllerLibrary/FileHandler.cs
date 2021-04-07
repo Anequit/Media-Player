@@ -34,7 +34,7 @@ namespace MediaControllerLibrary
         public List<FileModel> GetFileList()
         {
             if (FileList.Count == 0)
-                throw new Exception("FileList is null");
+                Environment.Exit(1);
             
             return FileList;
         }
@@ -45,6 +45,9 @@ namespace MediaControllerLibrary
         public void BuildFileList()
         {
             ClearFileList();
+
+            if (!Directory.Exists(folderPath))
+                return;
 
             DirectoryInfo directoryInfo = new DirectoryInfo(folderPath);
 
