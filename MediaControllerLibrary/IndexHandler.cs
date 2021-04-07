@@ -51,7 +51,7 @@ namespace MediaControllerLibrary
             // If it's less than 0 then overflow into the count of the mp3 folder.
             previousIndex = currentIndex;
 
-            if(currentIndex == indexMin)
+            if(currentIndex <= indexMin)
                 currentIndex = indexMax;
             else
                 currentIndex -= 1;
@@ -66,7 +66,7 @@ namespace MediaControllerLibrary
             // If it's greater than the max amount then overflow into 0 otherwise increase it.
             previousIndex = currentIndex;
 
-            if (currentIndex == indexMax)
+            if (currentIndex >= indexMax)
                 currentIndex = indexMin;
             else
                 currentIndex += 1;

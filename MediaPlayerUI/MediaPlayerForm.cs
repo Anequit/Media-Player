@@ -32,9 +32,9 @@ namespace MediaPlayerUI
             mediaHandler.Next(); // Play the next song.
         }
 
-        private void MediaHandler_MediaPlayingEvent(object sender, EventArgs e) => ActiveForm.Text = $"Playing - {mediaHandler.GetCurrentSong()}";
+        private void MediaHandler_MediaPlayingEvent(object sender, EventArgs e) => Text = $"Playing - {mediaHandler.GetCurrentSong()}";
 
-        private void MediaHandler_MediaPausedEvent(object sender, EventArgs e) => ActiveForm.Text = $"Paused - {mediaHandler.GetCurrentSong()}";
+        private void MediaHandler_MediaPausedEvent(object sender, EventArgs e) => Text = $"Paused - {mediaHandler.GetCurrentSong()}";
     
         private void MediaPlayerForm_Load(object sender, EventArgs e) => Songname_Label.Text = mediaHandler.GetCurrentSong();
 
