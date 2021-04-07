@@ -26,8 +26,7 @@ namespace MediaControllerLibrary
         /// <returns>
         /// Current index
         /// </returns>
-        public int GetCurrentIndex() 
-            => currentIndex;
+        public int GetCurrentIndex() => currentIndex;
 
         public void SetCurrentIndex(int index)
         {

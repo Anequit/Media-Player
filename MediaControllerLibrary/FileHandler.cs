@@ -42,7 +42,7 @@ namespace MediaControllerLibrary
         /// <summary>
         /// Adds files that match the extension provided at FileHandler creation.
         /// </summary>
-        private void BuildFileList()
+        public void BuildFileList()
         {
             ClearFileList();
 

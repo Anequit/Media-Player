@@ -22,12 +22,20 @@ namespace MediaPlayerUI
             mediaHandler.SongChangedEvent += MediaHandler_SongChangedEvent;
             mediaHandler.MediaPlayingEvent += MediaHandler_MediaPlayingEvent;
             mediaHandler.MediaPausedEvent += MediaHandler_MediaPausedEvent;
+            mediaHandler.MediaFailedToOpen += MediaHandler_MediaFailedToOpen;
+        }
+
+        private void MediaHandler_MediaFailedToOpen(object sender, EventArgs e)
+        {
+            fileHandler.BuildFileList(); // Rebuild file list
+            mediaHandler.UpdateMediaHandler(fileHandler.GetFileList()); // Update indexHandler and mediaHandler
+            mediaHandler.Next(); // Play the next song.
         }
 
         private void MediaHandler_MediaPlayingEvent(object sender, EventArgs e) => ActiveForm.Text = $"Playing - {mediaHandler.GetCurrentSong()}";
-        
-        private void MediaHandler_MediaPausedEvent(object sender, EventArgs e) => ActiveForm.Text = $"Paused - {mediaHandler.GetCurrentSong()}";
 
+        private void MediaHandler_MediaPausedEvent(object sender, EventArgs e) => ActiveForm.Text = $"Paused - {mediaHandler.GetCurrentSong()}";
+    
         private void MediaPlayerForm_Load(object sender, EventArgs e) => Songname_Label.Text = mediaHandler.GetCurrentSong();
 
         private void MediaHandler_SongChangedEvent(object sender, EventArgs e) => Songname_Label.Text = mediaHandler.GetCurrentSong();

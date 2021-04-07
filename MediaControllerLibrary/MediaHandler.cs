@@ -1,6 +1,8 @@
 ﻿using MediaControllerLibrary.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Windows.Forms;
 using System.Windows.Media;
 
 namespace MediaControllerLibrary
@@ -9,8 +11,8 @@ namespace MediaControllerLibrary
     {
         private readonly MediaPlayer player;
         private readonly IndexHandler indexHandler;
-        private readonly List<FileModel> fileModels;
-        
+        private List<FileModel> fileModels;
+
         private bool repeating = false;
         private bool shuffling = false;
 
@@ -18,21 +20,38 @@ namespace MediaControllerLibrary
         public event EventHandler VolumeChangedEvent;
         public event EventHandler MediaPlayingEvent;
         public event EventHandler MediaPausedEvent;
+        public event EventHandler MediaFailedToOpen;
 
         public MediaHandler(List<FileModel> fileModels)
         {
-            this.fileModels = fileModels;
+            UpdateFileModels(fileModels);
 
-            indexHandler = new IndexHandler(fileModels);
+            indexHandler = new IndexHandler(this.fileModels);
             player = new MediaPlayer();
-            
-            if(Environment.GetCommandLineArgs().Length == 2)
+
+            if (Environment.GetCommandLineArgs().Length == 2)
                 SetSelectedSong();
 
             Open();
 
             player.MediaEnded += Player_MediaEnded;
         }
+
+        /// <summary>
+        /// Updates the File Model list and updates the index.
+        /// </summary>
+        /// <param name="fileModels"></param>
+        public void UpdateMediaHandler(List<FileModel> fileModels)
+        {
+            // If there is an error, update the fileModels and then update the index handler, so that it's in sync with the new list.
+
+            UpdateFileModels(fileModels);
+            UpdateIndexHandler();
+        }
+
+        private void UpdateFileModels(List<FileModel> fileModels) => this.fileModels = fileModels;
+
+        private void UpdateIndexHandler() => indexHandler.UpdateIndex(fileModels);
 
         /// <summary>
         /// Plays the next song when it finishes playing the current one.
@@ -76,7 +95,7 @@ namespace MediaControllerLibrary
         /// Changes the song to the next one.
         /// </summary>
         public void Next()
-        {
+        { 
             if (shuffling)
                 indexHandler.RandomizeIndex();
             else if (!repeating)
@@ -103,7 +122,13 @@ namespace MediaControllerLibrary
         /// <summary>
         /// Loads the current song.
         /// </summary>
-        public void Open() => player.Open(fileModels[indexHandler.GetCurrentIndex()].Path);
+        public void Open()
+        {
+            if (File.Exists(fileModels[indexHandler.GetCurrentIndex()].Path.LocalPath))
+                player.Open(fileModels[indexHandler.GetCurrentIndex()].Path);
+            else 
+                MediaFailedToOpen.Invoke(this, EventArgs.Empty);
+        }
 
         /// <summary>
         /// Toggles shuffle on and off.
