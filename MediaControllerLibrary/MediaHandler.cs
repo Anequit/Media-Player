@@ -2,13 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Windows.Media;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace MediaControllerLibrary
 {
     public class MediaHandler
     {
-        private readonly MediaPlayer player;
+        private readonly MediaElement player;
         private readonly IndexHandler indexHandler;
         private List<FileModel> fileModels;
 
@@ -26,7 +27,11 @@ namespace MediaControllerLibrary
             UpdateFileModels(fileModels);
 
             indexHandler = new IndexHandler(this.fileModels);
-            player = new MediaPlayer();
+            player = new MediaElement()
+            {
+                LoadedBehavior = MediaState.Manual,
+                UnloadedBehavior = MediaState.Manual
+            };
 
             if (Environment.GetCommandLineArgs().Length == 2)
                 SetSelectedSong();
@@ -124,7 +129,7 @@ namespace MediaControllerLibrary
         public void Open()
         {
             if (File.Exists(fileModels[indexHandler.GetCurrentIndex()].Path.LocalPath))
-                player.Open(fileModels[indexHandler.GetCurrentIndex()].Path);
+                player.Source = fileModels[indexHandler.GetCurrentIndex()].Path;
             else 
                 MediaFailedToOpen.Invoke(this, EventArgs.Empty);
         }
