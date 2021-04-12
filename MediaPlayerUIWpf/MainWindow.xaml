@@ -1,0 +1,71 @@
+﻿<Window x:Class="MediaPlayerUIWpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MediaPlayerUIWpf"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="250" Width="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1.5*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0" Grid.ColumnSpan="4"
+                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                   Background="#e3e3e3">
+
+            <Label Content="Text"
+                   VerticalAlignment="Stretch" VerticalContentAlignment="Center"
+                   HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+        </Grid>
+
+        <!-- Back button -->
+        <Grid Grid.Row="3" Grid.Column="0" Margin="3 0 1.5 3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="1" Margin="0 1.5 0 0"
+                    Name="backButton"
+                    Content="↩"/>
+        </Grid>
+
+        <!-- Play button -->
+        <Grid Grid.Row="2" Grid.Column="1" Margin="1.5 0 1.5 3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="2" Margin="0 1.5 0 0"
+                    Name="playButton"
+                    Content="▶"/>
+        </Grid>
+
+        <!-- Pause & Repeat buttons -->
+        <Grid Grid.Row="2" Grid.Column="2" Margin="1.5 0 1.5 3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" Margin="0 0 0 1.5"
+                    Name="repeatButton"
+                    Content="Repeat Track"/>
+
+            <Button Grid.Row="1" Margin="0 1.5 0 0"
+                />
+        </Grid>
+    </Grid>
+</Window>
