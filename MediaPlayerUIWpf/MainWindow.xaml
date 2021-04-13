@@ -40,7 +40,7 @@
                    Background="#e3e3e3">
 
             <Label Name="songLabel" 
-                   Content="Text" FontSize="18"
+                   Content="Text" FontSize="17"
                    VerticalAlignment="Stretch" VerticalContentAlignment="Center"
                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
         </Grid>
