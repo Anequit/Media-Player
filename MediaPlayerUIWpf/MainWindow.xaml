@@ -5,7 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MediaPlayerUIWpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="250" Width="500">
+        Title="MainWindow" Height="250" Width="500"
+        WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"
+        ShowInTaskbar="True" AllowDrop="False">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#FFC3C3C3"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Aqua"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -20,11 +34,13 @@
             <ColumnDefinition Width="0.5*"/>
         </Grid.ColumnDefinitions>
 
+        <!-- Song Title -->
         <Grid Grid.Row="0" Grid.ColumnSpan="4"
                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                    Background="#e3e3e3">
 
-            <Label Content="Text" FontSize="18"
+            <Label Name="songLabel" 
+                   Content="Text" FontSize="18"
                    VerticalAlignment="Stretch" VerticalContentAlignment="Center"
                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
         </Grid>
@@ -82,7 +98,7 @@
 
             <Button Grid.Row="1" Margin="0 1.5 0 0"
                     Name="nextButton"
-                    Content="❙❙"/>
+                    Content="↪"/>
         </Grid>
 
     </Grid>
