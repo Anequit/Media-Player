@@ -5,26 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MediaPlayerUIWpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="250" Width="500"
+        Title="MainWindow" Height="300" Width="550"
         WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"
         ShowInTaskbar="True" AllowDrop="False">
-    <Window.Resources>
-        <Style TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="#FFC3C3C3"/>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="Aqua"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-        
-    </Window.Resources>
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.87*"/>
             <RowDefinition Height="4*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1.6*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -40,11 +29,38 @@
                    Background="#e3e3e3">
 
             <Label Name="songLabel" 
-                   Content="Text" FontSize="17"
+                   Content="Song Title" FontSize="20"
                    VerticalAlignment="Stretch" VerticalContentAlignment="Center"
                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
         </Grid>
 
+        <!-- Volume slider & Volume label -->
+        <Grid Grid.RowSpan="2" Grid.Row="1" Grid.Column="0"  Margin="3 3 1.5 0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="1.2*"/>
+            </Grid.RowDefinitions>
+
+            <Label Name="volumeLabel" Grid.Row="0"
+                   Content="Volume: 50" 
+                   FontSize="13" FontStretch="Normal" FontStyle="Normal"
+                   VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
+                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                   />
+
+            <Slider Name="volumeSlider" Margin="0 1.5 0 1.5" Grid.Row="1"
+                    Minimum="0" Maximum="100"
+                    TickFrequency="25" Value="50" 
+                    TickPlacement="BottomRight"
+                    Orientation="Vertical"
+                    IsSnapToTickEnabled="False"
+                    LargeChange="25" SmallChange="1"
+                    HorizontalAlignment="Left"/>
+
+        </Grid>
+        
         <!-- Back button -->
         <Grid Grid.Row="3" Grid.Column="0" Margin="3 0 1.5 3">
             <Grid.RowDefinitions>
@@ -64,7 +80,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Button Grid.Row="2" Margin="0 1.5 0 0"
+            <Button Grid.Row="1" Margin="0 1.5 0 0"
                     Name="playButton"
                     Content="▶"/>
         </Grid>
@@ -76,8 +92,8 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Button Grid.Row="0" Margin="0 0 0 1.5"
-                    Name="repeatButton"
+            <ToggleButton Grid.Row="0" Margin="0 0 0 1.5"
+                    Name="repeatButton" FontSize="14"
                     Content="Repeat Track"/>
 
             <Button Grid.Row="1" Margin="0 1.5 0 0"
@@ -92,8 +108,8 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Button Grid.Row="0" Margin="0 0 0 1.5"
-                    Name="shuffleButton"
+            <ToggleButton Grid.Row="0" Margin="0 0 0 1.5"
+                    Name="shuffleButton" FontSize="14"
                     Content="Shuffle"/>
 
             <Button Grid.Row="1" Margin="0 1.5 0 0"
