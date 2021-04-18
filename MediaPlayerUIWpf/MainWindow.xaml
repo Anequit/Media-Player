@@ -5,26 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MediaPlayerUIWpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="550"
+        Title="MainWindow" Height="200" Width="550"
         WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"
         ShowInTaskbar="True" AllowDrop="False">
     
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.87*"/>
-            <RowDefinition Height="4*"/>
             <RowDefinition Height="1.6*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="2.6*"/>
         </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.5*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="0.5*"/>
-            <ColumnDefinition Width="0.5*"/>
-        </Grid.ColumnDefinitions>
-
         <!-- Song Title -->
-        <Grid Grid.Row="0" Grid.ColumnSpan="4"
+        <Grid Grid.Row="0"
                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                    Background="#e3e3e3">
 
@@ -35,87 +28,77 @@
         </Grid>
 
         <!-- Volume slider & Volume label -->
-        <Grid Grid.RowSpan="2" Grid.Row="1" Grid.Column="0"  Margin="3 3 1.5 0">
-
+        <Grid Grid.Row="1" Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="5*"/>
-                <RowDefinition Height="1.2*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
 
             <Label Name="volumeLabel" Grid.Row="0"
                    Content="Volume: 50" 
-                   FontSize="13" FontStretch="Normal" FontStyle="Normal"
+                   FontSize="15" FontStretch="Normal" FontStyle="Normal"
                    VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
-                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                   />
+                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
 
-            <Slider Name="volumeSlider" Margin="0 1.5 0 1.5" Grid.Row="1"
+            <Slider Name="volumeSlider" Margin="0" 
+                    Grid.Row="0" Grid.Column="1"
                     Minimum="0" Maximum="100"
-                    TickFrequency="25" Value="50" 
-                    TickPlacement="BottomRight"
-                    Orientation="Vertical"
+                    TickFrequency="10" Value="50" 
+                    TickPlacement="Both"
+                    Orientation="Horizontal"
                     IsSnapToTickEnabled="False"
-                    LargeChange="25" SmallChange="1"
-                    HorizontalAlignment="Left"/>
-
+                    LargeChange="10" SmallChange="1"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
         </Grid>
-        
-        <!-- Back button -->
-        <Grid Grid.Row="3" Grid.Column="0" Margin="3 0 1.5 3">
+
+        <Grid Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Button Grid.Row="1" Margin="0 1.5 0 0"
-                    Name="backButton"
-                    Content="↩"/>
-        </Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
 
-        <!-- Play button -->
-        <Grid Grid.Row="2" Grid.Column="1" Margin="1.5 0 1.5 3">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <Button Grid.Row="1" Margin="0 1.5 0 0"
-                    Name="playButton"
-                    Content="▶"/>
-        </Grid>
-
-        <!-- Pause & Repeat buttons -->
-        <Grid Grid.Row="2" Grid.Column="2" Margin="1.5 0 1.5 3">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <ToggleButton Grid.Row="0" Margin="0 0 0 1.5"
+            <ToggleButton Grid.Row="0" Grid.Column="0"
                     Name="repeatButton" FontSize="14"
                     Content="Repeat Track"/>
 
-            <Button Grid.Row="1" Margin="0 1.5 0 0"
+            <Button Grid.Row="1" Grid.Column="0"
+                    Name="backButton"
+                    Content="↩"/>
+
+            <Slider Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
+                    Name="seekSlide"
+                    Minimum="0" Maximum="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+
+            <Button Grid.Row="1" Grid.Column="1" 
+                    Name="playButton"
+                    Content="▶"/>
+
+            <Button Grid.Row="1" Grid.Column="2"
                     Name="pauseButton"
                     Content="❙❙"/>
-        </Grid>
-        
-        <!-- Next & Shuffle buttons -->
-        <Grid Grid.Row="2" Grid.Column="3" Margin="1.5 0 3 3">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
 
-            <ToggleButton Grid.Row="0" Margin="0 0 0 1.5"
+            <ToggleButton Grid.Row="0" Grid.Column="3"
                     Name="shuffleButton" FontSize="14"
                     Content="Shuffle"/>
 
-            <Button Grid.Row="1" Margin="0 1.5 0 0"
+            <Button Grid.Row="1" Grid.Column="3"
                     Name="nextButton"
                     Content="↪"/>
         </Grid>
-
     </Grid>
 </Window>
