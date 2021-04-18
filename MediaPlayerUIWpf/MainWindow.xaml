@@ -5,32 +5,80 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MediaPlayerUIWpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="200" Width="550"
+        Title="MainWindow" Height="350" Width="650"
         WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"
         ShowInTaskbar="True" AllowDrop="False">
-    
-    <Grid>
+
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#273c75"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#3855a5"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="ToggleButton">
+            <Setter Property="Background" Value="#273c75"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#3855a5"/>
+                </Trigger>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Background" Value="#384d87"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="#192a56">
         <Grid.RowDefinitions>
-            <RowDefinition Height="1.6*"/>
+            <RowDefinition Height="0.67*"/>
             <RowDefinition Height="3*"/>
-            <RowDefinition Height="2.6*"/>
+            <RowDefinition Height="1.4*"/>
         </Grid.RowDefinitions>
 
         <!-- Song Title -->
         <Grid Grid.Row="0"
                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                   Background="#e3e3e3">
+                   Background="#273c75">
 
             <Label Name="songLabel" 
                    Content="Song Title" FontSize="20"
                    VerticalAlignment="Stretch" VerticalContentAlignment="Center"
                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+
         </Grid>
 
         <!-- Volume slider & Volume label -->
         <Grid Grid.Row="1" Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.2*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
@@ -47,56 +95,63 @@
                    VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
 
             <Slider Name="volumeSlider" Margin="0" 
-                    Grid.Row="0" Grid.Column="1"
+                    Grid.Row="1" Grid.Column="0"
                     Minimum="0" Maximum="100"
                     TickFrequency="10" Value="50" 
                     TickPlacement="Both"
-                    Orientation="Horizontal"
+                    Orientation="Vertical"
                     IsSnapToTickEnabled="False"
                     LargeChange="10" SmallChange="1"
-                    HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                    HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
         </Grid>
 
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="2" Margin="3 1.5 3 3">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.4*"/>
                 <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="0.5*"/>
-                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.4*"/>
+                <ColumnDefinition Width="0.4*"/>
             </Grid.ColumnDefinitions>
 
             <ToggleButton Grid.Row="0" Grid.Column="0"
+                    Margin="0 0 1.5 1.5"
                     Name="repeatButton" FontSize="14"
                     Content="Repeat Track"/>
 
             <Button Grid.Row="1" Grid.Column="0"
+                    Margin="0 1.5 1.5 0"
                     Name="backButton"
                     Content="↩"/>
 
             <Slider Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
+                    Margin="1.5 0 1.5 1.5"
                     Name="seekSlide"
                     Minimum="0" Maximum="1"
                     Orientation="Horizontal"
                     HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
 
-            <Button Grid.Row="1" Grid.Column="1" 
+            <Button Grid.Row="1" Grid.Column="1"
+                    Margin="1.5 1.5 1.5 0"
                     Name="playButton"
                     Content="▶"/>
 
             <Button Grid.Row="1" Grid.Column="2"
+                    Margin="1.5 1.5 1.5 0"
                     Name="pauseButton"
                     Content="❙❙"/>
 
             <ToggleButton Grid.Row="0" Grid.Column="3"
+                    Margin="1.5 0 0 1.5"
                     Name="shuffleButton" FontSize="14"
                     Content="Shuffle"/>
 
             <Button Grid.Row="1" Grid.Column="3"
+                    Margin="1.5 1.5 0 0"
                     Name="nextButton"
                     Content="↪"/>
         </Grid>
