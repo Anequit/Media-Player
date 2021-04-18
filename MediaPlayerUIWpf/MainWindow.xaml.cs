@@ -24,5 +24,6 @@ namespace MediaPlayerUIWpf
         {
             InitializeComponent();
         }
+
     }
 }
