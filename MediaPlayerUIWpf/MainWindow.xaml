@@ -10,53 +10,14 @@
         ShowInTaskbar="True" AllowDrop="False">
 
     <Window.Resources>
-        <Style TargetType="Label">
-            <Setter Property="Foreground" Value="White"/>
-        </Style>
-        
-        <Style TargetType="Button">
-            <Setter Property="Background" Value="#273c75"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#3855a5"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style TargetType="ToggleButton">
-            <Setter Property="Background" Value="#273c75"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ToggleButton">
-                        <Border Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#3855a5"/>
-                </Trigger>
-                <Trigger Property="IsChecked" Value="True">
-                    <Setter Property="Background" Value="#384d87"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
 
-    <Grid Background="#192a56">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.67*"/>
             <RowDefinition Height="3*"/>
@@ -64,19 +25,17 @@
         </Grid.RowDefinitions>
 
         <!-- Song Title -->
-        <Grid Grid.Row="0"
-                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                   Background="#273c75">
+        <Grid Grid.Row="0" Style="{DynamicResource Title}"
+                   HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
             <Label Name="songLabel" 
                    Content="Song Title" FontSize="20"
                    VerticalAlignment="Stretch" VerticalContentAlignment="Center"
                    HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
-
         </Grid>
 
         <!-- Volume slider & Volume label -->
-        <Grid Grid.Row="1" Grid.Column="0">
+        <Grid Grid.Row="1" Grid.Column="0" Margin="3 3 3 1.5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.2*"/>
                 <RowDefinition Height="*"/>
@@ -130,10 +89,11 @@
 
             <Slider Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
                     Margin="1.5 0 1.5 1.5"
-                    Name="seekSlide"
+                    Name="seekSlider" Style="{DynamicResource HorizontalSlider}"
                     Minimum="0" Maximum="1"
                     Orientation="Horizontal"
-                    HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                    HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
             <Button Grid.Row="1" Grid.Column="1"
                     Margin="1.5 1.5 1.5 0"
