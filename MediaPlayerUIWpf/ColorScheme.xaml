@@ -7,6 +7,7 @@
     <SolidColorBrush x:Key="TitleBackgroundBrush" Color="#273c75"/>
     <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="#273c75"/>
     <SolidColorBrush x:Key="ButtonMouseOverBrush" Color="#3855a5"/>
+    <SolidColorBrush x:Key="ButtonPressedBrush" Color="#273c75"/>
     <SolidColorBrush x:Key="ToggleButtonSelectedBrush" Color="#384d87"/>
     <SolidColorBrush x:Key="SliderTrackBrush" Color="#384d87"/>
     
