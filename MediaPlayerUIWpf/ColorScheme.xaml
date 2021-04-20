@@ -13,5 +13,6 @@
     <!-- Colors for the styles -->
     <Color x:Key="SliderThumbColor" R="39" G="60" B="117" A="255"/>
     <Color x:Key="SliderThumbMouseOverColor" R="56" G="85" B="165" A="255"/>
-    
+    <Color x:Key="SliderThumbMouseDown" R="56" G="85" B="165" A="255"/>
+
 </ResourceDictionary>
