@@ -51,7 +51,7 @@
                    Grid.Row="0" Grid.Column="0"
                    Content="Volume: 50" 
                    FontSize="15" FontStretch="Normal" FontStyle="Normal"
-                   VerticalContentAlignment="Center" HorizontalContentAlignment="Left"
+                   VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
                    VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
 
             <Slider Name="volumeSlider" Margin="0" 
