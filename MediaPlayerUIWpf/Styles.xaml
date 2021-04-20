@@ -2,24 +2,24 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="Brushes.xaml" />
+        <ResourceDictionary Source="ColorScheme.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
     <Style TargetType="Label">
-        <Setter Property="Foreground" Value="{DynamicResource TextForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextForegroundBrush}"/>
     </Style>
 
     <Style TargetType="Grid">
-        <Setter Property="Background" Value="{DynamicResource GridBackground}"/>
+        <Setter Property="Background" Value="{DynamicResource GridBackgroundBrush}"/>
     </Style>
 
     <Style x:Key="Title" TargetType="Grid">
-        <Setter Property="Background" Value="{DynamicResource TitleBackground}"/>
+        <Setter Property="Background" Value="{DynamicResource TitleBackgroundBrush}"/>
     </Style>
     
     <Style TargetType="Button">
-        <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
-        <Setter Property="Foreground" Value="{DynamicResource TextForeground}"/>
+        <Setter Property="Background" Value="{DynamicResource ButtonBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextForegroundBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -31,14 +31,14 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource ButtonMouseOver}"/>
+                <Setter Property="Background" Value="{DynamicResource ButtonMouseOverBrush}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
 
     <Style TargetType="ToggleButton">
-        <Setter Property="Background" Value="{DynamicResource ButtonBackground}"/>
-        <Setter Property="Foreground" Value="{DynamicResource TextForeground}"/>
+        <Setter Property="Background" Value="{DynamicResource ButtonBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextForegroundBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
@@ -50,10 +50,10 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource ButtonMouseOver}"/>
+                <Setter Property="Background" Value="{DynamicResource ButtonMouseOverBrush}"/>
             </Trigger>
             <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Background" Value="{DynamicResource ToggleButtonSelected}"/>
+                <Setter Property="Background" Value="{DynamicResource ToggleButtonSelectedBrush}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -81,21 +81,22 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Thumb}">
-                    <Rectangle x:Name="Rectangle">
+                    <Rectangle x:Name="trackThumb">
                         <Rectangle.Fill>
-                            <SolidColorBrush Color="#273c75"/>
+                            <SolidColorBrush Color="{DynamicResource SliderThumbColor}"/>
                         </Rectangle.Fill>
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Normal" />
-                                <VisualState x:Name="MouseOver">
-                                
-                                </VisualState>
-                                <VisualState x:Name="Pressed">
-                                    
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
+                        <Rectangle.Triggers>
+                            <EventTrigger RoutedEvent="Rectangle.MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetName="trackThumb" 
+                                                        Storyboard.TargetProperty="Fill.Color" 
+                                                        To="{DynamicResource SliderThumbMouseOverColor}" From="{DynamicResource SliderThumbColor}"
+                                                        Duration="0:0:0:0.01" AutoReverse="False"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Rectangle.Triggers>
                     </Rectangle>
                 </ControlTemplate>
             </Setter.Value>
@@ -126,7 +127,7 @@
                                 CornerRadius="2"
                                 Height="4"
                                 Grid.Row="1"
-                                Background="{DynamicResource SliderTrack}"
+                                Background="{DynamicResource SliderTrackBrush}"
                                 BorderThickness="0"/>
 
                         <Track Grid.Row="1" x:Name="PART_Track">
