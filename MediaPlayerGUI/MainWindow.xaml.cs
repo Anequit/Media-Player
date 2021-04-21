@@ -27,8 +27,11 @@ namespace MediaPlayerUIWpf
             InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e) => songLabel.Content = mediaHandler.GetCurrentSong();
-
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Title = $"Paused - {mediaHandler.GetCurrentSong()}";
+            songLabel.Content = mediaHandler.GetCurrentSong();
+        }
         private void MediaHandler_MediaFailedToOpen(object sender, EventArgs e)
         {
             fileHandler.BuildFileList(); // Rebuild file list
