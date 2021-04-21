@@ -3,7 +3,7 @@ using MediaControllerLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Windows.Forms;
+using WK.Libraries.BetterFolderBrowserNS;
 
 namespace MediaControllerLibrary
 {
@@ -69,15 +69,14 @@ namespace MediaControllerLibrary
 
         private string OpenFolderDialog()
         {
-            using(FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog())
+            using (BetterFolderBrowser folderBrowser = new BetterFolderBrowser())
             {
-                folderBrowserDialog.ShowNewFolderButton = false;
-                folderBrowserDialog.Description = "Media location.";
+                folderBrowser.Multiselect = false;
+                folderBrowser.Title = "Media location.";
+                folderBrowser.ShowDialog();
 
-                folderBrowserDialog.ShowDialog();
-
-                return folderBrowserDialog.SelectedPath;
-            }
+                return folderBrowser.SelectedPath;
+            };
         }
 
         private void ClearFileList()

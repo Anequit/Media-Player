@@ -15,7 +15,7 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\MediaControllerLibrary\MediaControllerLibrary.csproj" />
+    <ProjectReference Include="..\MediaControllerLibrary\MediaPlayerLibrary.csproj" />
   </ItemGroup>
   
   <ItemGroup>
