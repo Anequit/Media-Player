@@ -17,12 +17,10 @@ namespace MediaControllerLibrary
         {
             this.fileType = fileType;
 
-            if(Environment.GetCommandLineArgs().Length == 2)
+            if (Environment.GetCommandLineArgs().Length == 2)
                 folderPath = new FileInfo(Environment.GetCommandLineArgs()[1]).DirectoryName;
             else
                 folderPath = OpenFolderDialog();
-
-            BuildFileList();
         }
 
         /// <summary>

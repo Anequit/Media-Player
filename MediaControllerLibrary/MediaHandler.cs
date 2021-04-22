@@ -20,25 +20,28 @@ namespace MediaControllerLibrary
         public event EventHandler VolumeChangedEvent;
         public event EventHandler MediaPlayingEvent;
         public event EventHandler MediaPausedEvent;
-        public event EventHandler MediaFailedToOpen;
+        public event EventHandler MediaFailedEvent;
 
         public MediaHandler(List<FileModel> fileModels)
         {
-            UpdateFileModels(fileModels);
+            this.fileModels = fileModels;
 
             indexHandler = new IndexHandler(this.fileModels);
             player = new MediaElement()
             {
                 LoadedBehavior = MediaState.Manual,
-                UnloadedBehavior = MediaState.Manual
+                UnloadedBehavior = MediaState.Manual,
+                Volume = 50
             };
 
             if (Environment.GetCommandLineArgs().Length == 2)
                 SetSelectedSong();
 
-            Open();
-
             player.MediaEnded += Player_MediaEnded;
+            player.MediaOpened += Player_MediaOpened;
+            player.MediaFailed += Player_MediaFailed;
+
+            Open();
         }
 
         /// <summary>
@@ -49,13 +52,23 @@ namespace MediaControllerLibrary
         {
             // If there is an error, update the fileModels and then update the index handler, so that it's in sync with the new list.
 
-            UpdateFileModels(fileModels);
-            UpdateIndexHandler();
+            this.fileModels = fileModels;
+            indexHandler.UpdateIndex(fileModels);
         }
 
-        private void UpdateFileModels(List<FileModel> fileModels) => this.fileModels = fileModels;
+        /// <summary>
+        /// Play media when it opens.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Player_MediaOpened(object sender, RoutedEventArgs e) => Play();
 
-        private void UpdateIndexHandler() => indexHandler.UpdateIndex(fileModels);
+        /// <summary>
+        /// Invoke MediaFailed event when media fails to open. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Player_MediaFailed(object sender, ExceptionRoutedEventArgs e) => MediaFailedEvent.Invoke(this, EventArgs.Empty);
 
         /// <summary>
         /// Plays the next song when it finishes playing the current one.
@@ -126,13 +139,7 @@ namespace MediaControllerLibrary
         /// <summary>
         /// Loads the current song.
         /// </summary>
-        public void Open()
-        {
-            if (File.Exists(fileModels[indexHandler.GetCurrentIndex()].Path.LocalPath))
-                player.Source = fileModels[indexHandler.GetCurrentIndex()].Path;
-            else 
-                MediaFailedToOpen.Invoke(this, EventArgs.Empty);
-        }
+        public void Open() => player.Source = fileModels[indexHandler.GetCurrentIndex()].Path;
 
         /// <summary>
         /// Toggles shuffle on and off.
@@ -153,6 +160,15 @@ namespace MediaControllerLibrary
             player.Volume = volume * 0.01;
 
             VolumeChangedEvent.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Seeks to the position provided
+        /// </summary>
+        /// <param name="position"></param>
+        public void Seek(int position)
+        {
+            //mediaElement.Clock.Controller.Seek(TimeSpan.FromSeconds(slider.Value), TimeSeekOrigin.BeginTime);
         }
 
         /// <summary>

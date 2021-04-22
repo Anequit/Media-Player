@@ -16,13 +16,15 @@ namespace MediaPlayerUIWpf
         public MainWindow()
         {
             fileHandler = new FileHandler(FileType.mp3);
+            fileHandler.BuildFileList();
+
             mediaHandler = new MediaHandler(fileHandler.GetFileList());
 
             mediaHandler.VolumeChangedEvent += MediaHandler_VolumeChangedEvent;
             mediaHandler.SongChangedEvent += MediaHandler_SongChangedEvent;
             mediaHandler.MediaPlayingEvent += MediaHandler_MediaPlayingEvent;
             mediaHandler.MediaPausedEvent += MediaHandler_MediaPausedEvent;
-            mediaHandler.MediaFailedToOpen += MediaHandler_MediaFailedToOpen;
+            mediaHandler.MediaFailedEvent += MediaHandler_MediaFailedEvent;
 
             InitializeComponent();
         }
@@ -32,20 +34,20 @@ namespace MediaPlayerUIWpf
             Title = $"Paused - {mediaHandler.GetCurrentSong()}";
             songLabel.Content = mediaHandler.GetCurrentSong();
         }
-        private void MediaHandler_MediaFailedToOpen(object sender, EventArgs e)
+        private void MediaHandler_MediaFailedEvent(object sender, EventArgs e)
         {
             fileHandler.BuildFileList(); // Rebuild file list
             mediaHandler.UpdateMediaHandler(fileHandler.GetFileList()); // Update indexHandler and mediaHandler
             mediaHandler.Next(); // Play the next song.
         }
 
+        private void MediaHandler_SongChangedEvent(object sender, EventArgs e) => songLabel.Content = mediaHandler.GetCurrentSong();
+
         private void MediaHandler_MediaPlayingEvent(object sender, EventArgs e) => Title = $"Playing - {mediaHandler.GetCurrentSong()}";
 
         private void MediaHandler_MediaPausedEvent(object sender, EventArgs e) => Title = $"Paused - {mediaHandler.GetCurrentSong()}";
 
         private void MediaPlayerForm_Load(object sender, EventArgs e) => songLabel.Content = mediaHandler.GetCurrentSong();
-
-        private void MediaHandler_SongChangedEvent(object sender, EventArgs e) => songLabel.Content = mediaHandler.GetCurrentSong();
 
         private void MediaHandler_VolumeChangedEvent(object sender, EventArgs e) => volumeLabel.Content = $"Volume: {Convert.ToInt32(volumeSlider.Value) / 1}";
 
@@ -62,5 +64,7 @@ namespace MediaPlayerUIWpf
         private void ShuffleButton_Click(object sender, RoutedEventArgs e) => mediaHandler.ToggleShuffle();
 
         private void NextButton_Click(object sender, RoutedEventArgs e) => mediaHandler.Next();
+
+        private void SeekSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) { }
     }
 }

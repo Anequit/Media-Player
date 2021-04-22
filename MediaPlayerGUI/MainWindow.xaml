@@ -57,9 +57,6 @@
                     Minimum="0" Maximum="100" TickFrequency="10" Value="50" TickPlacement="None"
                     Orientation="Vertical" IsSnapToTickEnabled="False"
                     LargeChange="10" SmallChange="1"
-                    
-                    
-                    
                     HorizontalAlignment="Center" VerticalAlignment="Stretch"
                     Style="{DynamicResource VerticalSlider}"
                     ValueChanged="VolumeSlider_ValueChanged"/>
@@ -96,7 +93,8 @@
                     Minimum="0" Maximum="1"
                     Orientation="Horizontal"
                     HorizontalAlignment="Stretch" VerticalAlignment="Center"
-                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                    />
 
             <Button Name="playButton" 
                     Grid.Row="1" Grid.Column="1" Margin="1.5 1.5 1.5 0"
