@@ -94,7 +94,7 @@
                     Orientation="Horizontal"
                     HorizontalAlignment="Stretch" VerticalAlignment="Center"
                     HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                    Thumb.DragCompleted="SeekSlider_DragCompleted"/>
+                    Thumb.DragCompleted="SeekSlider_DragCompleted" Thumb.DragStarted="SeekSlider_DragStarted"/>
 
             <Button Name="playButton" 
                     Grid.Row="1" Grid.Column="1" Margin="1.5 1.5 1.5 0"

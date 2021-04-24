@@ -31,7 +31,7 @@ namespace MediaPlayerUIWpf
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //SetupSeekSlider();
+            SetupSeekSlider();
 
             Title = $"Paused - {mediaHandler.GetCurrentSong().Name}";
             songLabel.Content = mediaHandler.GetCurrentSong().Name;
@@ -78,6 +78,12 @@ namespace MediaPlayerUIWpf
             seekSlider.Value = 0;
         }
 
-        private void SeekSlider_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e) => mediaHandler.Seek(seekSlider.Value);
+        private void SeekSlider_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
+        {
+            mediaHandler.Seek(seekSlider.Value);
+            mediaHandler.Play();
+        }
+
+        private void SeekSlider_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e) => mediaHandler.Pause();
     }
 }

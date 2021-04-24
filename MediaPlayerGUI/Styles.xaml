@@ -145,17 +145,9 @@
                                 BorderThickness="0"/>
 
                         <Track Grid.Row="1" x:Name="PART_Track">
-                            <Track.DecreaseRepeatButton>
-                                <RepeatButton Style="{StaticResource SliderButtonStyle}" Command="Slider.DecreaseLarge" />
-                            </Track.DecreaseRepeatButton>
-
                             <Track.Thumb>
                                 <Thumb Style="{StaticResource SliderThumbStyle}" Height="20" Width="10"/>
                             </Track.Thumb>
-
-                            <Track.IncreaseRepeatButton>
-                                <RepeatButton Style="{StaticResource SliderButtonStyle}" Command="Slider.IncreaseLarge" />
-                            </Track.IncreaseRepeatButton>
                         </Track>
                         <TickBar x:Name="BottomTick"
                                  SnapsToDevicePixels="True"
