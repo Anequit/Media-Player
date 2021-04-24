@@ -20,6 +20,7 @@ namespace MediaPlayerUIWpf
 
             mediaHandler = new MediaHandler(fileHandler.GetFileList());
 
+            mediaHandler.MediaOpenedEvent += MediaHandler_MediaOpenedEvent;
             mediaHandler.VolumeChangedEvent += MediaHandler_VolumeChangedEvent;
             mediaHandler.SongChangedEvent += MediaHandler_SongChangedEvent;
             mediaHandler.MediaPlayingEvent += MediaHandler_MediaPlayingEvent;
@@ -29,10 +30,10 @@ namespace MediaPlayerUIWpf
             InitializeComponent();
         }
 
+        private void MediaHandler_MediaOpenedEvent(object sender, EventArgs e) => SetupSeekSlider();
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            SetupSeekSlider();
-
             Title = $"Paused - {mediaHandler.GetCurrentSong().Name}";
             songLabel.Content = mediaHandler.GetCurrentSong().Name;
         }
@@ -44,12 +45,7 @@ namespace MediaPlayerUIWpf
             mediaHandler.Next();
         }
 
-        private void MediaHandler_SongChangedEvent(object sender, EventArgs e)
-        {
-            SetupSeekSlider();
-
-            songLabel.Content = mediaHandler.GetCurrentSong().Name;
-        }
+        private void MediaHandler_SongChangedEvent(object sender, EventArgs e) => songLabel.Content = mediaHandler.GetCurrentSong().Name;
 
         private void MediaHandler_MediaPlayingEvent(object sender, EventArgs e) => Title = $"Playing - {mediaHandler.GetCurrentSong().Name}";
 
@@ -81,7 +77,9 @@ namespace MediaPlayerUIWpf
         private void SeekSlider_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
         {
             mediaHandler.Seek(seekSlider.Value);
-            mediaHandler.Play();
+
+            if(!mediaHandler.isPaused)
+                mediaHandler.Play();
         }
 
         private void SeekSlider_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e) => mediaHandler.Pause();

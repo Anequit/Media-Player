@@ -16,11 +16,14 @@ namespace MediaControllerLibrary
         private bool repeating = false;
         private bool shuffling = false;
 
+        public bool isPaused = true;
+
         public event EventHandler SongChangedEvent;
         public event EventHandler VolumeChangedEvent;
         public event EventHandler MediaPlayingEvent;
         public event EventHandler MediaPausedEvent;
         public event EventHandler MediaFailedEvent;
+        public event EventHandler MediaOpenedEvent;
 
         public MediaHandler(List<FileModel> fileModels)
         {
@@ -64,8 +67,8 @@ namespace MediaControllerLibrary
         /// <param name="e"></param>
         private void Player_MediaOpened(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("opened");
             Play();
+            MediaOpenedEvent.Invoke(this, EventArgs.Empty);
         }
         /// <summary>
         /// Invoke MediaFailed event when media fails to open. 
@@ -95,6 +98,7 @@ namespace MediaControllerLibrary
         public void Play()
         {
             player.Play();
+            isPaused = false;
             MediaPlayingEvent.Invoke(this, EventArgs.Empty);
         }
 
@@ -104,13 +108,9 @@ namespace MediaControllerLibrary
         public void Pause()
         {
             player.Pause();
+            isPaused = true;
             MediaPausedEvent.Invoke(this, EventArgs.Empty);
         }
-
-        /// <summary>
-        /// Stops the MediaPlayer.
-        /// </summary>
-        public void Stop() => player.Stop();
 
         /// <summary>
         /// Changes the song to the next one.
