@@ -1,9 +1,9 @@
 ﻿using MediaControllerLibrary.Models;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace MediaControllerLibrary
 {
@@ -31,7 +31,8 @@ namespace MediaControllerLibrary
             {
                 LoadedBehavior = MediaState.Manual,
                 UnloadedBehavior = MediaState.Manual,
-                Volume = 50
+                Volume = 50,
+                ScrubbingEnabled = true
             };
 
             if (Environment.GetCommandLineArgs().Length == 2)
@@ -61,8 +62,11 @@ namespace MediaControllerLibrary
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Player_MediaOpened(object sender, RoutedEventArgs e) => Play();
-
+        private void Player_MediaOpened(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("opened");
+            Play();
+        }
         /// <summary>
         /// Invoke MediaFailed event when media fails to open. 
         /// </summary>
@@ -83,7 +87,7 @@ namespace MediaControllerLibrary
         /// <returns>
         /// Current song name.
         /// </returns>
-        public string GetCurrentSong() => fileModels[indexHandler.GetCurrentIndex()].Name;
+        public FileModel GetCurrentSong() => fileModels[indexHandler.GetCurrentIndex()];
 
         /// <summary>
         /// Starts playing the MediaPlayer.
@@ -166,11 +170,17 @@ namespace MediaControllerLibrary
         /// Seeks to the position provided
         /// </summary>
         /// <param name="position"></param>
-        public void Seek(int position)
-        {
-            //mediaElement.Clock.Controller.Seek(TimeSpan.FromSeconds(slider.Value), TimeSeekOrigin.BeginTime);
-        }
+        public void Seek(double position) => player.Position = TimeSpan.FromSeconds(position);
 
+        public Duration GetCurrentSongDuration()
+        {
+            if (!player.NaturalDuration.HasTimeSpan)
+            {
+                MessageBox.Show(player.NaturalDuration.HasTimeSpan.ToString());
+            }
+
+            return player.NaturalDuration;
+        }
         /// <summary>
         /// Takes command line args and finds a matching fileModel path, then sets the index to that song.
         /// </summary>

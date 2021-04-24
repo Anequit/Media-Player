@@ -150,7 +150,7 @@
                             </Track.DecreaseRepeatButton>
 
                             <Track.Thumb>
-                                <Thumb Style="{StaticResource SliderThumbStyle}" Height="20" Width="10" />
+                                <Thumb Style="{StaticResource SliderThumbStyle}" Height="20" Width="10"/>
                             </Track.Thumb>
 
                             <Track.IncreaseRepeatButton>
