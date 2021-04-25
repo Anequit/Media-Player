@@ -193,6 +193,8 @@ namespace MediaControllerLibrary
 
         public double GetCurrentSongDuration() => naturalDuration.TimeSpan.TotalSeconds;
 
+        public double GetCurrentPosition() => player.Position.TotalSeconds;
+       
         /// <summary>
         /// Takes command line args and finds a matching fileModel path, then sets the index to that song.
         /// </summary>
