@@ -12,6 +12,7 @@ namespace MediaControllerLibrary
         private readonly MediaElement player;
         private readonly IndexHandler indexHandler;
         private List<FileModel> fileModels;
+        private Duration naturalDuration;
 
         private bool repeating = false;
         private bool shuffling = false;
@@ -30,22 +31,25 @@ namespace MediaControllerLibrary
             this.fileModels = fileModels;
 
             indexHandler = new IndexHandler(this.fileModels);
+
+            if (Environment.GetCommandLineArgs().Length == 2)
+                SetSelectedSong();
+
             player = new MediaElement()
             {
                 LoadedBehavior = MediaState.Manual,
                 UnloadedBehavior = MediaState.Manual,
                 Volume = 50,
-                ScrubbingEnabled = true
+                ScrubbingEnabled = true,
+                Source = fileModels[indexHandler.GetCurrentIndex()].Path,
+                Balance = 0
             };
-
-            if (Environment.GetCommandLineArgs().Length == 2)
-                SetSelectedSong();
 
             player.MediaEnded += Player_MediaEnded;
             player.MediaOpened += Player_MediaOpened;
             player.MediaFailed += Player_MediaFailed;
 
-            Open();
+            player.Play();
         }
 
         /// <summary>
@@ -67,6 +71,8 @@ namespace MediaControllerLibrary
         /// <param name="e"></param>
         private void Player_MediaOpened(object sender, RoutedEventArgs e)
         {
+            naturalDuration = player.NaturalDuration;
+
             Play();
             MediaOpenedEvent.Invoke(this, EventArgs.Empty);
         }
@@ -143,7 +149,11 @@ namespace MediaControllerLibrary
         /// <summary>
         /// Loads the current song.
         /// </summary>
-        public void Open() => player.Source = fileModels[indexHandler.GetCurrentIndex()].Path;
+        public void Open()
+        {
+            player.Source = fileModels[indexHandler.GetCurrentIndex()].Path;
+            MediaOpenedEvent.Invoke(this, EventArgs.Empty);
+        }
 
         /// <summary>
         /// Toggles shuffle on and off.
@@ -172,14 +182,15 @@ namespace MediaControllerLibrary
         /// <param name="position"></param>
         public void Seek(double position) => player.Position = TimeSpan.FromSeconds(position);
 
-        public Duration GetCurrentSongDuration()
+        public double GetCurrentSongDuration()
         {
-            if (!player.NaturalDuration.HasTimeSpan)
+            if (player.NaturalDuration.HasTimeSpan)
             {
-                MessageBox.Show(player.NaturalDuration.HasTimeSpan.ToString());
-            }
+                return player.NaturalDuration.TimeSpan.TotalSeconds;
 
-            return player.NaturalDuration;
+            }
+            else
+                return 0.0;
         }
         /// <summary>
         /// Takes command line args and finds a matching fileModel path, then sets the index to that song.
