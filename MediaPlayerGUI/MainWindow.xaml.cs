@@ -36,6 +36,8 @@ namespace MediaPlayerUIWpf
         {
             Title = $"Paused - {mediaHandler.GetCurrentSong().Name}";
             songLabel.Content = mediaHandler.GetCurrentSong().Name;
+
+            //mediaHandler.Open();
         }
 
         private void MediaHandler_MediaFailedEvent(object sender, EventArgs e)
@@ -69,7 +71,7 @@ namespace MediaPlayerUIWpf
 
         private void SetupSeekSlider()
         {
-            seekSlider.Maximum = mediaHandler.GetCurrentSongDuration().TimeSpan.TotalSeconds;
+            seekSlider.Maximum = mediaHandler.GetCurrentSongDuration();
             seekSlider.Minimum = 0;
             seekSlider.Value = 0;
         }
@@ -78,8 +80,7 @@ namespace MediaPlayerUIWpf
         {
             mediaHandler.Seek(seekSlider.Value);
 
-            if(!mediaHandler.isPaused)
-                mediaHandler.Play();
+            mediaHandler.Play();
         }
 
         private void SeekSlider_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e) => mediaHandler.Pause();
