@@ -49,7 +49,16 @@ namespace MediaControllerLibrary
             player.MediaOpened += Player_MediaOpened;
             player.MediaFailed += Player_MediaFailed;
 
-            player.Play();
+            player.Play(); // play, so that the natural duration of the song is set
+
+            do
+            {
+                if (player.NaturalDuration.HasTimeSpan)
+                {
+                    naturalDuration = player.NaturalDuration;
+                    player.Pause();
+                }
+            } while (!naturalDuration.HasTimeSpan);
         }
 
         /// <summary>
@@ -182,16 +191,8 @@ namespace MediaControllerLibrary
         /// <param name="position"></param>
         public void Seek(double position) => player.Position = TimeSpan.FromSeconds(position);
 
-        public double GetCurrentSongDuration()
-        {
-            if (player.NaturalDuration.HasTimeSpan)
-            {
-                return player.NaturalDuration.TimeSpan.TotalSeconds;
+        public double GetCurrentSongDuration() => naturalDuration.TimeSpan.TotalSeconds;
 
-            }
-            else
-                return 0.0;
-        }
         /// <summary>
         /// Takes command line args and finds a matching fileModel path, then sets the index to that song.
         /// </summary>
