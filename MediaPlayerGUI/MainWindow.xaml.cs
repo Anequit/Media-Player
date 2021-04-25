@@ -102,11 +102,16 @@ namespace MediaPlayerUIWpf
 
         private void SeekSlider_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
         {
+            timer.IsEnabled = true;
             mediaHandler.Seek(seekSlider.Value);
             mediaHandler.Play();
         }
 
-        private void SeekSlider_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e) => mediaHandler.Pause();
+        private void SeekSlider_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
+        {
+            timer.IsEnabled = false;
+            mediaHandler.Pause();
+        }
 
         #endregion
        
