@@ -61,51 +61,8 @@ namespace MediaControllerLibrary
             } while (!naturalDuration.HasTimeSpan);
         }
 
-        /// <summary>
-        /// Updates the File Model list and updates the index.
-        /// </summary>
-        /// <param name="fileModels"></param>
-        public void UpdateMediaHandler(List<FileModel> fileModels)
-        {
-            // If there is an error, update the fileModels and then update the index handler, so that it's in sync with the new list.
+        #region Player Controls
 
-            this.fileModels = fileModels;
-            indexHandler.UpdateIndex(fileModels);
-        }
-
-        /// <summary>
-        /// Play media when it opens.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Player_MediaOpened(object sender, RoutedEventArgs e)
-        {
-            naturalDuration = player.NaturalDuration;
-
-            Play();
-            MediaOpenedEvent.Invoke(this, EventArgs.Empty);
-        }
-        /// <summary>
-        /// Invoke MediaFailed event when media fails to open. 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Player_MediaFailed(object sender, ExceptionRoutedEventArgs e) => MediaFailedEvent.Invoke(this, EventArgs.Empty);
-
-        /// <summary>
-        /// Plays the next song when it finishes playing the current one.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Player_MediaEnded(object sender, EventArgs e) => Next();
-
-        /// <summary>
-        /// Gets the current song name.
-        /// </summary>
-        /// <returns>
-        /// Current song name.
-        /// </returns>
-        public FileModel GetCurrentSong() => fileModels[indexHandler.GetCurrentIndex()];
 
         /// <summary>
         /// Starts playing the MediaPlayer.
@@ -131,7 +88,7 @@ namespace MediaControllerLibrary
         /// Changes the song to the next one.
         /// </summary>
         public void Next()
-        { 
+        {
             if (shuffling)
                 indexHandler.RandomizeIndex();
             else if (!repeating)
@@ -190,6 +147,59 @@ namespace MediaControllerLibrary
         /// </summary>
         /// <param name="position"></param>
         public void Seek(double position) => player.Position = TimeSpan.FromSeconds(position);
+
+
+        #endregion
+
+        #region Player Events
+
+        /// <summary>
+        /// Play media when it opens.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Player_MediaOpened(object sender, RoutedEventArgs e)
+        {
+            naturalDuration = player.NaturalDuration;
+
+            Play();
+            MediaOpenedEvent.Invoke(this, EventArgs.Empty);
+        }
+        /// <summary>
+        /// Invoke MediaFailed event when media fails to open. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Player_MediaFailed(object sender, ExceptionRoutedEventArgs e) => MediaFailedEvent.Invoke(this, EventArgs.Empty);
+
+        /// <summary>
+        /// Plays the next song when it finishes playing the current one.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Player_MediaEnded(object sender, EventArgs e) => Next();
+
+        #endregion
+
+        /// <summary>
+        /// Updates the File Model list and updates the index.
+        /// </summary>
+        /// <param name="fileModels"></param>
+        public void UpdateMediaHandler(List<FileModel> fileModels)
+        {
+            // If there is an error, update the fileModels and then update the index handler, so that it's in sync with the new list.
+
+            this.fileModels = fileModels;
+            indexHandler.UpdateIndex(fileModels);
+        }
+
+        /// <summary>
+        /// Gets the current song name.
+        /// </summary>
+        /// <returns>
+        /// Current song name.
+        /// </returns>
+        public FileModel GetCurrentSong() => fileModels[indexHandler.GetCurrentIndex()];
 
         public double GetCurrentSongDuration() => naturalDuration.TimeSpan.TotalSeconds;
 
