@@ -105,7 +105,11 @@ namespace MediaControllerLibrary
         /// </summary>
         public void Back()
         {
-            indexHandler.IndexBack();
+            if (shuffling)
+                indexHandler.RandomizeIndex();
+            else if (!repeating)
+                indexHandler.IndexBack();
+
             Open();
             Play();
 

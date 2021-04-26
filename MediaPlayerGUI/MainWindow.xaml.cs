@@ -54,7 +54,12 @@ namespace MediaPlayerUIWpf
 
         #region Media Handler Events
 
-        private void MediaHandler_MediaOpenedEvent(object sender, EventArgs e) => SetupSeekSlider();
+        private void MediaHandler_MediaOpenedEvent(object sender, EventArgs e)
+        {
+            SetupSeekSlider();
+
+            mediaHandler.Seek(0);
+        }
 
         private void MediaHandler_SongChangedEvent(object sender, EventArgs e) => songLabel.Content = mediaHandler.GetCurrentSong().Name;
 
