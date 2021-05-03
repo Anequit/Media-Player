@@ -34,7 +34,7 @@ namespace MediaPlayerUIWpf
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Title = $"Paused - {mediaHandler.GetCurrentSong().Name}";
+            Title = $"Playing - {mediaHandler.GetCurrentSong().Name}";
             songLabel.Content = mediaHandler.GetCurrentSong().Name;
 
             timer = new DispatcherTimer()
