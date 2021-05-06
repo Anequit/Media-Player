@@ -1,8 +1,8 @@
-﻿using MediaControllerLibrary.Models;
+﻿using MediaPlayerLibrary.Models;
 using System;
 using System.Collections.Generic;
 
-namespace MediaControllerLibrary
+namespace MediaPlayerLibrary
 {
     public class IndexHandler
     {

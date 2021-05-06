@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MediaControllerLibrary.Models
+namespace MediaPlayerLibrary.Models
 {
     public class FileModel
     {

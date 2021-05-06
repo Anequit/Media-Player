@@ -1,11 +1,10 @@
-﻿using MediaControllerLibrary.Models;
+﻿using MediaPlayerLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
-namespace MediaControllerLibrary
+namespace MediaPlayerLibrary
 {
     public class MediaHandler
     {

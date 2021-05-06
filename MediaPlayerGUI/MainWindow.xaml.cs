@@ -1,5 +1,5 @@
-﻿using MediaControllerLibrary;
-using MediaControllerLibrary.Entities;
+﻿using MediaPlayerLibrary;
+using MediaPlayerLibrary.Entities;
 using System;
 using System.Windows;
 using System.Windows.Threading;

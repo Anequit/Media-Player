@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaPlayerLibrary", "MediaControllerLibrary\MediaPlayerLibrary.csproj", "{B3E25845-0C49-41DC-8263-3FACFE487E0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaPlayerLibrary", "MediaPlayerLibrary\MediaPlayerLibrary.csproj", "{B3E25845-0C49-41DC-8263-3FACFE487E0A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaPlayerGUI", "MediaPlayerGUI\MediaPlayerGUI.csproj", "{51C1E0EF-55B9-4331-979F-9527E55B23B4}"
 EndProject

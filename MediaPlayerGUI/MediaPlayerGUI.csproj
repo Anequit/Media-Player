@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MediaControllerLibrary\MediaPlayerLibrary.csproj" />
+    <ProjectReference Include="..\MediaPlayerLibrary\MediaPlayerLibrary.csproj" />
   </ItemGroup>
 
 </Project>

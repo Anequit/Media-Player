@@ -1,4 +1,4 @@
-﻿namespace MediaControllerLibrary.Entities
+﻿namespace MediaPlayerLibrary.Entities
 {
     public enum FileType
     {

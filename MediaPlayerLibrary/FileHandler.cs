@@ -1,11 +1,11 @@
-﻿using MediaControllerLibrary.Entities;
-using MediaControllerLibrary.Models;
+﻿using MediaPlayerLibrary.Entities;
+using MediaPlayerLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using WK.Libraries.BetterFolderBrowserNS;
 
-namespace MediaControllerLibrary
+namespace MediaPlayerLibrary
 {
     public class FileHandler
     {
