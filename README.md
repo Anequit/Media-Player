@@ -1,4 +1,4 @@
-# dotnet-media-player
+# Media Player
 
 Super low resource consuming Media player for those who can't use spotify or any other music platform.
 
