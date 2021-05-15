@@ -32,26 +32,6 @@ namespace MediaPlayerUIWpf
             InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            Title = $"Playing - {mediaHandler.CurrentSong.Name}";
-            songLabel.Content = mediaHandler.CurrentSong.Name;
-
-            timer = new DispatcherTimer()
-            {
-                Interval = TimeSpan.FromMilliseconds(5)
-            };
-
-            timer.Tick += Timer_Tick;
-            timer.Start();
-        }
-
-        #region Timer
-
-        private void Timer_Tick(object sender, EventArgs e) => seekSlider.Value = mediaHandler.CurrentSongPosition;
-
-        #endregion
-
         #region Media Handler Events
 
         private void MediaHandler_MediaOpenedEvent(object sender, EventArgs e)
@@ -78,7 +58,23 @@ namespace MediaPlayerUIWpf
 
         #endregion
 
-        #region Controls
+        #region Control Events
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Title = $"Playing - {mediaHandler.CurrentSong.Name}";
+            songLabel.Content = mediaHandler.CurrentSong.Name;
+
+            timer = new DispatcherTimer()
+            {
+                Interval = TimeSpan.FromMilliseconds(5)
+            };
+
+            timer.Tick += Timer_Tick;
+            timer.Start();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e) => seekSlider.Value = mediaHandler.CurrentSongPosition;
 
         private void VolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => mediaHandler.ChangeVolume(Convert.ToInt32(e.NewValue));
 
@@ -95,7 +91,7 @@ namespace MediaPlayerUIWpf
         }
         private void PauseButton_Click(object sender, RoutedEventArgs e)
         {
-            if(timer.IsEnabled)
+            if (timer.IsEnabled)
                 timer.IsEnabled = false;
 
             mediaHandler.Pause();
@@ -119,12 +115,16 @@ namespace MediaPlayerUIWpf
         }
 
         #endregion
-       
+
+        #region Methods
+
         private void SetupSeekSlider()
         {
             seekSlider.Maximum = mediaHandler.CurrentSongDuration;
             seekSlider.Minimum = 0;
             seekSlider.Value = 0;
-        } 
+        }
+
+        #endregion
     }
 }
