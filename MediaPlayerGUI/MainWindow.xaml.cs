@@ -20,7 +20,7 @@ namespace MediaPlayerUIWpf
             fileHandler = new FileHandler(FileType.mp3);
             fileHandler.BuildFileList();
 
-            mediaHandler = new MediaHandler(fileHandler.GetFileList());
+            mediaHandler = new MediaHandler(fileHandler.FileList);
 
             mediaHandler.MediaOpenedEvent += MediaHandler_MediaOpenedEvent;
             mediaHandler.VolumeChangedEvent += MediaHandler_VolumeChangedEvent;
@@ -34,8 +34,8 @@ namespace MediaPlayerUIWpf
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Title = $"Playing - {mediaHandler.GetCurrentSong().Name}";
-            songLabel.Content = mediaHandler.GetCurrentSong().Name;
+            Title = $"Playing - {mediaHandler.CurrentSong.Name}";
+            songLabel.Content = mediaHandler.CurrentSong.Name;
 
             timer = new DispatcherTimer()
             {
@@ -48,7 +48,7 @@ namespace MediaPlayerUIWpf
 
         #region Timer
 
-        private void Timer_Tick(object sender, EventArgs e) => seekSlider.Value = mediaHandler.GetCurrentPosition();
+        private void Timer_Tick(object sender, EventArgs e) => seekSlider.Value = mediaHandler.CurrentSongPosition;
 
         #endregion
 
@@ -61,18 +61,18 @@ namespace MediaPlayerUIWpf
             mediaHandler.Seek(0);
         }
 
-        private void MediaHandler_SongChangedEvent(object sender, EventArgs e) => songLabel.Content = mediaHandler.GetCurrentSong().Name;
+        private void MediaHandler_SongChangedEvent(object sender, EventArgs e) => songLabel.Content = mediaHandler.CurrentSong.Name;
 
-        private void MediaHandler_MediaPlayingEvent(object sender, EventArgs e) => Title = $"Playing - {mediaHandler.GetCurrentSong().Name}";
+        private void MediaHandler_MediaPlayingEvent(object sender, EventArgs e) => Title = $"Playing - {mediaHandler.CurrentSong.Name}";
 
-        private void MediaHandler_MediaPausedEvent(object sender, EventArgs e) => Title = $"Paused - {mediaHandler.GetCurrentSong().Name}";
+        private void MediaHandler_MediaPausedEvent(object sender, EventArgs e) => Title = $"Paused - {mediaHandler.CurrentSong.Name}";
 
         private void MediaHandler_VolumeChangedEvent(object sender, EventArgs e) => volumeLabel.Content = $"Volume: {Convert.ToInt32(volumeSlider.Value) / 1}";
 
         private void MediaHandler_MediaFailedEvent(object sender, EventArgs e)
         {
             fileHandler.BuildFileList();
-            mediaHandler.UpdateMediaHandler(fileHandler.GetFileList());
+            mediaHandler.UpdateMediaHandler(fileHandler.FileList);
             mediaHandler.Next();
         }
 
@@ -122,9 +122,9 @@ namespace MediaPlayerUIWpf
        
         private void SetupSeekSlider()
         {
-            seekSlider.Maximum = mediaHandler.GetCurrentSongDuration();
+            seekSlider.Maximum = mediaHandler.CurrentSongDuration;
             seekSlider.Minimum = 0;
             seekSlider.Value = 0;
-        }
+        } 
     }
 }

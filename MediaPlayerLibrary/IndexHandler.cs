@@ -6,41 +6,41 @@ namespace MediaPlayerLibrary
 {
     public class IndexHandler
     {
-        private readonly Random randomizer;
+        readonly Random _randomizer;
 
-        private int currentIndex = 0;
-        private int previousIndex;
-        private int indexMax = 0;
-        private readonly int indexMin = 0;
+        int _currentIndex = 0;
+        int _previousIndex;
+        int _indexMax = 0;
 
         public IndexHandler(List<FileModel> fileModels)
         {
-            randomizer = new Random();
-
-            UpdateIndex(fileModels);
+            _randomizer = new Random();
+            _indexMax = fileModels.Count - 1;
         }
 
-        /// <summary>
-        /// Get the current index
-        /// </summary>
-        /// <returns>
-        /// Current index
-        /// </returns>
-        public int GetCurrentIndex() => currentIndex;
+        #region Properties
 
-        public void SetCurrentIndex(int index)
+        public int CurrentIndex
         {
-            if (index > indexMax || index < indexMin)
-                return;
+            get => _currentIndex;
+            set
+            {
+                if (value > _indexMax || value < 0)
+                    return;
 
-            currentIndex = index;
+                _currentIndex = value;
+            }
         }
 
-        /// <summary>
-        /// Updates the index max
-        /// </summary>
-        /// <param name="fileModels"></param>
-        public void UpdateIndex(List<FileModel> fileModels) => indexMax = fileModels.Count - 1; // Takes the fileModels count and then subtracts 1 because it starts counting at 0.
+        public int IndexMax
+        {
+            get => _indexMax;
+            set => _indexMax = value - 1;
+        }
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// Moves index back by 1
@@ -49,12 +49,12 @@ namespace MediaPlayerLibrary
         {
             // Decrement currentIndex and check if it's greater than 0
             // If it's less than 0 then overflow into the count of the mp3 folder.
-            previousIndex = currentIndex;
+            _previousIndex = _currentIndex;
 
-            if(currentIndex <= indexMin)
-                currentIndex = indexMax;
+            if(_currentIndex <= 0)
+                _currentIndex = _indexMax;
             else
-                currentIndex -= 1;
+                _currentIndex -= 1;
         }
 
         /// <summary>
@@ -64,12 +64,12 @@ namespace MediaPlayerLibrary
         {
             // Increment currentIndex and check if it's under the max ammount
             // If it's greater than the max amount then overflow into 0 otherwise increase it.
-            previousIndex = currentIndex;
+            _previousIndex = _currentIndex;
 
-            if (currentIndex >= indexMax)
-                currentIndex = indexMin;
+            if (_currentIndex >= _indexMax)
+                _currentIndex = 0;
             else
-                currentIndex += 1;
+                _currentIndex += 1;
         }
 
         /// <summary>
@@ -79,12 +79,13 @@ namespace MediaPlayerLibrary
         {
             // Shuffle the index by generating a random index number between 0 and the max ammount and if the index is greater than 0
 
-            previousIndex = currentIndex;
+            _previousIndex = _currentIndex;
             
             do
             {
-                currentIndex = randomizer.Next(indexMin, indexMax);    
-            } while (previousIndex == currentIndex && indexMax > 0); 
+                _currentIndex = _randomizer.Next(0, _indexMax);    
+            } while (_previousIndex == _currentIndex && _indexMax > 0); 
         }
+        #endregion
     }
 }

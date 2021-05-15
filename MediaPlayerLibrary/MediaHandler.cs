@@ -8,15 +8,15 @@ namespace MediaPlayerLibrary
 {
     public class MediaHandler
     {
-        private readonly MediaElement player;
-        private readonly IndexHandler indexHandler;
-        private List<FileModel> fileModels;
-        private Duration naturalDuration;
+        private readonly MediaElement _player;
+        private readonly IndexHandler _indexHandler;
+        private List<FileModel> _fileModels;
 
-        private bool repeating = false;
-        private bool shuffling = false;
+        private Duration _naturalDuration;
 
-        public bool isPaused = true;
+        private bool _isRepeating = false;
+        private bool _isShuffling = false;
+        private bool _isPaused = false;
 
         public event EventHandler SongChangedEvent;
         public event EventHandler VolumeChangedEvent;
@@ -27,49 +27,77 @@ namespace MediaPlayerLibrary
 
         public MediaHandler(List<FileModel> fileModels)
         {
-            this.fileModels = fileModels;
+            _fileModels = fileModels;
 
-            indexHandler = new IndexHandler(this.fileModels);
+            _indexHandler = new IndexHandler(_fileModels);
 
             if (Environment.GetCommandLineArgs().Length == 2)
-                SetSelectedSong();
+                SetCurrentSong();
 
-            player = new MediaElement()
+            _player = new MediaElement()
             {
                 LoadedBehavior = MediaState.Manual,
                 UnloadedBehavior = MediaState.Manual,
                 Volume = 50,
                 ScrubbingEnabled = true,
-                Source = fileModels[indexHandler.GetCurrentIndex()].Path,
+                Source = fileModels[_indexHandler.CurrentIndex].Path,
                 Balance = 0
             };
 
-            player.MediaEnded += Player_MediaEnded;
-            player.MediaOpened += Player_MediaOpened;
-            player.MediaFailed += Player_MediaFailed;
+            _player.MediaEnded += Player_MediaEnded;
+            _player.MediaOpened += Player_MediaOpened;
+            _player.MediaFailed += Player_MediaFailed;
 
-            player.Play(); // play, so that the natural duration of the song is set
+            _player.Play(); // play, so that the natural duration of the song is set
 
             do
             {
-                if (player.NaturalDuration.HasTimeSpan)
+                if (_player.NaturalDuration.HasTimeSpan)
                 {
-                    naturalDuration = player.NaturalDuration;
-                    player.Pause();
+                    _naturalDuration = _player.NaturalDuration;
+                    _player.Pause();
                 }
-            } while (!naturalDuration.HasTimeSpan);
+            } while (!_naturalDuration.HasTimeSpan);
         }
 
-        #region Player Controls
+        #region Properties
 
+        public double CurrentSongDuration => _naturalDuration.TimeSpan.TotalSeconds;
+
+        public double CurrentSongPosition => _player.Position.TotalSeconds;
+
+        public FileModel CurrentSong => _fileModels[_indexHandler.CurrentIndex];
+
+        public bool Repeating
+        {
+            get => _isRepeating;
+            set => _isRepeating = value;
+        }
+
+        public bool Shuffling
+        {
+            get => _isShuffling;
+            set => _isShuffling = value;
+        }
+
+        public bool IsPaused
+        {
+            get => _isPaused;
+            set => _isPaused = value;
+        }
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// Starts playing the MediaPlayer.
         /// </summary>
         public void Play()
         {
-            player.Play();
-            isPaused = false;
+            _player.Play();
+            _isPaused = false;
+
             MediaPlayingEvent.Invoke(this, EventArgs.Empty);
         }
 
@@ -78,8 +106,9 @@ namespace MediaPlayerLibrary
         /// </summary>
         public void Pause()
         {
-            player.Pause();
-            isPaused = true;
+            _player.Pause();
+            _isPaused = true;
+
             MediaPausedEvent.Invoke(this, EventArgs.Empty);
         }
 
@@ -88,10 +117,10 @@ namespace MediaPlayerLibrary
         /// </summary>
         public void Next()
         {
-            if (shuffling)
-                indexHandler.RandomizeIndex();
-            else if (!repeating)
-                indexHandler.IndexNext();
+            if (_isShuffling)
+                _indexHandler.RandomizeIndex();
+            else if (!_isRepeating)
+                _indexHandler.IndexNext();
 
             Open();
             Play();
@@ -104,10 +133,10 @@ namespace MediaPlayerLibrary
         /// </summary>
         public void Back()
         {
-            if (shuffling)
-                indexHandler.RandomizeIndex();
-            else if (!repeating)
-                indexHandler.IndexBack();
+            if (_isShuffling)
+                _indexHandler.RandomizeIndex();
+            else if (!_isRepeating)
+                _indexHandler.IndexBack();
 
             Open();
             Play();
@@ -120,19 +149,19 @@ namespace MediaPlayerLibrary
         /// </summary>
         public void Open()
         {
-            player.Source = fileModels[indexHandler.GetCurrentIndex()].Path;
+            _player.Source = _fileModels[_indexHandler.CurrentIndex].Path;
             MediaOpenedEvent.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
         /// Toggles shuffle on and off.
         /// </summary>
-        public void ToggleShuffle() => shuffling = !shuffling;
+        public void ToggleShuffle() => _isShuffling = !_isShuffling;
 
         /// <summary>
         /// Toggles repeat on and off
         /// </summary>
-        public void ToggleRepeat() => repeating = !repeating;
+        public void ToggleRepeat() => _isRepeating = !_isRepeating;
 
         /// <summary>
         /// Changes the volume of the media player.
@@ -140,7 +169,7 @@ namespace MediaPlayerLibrary
         /// <param name="volume"></param>
         public void ChangeVolume(int volume)
         {
-            player.Volume = volume * 0.01;
+            _player.Volume = volume * 0.01;
 
             VolumeChangedEvent.Invoke(this, EventArgs.Empty);
         }
@@ -149,12 +178,7 @@ namespace MediaPlayerLibrary
         /// Seeks to the position provided
         /// </summary>
         /// <param name="position"></param>
-        public void Seek(double position) => player.Position = TimeSpan.FromSeconds(position);
-
-
-        #endregion
-
-        #region Player Events
+        public void Seek(double position) => _player.Position = TimeSpan.FromSeconds(position);
 
         /// <summary>
         /// Play media when it opens.
@@ -163,7 +187,7 @@ namespace MediaPlayerLibrary
         /// <param name="e"></param>
         private void Player_MediaOpened(object sender, RoutedEventArgs e)
         {
-            naturalDuration = player.NaturalDuration;
+            _naturalDuration = _player.NaturalDuration;
 
             Play();
             MediaOpenedEvent.Invoke(this, EventArgs.Empty);
@@ -182,8 +206,6 @@ namespace MediaPlayerLibrary
         /// <param name="e"></param>
         private void Player_MediaEnded(object sender, EventArgs e) => Next();
 
-        #endregion
-
         /// <summary>
         /// Updates the File Model list and updates the index.
         /// </summary>
@@ -192,25 +214,15 @@ namespace MediaPlayerLibrary
         {
             // If there is an error, update the fileModels and then update the index handler, so that it's in sync with the new list.
 
-            this.fileModels = fileModels;
-            indexHandler.UpdateIndex(fileModels);
+            _fileModels = fileModels;
+            _indexHandler.IndexMax = fileModels.Count;
         }
 
         /// <summary>
-        /// Gets the current song name.
-        /// </summary>
-        /// <returns>
-        /// Current song name.
-        /// </returns>
-        public FileModel GetCurrentSong() => fileModels[indexHandler.GetCurrentIndex()];
-
-        public double GetCurrentSongDuration() => naturalDuration.TimeSpan.TotalSeconds;
-
-        public double GetCurrentPosition() => player.Position.TotalSeconds;
-       
-        /// <summary>
         /// Takes command line args and finds a matching fileModel path, then sets the index to that song.
         /// </summary>
-        private void SetSelectedSong() => indexHandler.SetCurrentIndex(fileModels.FindIndex(x => x.Path == new Uri(Environment.GetCommandLineArgs()[1])));
+        private void SetCurrentSong() => _indexHandler.CurrentIndex = _fileModels.FindIndex(x => x.Path == new Uri(Environment.GetCommandLineArgs()[1]));
+
+        #endregion
     }
 }

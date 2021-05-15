@@ -9,33 +9,38 @@ namespace MediaPlayerLibrary
 {
     public class FileHandler
     {
-        private readonly FileType fileType;
-        private readonly string folderPath;
-        readonly List<FileModel> FileList = new List<FileModel>();
+        readonly FileType _fileType;
+        readonly string _folderPath;
+        readonly List<FileModel> _fileList = new List<FileModel>();
 
         public FileHandler(FileType fileType)
         {
-            this.fileType = fileType;
+            _fileType = fileType;
 
             if (Environment.GetCommandLineArgs().Length == 2)
-                folderPath = new FileInfo(Environment.GetCommandLineArgs()[1]).DirectoryName;
+                _folderPath = new FileInfo(Environment.GetCommandLineArgs()[1]).DirectoryName;
             else
-                folderPath = OpenFolderDialog();
+                _folderPath = OpenFolderDialog();
         }
 
-        /// <summary>
-        /// Returns a built FileList with FileModels
-        /// </summary>
-        /// <returns>
-        /// List of FileModels
-        /// </returns>
-        public List<FileModel> GetFileList()
+        #region Properties
+
+        public List<FileModel> FileList 
         {
-            if (FileList.Count == 0)
-                Environment.Exit(1);
-            
-            return FileList;
+            get
+            {
+
+                if (_fileList.Count == 0)
+                    Environment.Exit(1);
+
+
+                return _fileList;
+            } 
         }
+
+        #endregion
+
+        #region Methods
 
         /// <summary>
         /// Adds files that match the extension provided at FileHandler creation.
@@ -44,14 +49,14 @@ namespace MediaPlayerLibrary
         {
             ClearFileList();
 
-            if (!Directory.Exists(folderPath))
+            if (!Directory.Exists(_folderPath))
                 return;
 
-            DirectoryInfo directoryInfo = new DirectoryInfo(folderPath);
+            DirectoryInfo directoryInfo = new DirectoryInfo(_folderPath);
 
-            foreach(var file in directoryInfo.GetFiles())
+            foreach(FileInfo file in directoryInfo.GetFiles())
             {
-                if(file.Extension != $".{fileType}") {
+                if(file.Extension != $".{_fileType}") {
                     continue;
                 }
 
@@ -61,7 +66,7 @@ namespace MediaPlayerLibrary
                     Path = new Uri(file.FullName)
                 };
 
-                FileList.Add(fileListItem);
+                _fileList.Add(fileListItem);
             }
         }
 
@@ -78,6 +83,8 @@ namespace MediaPlayerLibrary
         }
 
         private void ClearFileList()
-            => FileList.Clear();
+            => _fileList.Clear();
+
+        #endregion
     }
 }
