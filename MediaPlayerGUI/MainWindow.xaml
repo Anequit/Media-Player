@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MediaPlayerUIWpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="650"
+        Title="MainWindow" Height="350" Width="650" WindowStyle="SingleBorderWindow"
         WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"
-        ShowInTaskbar="True" AllowDrop="False" Loaded="Window_Loaded">
+        ShowInTaskbar="True" AllowDrop="False" Loaded="Window_Loaded" IsTabStop="False">
 
     <Window.Resources>
         <ResourceDictionary>
