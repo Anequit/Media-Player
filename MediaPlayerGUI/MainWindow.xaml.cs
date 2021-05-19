@@ -1,5 +1,4 @@
 ﻿using MediaPlayerLibrary;
-using MediaPlayerLibrary.Entities;
 using System;
 using System.Windows;
 using System.Windows.Threading;
@@ -17,7 +16,7 @@ namespace MediaPlayerUIWpf
 
         public MainWindow()
         {
-            fileHandler = new FileHandler(FileType.mp3);
+            fileHandler = new FileHandler();
             fileHandler.BuildFileList();
 
             mediaHandler = new MediaHandler(fileHandler.FileList);
