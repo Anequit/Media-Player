@@ -1,5 +1,4 @@
-﻿using MediaPlayerLibrary.Entities;
-using MediaPlayerLibrary.Models;
+﻿using MediaPlayerLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,14 +8,12 @@ namespace MediaPlayerLibrary
 {
     public class FileHandler
     {
-        readonly FileType _fileType;
         readonly string _folderPath;
         readonly List<FileModel> _fileList = new List<FileModel>();
+        readonly string[] _fileTypes = { ".mp3", ".m4a", ".wav" };
 
-        public FileHandler(FileType fileType)
+        public FileHandler()
         {
-            _fileType = fileType;
-
             if (Environment.GetCommandLineArgs().Length == 2)
                 _folderPath = new FileInfo(Environment.GetCommandLineArgs()[1]).DirectoryName;
             else
@@ -25,7 +22,7 @@ namespace MediaPlayerLibrary
 
         #region Properties
 
-        public List<FileModel> FileList 
+        public List<FileModel> FileList
         {
             get
             {
@@ -35,7 +32,7 @@ namespace MediaPlayerLibrary
 
 
                 return _fileList;
-            } 
+            }
         }
 
         #endregion
@@ -54,19 +51,25 @@ namespace MediaPlayerLibrary
 
             DirectoryInfo directoryInfo = new DirectoryInfo(_folderPath);
 
-            foreach(FileInfo file in directoryInfo.GetFiles())
+            foreach (FileInfo file in directoryInfo.GetFiles())
             {
-                if(file.Extension != $".{_fileType}") {
-                    continue;
-                }
-
-                FileModel fileListItem = new FileModel()
+                foreach (string type in _fileTypes)
                 {
-                    Name = Path.GetFileNameWithoutExtension(file.Name),
-                    Path = new Uri(file.FullName)
-                };
+                    if (file.Extension == type)
+                    {
+                        FileModel fileListItem = new FileModel()
+                        {
+                            Name = Path.GetFileNameWithoutExtension(file.Name),
+                            Path = new Uri(file.FullName)
+                        };
 
-                _fileList.Add(fileListItem);
+                        _fileList.Add(fileListItem);
+
+                        break;
+                    }
+                    else
+                        continue;
+                }
             }
         }
 
