@@ -16,7 +16,6 @@ namespace MediaPlayerLibrary
 
         private bool _isRepeating = false;
         private bool _isShuffling = false;
-        private bool _isPaused = false;
 
         public event EventHandler SongChangedEvent;
         public event EventHandler VolumeChangedEvent;
@@ -68,24 +67,6 @@ namespace MediaPlayerLibrary
 
         public FileModel CurrentSong => _fileModels[_indexHandler.CurrentIndex];
 
-        public bool Repeating
-        {
-            get => _isRepeating;
-            set => _isRepeating = value;
-        }
-
-        public bool Shuffling
-        {
-            get => _isShuffling;
-            set => _isShuffling = value;
-        }
-
-        public bool IsPaused
-        {
-            get => _isPaused;
-            set => _isPaused = value;
-        }
-
         #endregion
 
         #region Methods
@@ -96,7 +77,6 @@ namespace MediaPlayerLibrary
         public void Play()
         {
             _player.Play();
-            _isPaused = false;
 
             MediaPlayingEvent.Invoke(this, EventArgs.Empty);
         }
@@ -107,7 +87,6 @@ namespace MediaPlayerLibrary
         public void Pause()
         {
             _player.Pause();
-            _isPaused = true;
 
             MediaPausedEvent.Invoke(this, EventArgs.Empty);
         }
@@ -119,7 +98,9 @@ namespace MediaPlayerLibrary
         {
             if (_isShuffling)
                 _indexHandler.RandomizeIndex();
-            else if (!_isRepeating)
+            else if (_isRepeating)
+                Seek(0); // Restarts current song.
+            else
                 _indexHandler.IndexNext();
 
             Open();
@@ -135,7 +116,9 @@ namespace MediaPlayerLibrary
         {
             if (_isShuffling)
                 _indexHandler.RandomizeIndex();
-            else if (!_isRepeating)
+            else if (_isRepeating)
+                Seek(0); // Restarts current song.
+            else
                 _indexHandler.IndexBack();
 
             Open();

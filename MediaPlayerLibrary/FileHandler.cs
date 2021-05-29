@@ -18,6 +18,8 @@ namespace MediaPlayerLibrary
                 _folderPath = new FileInfo(Environment.GetCommandLineArgs()[1]).DirectoryName;
             else
                 _folderPath = OpenFolderDialog();
+
+            BuildFileList();
         }
 
         #region Properties
@@ -26,10 +28,8 @@ namespace MediaPlayerLibrary
         {
             get
             {
-
                 if (_fileList.Count == 0)
                     Environment.Exit(1);
-
 
                 return _fileList;
             }

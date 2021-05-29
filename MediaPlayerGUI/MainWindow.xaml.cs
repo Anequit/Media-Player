@@ -17,7 +17,6 @@ namespace MediaPlayerUIWpf
         public MainWindow()
         {
             fileHandler = new FileHandler();
-            fileHandler.BuildFileList();
 
             mediaHandler = new MediaHandler(fileHandler.FileList);
 
@@ -33,12 +32,7 @@ namespace MediaPlayerUIWpf
 
         #region Media Handler Events
 
-        private void MediaHandler_MediaOpenedEvent(object sender, EventArgs e)
-        {
-            SetupSeekSlider();
-
-            mediaHandler.Seek(0);
-        }
+        private void MediaHandler_MediaOpenedEvent(object sender, EventArgs e) => SetupSeekSlider();
 
         private void MediaHandler_SongChangedEvent(object sender, EventArgs e) => songLabel.Content = mediaHandler.CurrentSong.Name;
 
@@ -120,7 +114,6 @@ namespace MediaPlayerUIWpf
         private void SetupSeekSlider()
         {
             seekSlider.Maximum = mediaHandler.CurrentSongDuration;
-            seekSlider.Minimum = 0;
             seekSlider.Value = 0;
         }
 
