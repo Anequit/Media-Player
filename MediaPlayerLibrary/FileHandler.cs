@@ -14,7 +14,7 @@ namespace MediaPlayerLibrary
 
         public FileHandler()
         {
-            if (Environment.GetCommandLineArgs().Length == 2)
+            if(Environment.GetCommandLineArgs().Length == 2)
                 _folderPath = new FileInfo(Environment.GetCommandLineArgs()[1]).DirectoryName;
             else
                 _folderPath = OpenFolderDialog();
@@ -28,7 +28,7 @@ namespace MediaPlayerLibrary
         {
             get
             {
-                if (_fileList.Count == 0)
+                if(_fileList.Count == 0)
                     Environment.Exit(1);
 
                 return _fileList;
@@ -46,16 +46,16 @@ namespace MediaPlayerLibrary
         {
             ClearFileList();
 
-            if (!Directory.Exists(_folderPath))
+            if(!Directory.Exists(_folderPath))
                 return;
 
             DirectoryInfo directoryInfo = new DirectoryInfo(_folderPath);
 
-            foreach (FileInfo file in directoryInfo.GetFiles())
+            foreach(FileInfo file in directoryInfo.GetFiles())
             {
-                foreach (string type in _fileTypes)
+                foreach(string type in _fileTypes)
                 {
-                    if (file.Extension == type)
+                    if(file.Extension == type)
                     {
                         FileModel fileListItem = new FileModel()
                         {
@@ -75,7 +75,7 @@ namespace MediaPlayerLibrary
 
         private string OpenFolderDialog()
         {
-            using (BetterFolderBrowser folderBrowser = new BetterFolderBrowser())
+            using(BetterFolderBrowser folderBrowser = new BetterFolderBrowser())
             {
                 folderBrowser.Multiselect = false;
                 folderBrowser.Title = "Media location.";

@@ -30,7 +30,7 @@ namespace MediaPlayerLibrary
 
             _indexHandler = new IndexHandler(_fileModels);
 
-            if (Environment.GetCommandLineArgs().Length == 2)
+            if(Environment.GetCommandLineArgs().Length == 2)
                 SetCurrentSong();
 
             _player = new MediaElement()
@@ -51,12 +51,12 @@ namespace MediaPlayerLibrary
 
             do
             {
-                if (_player.NaturalDuration.HasTimeSpan)
+                if(_player.NaturalDuration.HasTimeSpan)
                 {
                     _naturalDuration = _player.NaturalDuration;
                     _player.Pause();
                 }
-            } while (!_naturalDuration.HasTimeSpan);
+            } while(!_naturalDuration.HasTimeSpan);
         }
 
         #region Properties
@@ -96,9 +96,9 @@ namespace MediaPlayerLibrary
         /// </summary>
         public void Next()
         {
-            if (_isShuffling)
+            if(_isShuffling)
                 _indexHandler.RandomizeIndex();
-            else if (_isRepeating)
+            else if(_isRepeating)
                 Seek(0); // Restarts current song.
             else
                 _indexHandler.IndexNext();
@@ -114,9 +114,9 @@ namespace MediaPlayerLibrary
         /// </summary>
         public void Back()
         {
-            if (_isShuffling)
+            if(_isShuffling)
                 _indexHandler.RandomizeIndex();
-            else if (_isRepeating)
+            else if(_isRepeating)
                 Seek(0); // Restarts current song.
             else
                 _indexHandler.IndexBack();

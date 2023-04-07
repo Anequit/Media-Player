@@ -25,7 +25,7 @@ namespace MediaPlayerLibrary
             get => _currentIndex;
             set
             {
-                if (value > _indexMax || value < 0)
+                if(value > _indexMax || value < 0)
                     return;
 
                 _currentIndex = value;
@@ -51,7 +51,7 @@ namespace MediaPlayerLibrary
             // If it's less than 0 then overflow into the count of the mp3 folder.
             _previousIndex = _currentIndex;
 
-            if (_currentIndex <= 0)
+            if(_currentIndex <= 0)
                 _currentIndex = _indexMax;
             else
                 _currentIndex -= 1;
@@ -66,7 +66,7 @@ namespace MediaPlayerLibrary
             // If it's greater than the max amount then overflow into 0 otherwise increase it.
             _previousIndex = _currentIndex;
 
-            if (_currentIndex >= _indexMax)
+            if(_currentIndex >= _indexMax)
                 _currentIndex = 0;
             else
                 _currentIndex += 1;
@@ -84,7 +84,7 @@ namespace MediaPlayerLibrary
             do
             {
                 _currentIndex = _randomizer.Next(0, _indexMax);
-            } while (_previousIndex == _currentIndex && _indexMax > 0);
+            } while(_previousIndex == _currentIndex && _indexMax > 0);
         }
         #endregion
     }

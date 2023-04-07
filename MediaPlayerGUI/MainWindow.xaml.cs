@@ -77,14 +77,14 @@ namespace MediaPlayerUIWpf
 
         private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!timer.IsEnabled)
+            if(!timer.IsEnabled)
                 timer.IsEnabled = true;
 
             mediaHandler.Play();
         }
         private void PauseButton_Click(object sender, RoutedEventArgs e)
         {
-            if (timer.IsEnabled)
+            if(timer.IsEnabled)
                 timer.IsEnabled = false;
 
             mediaHandler.Pause();
