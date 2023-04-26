@@ -83,28 +83,21 @@
 					Maximum="100"
 					TickFrequency="10"
 					Value="50"
-					TickPlacement="None"
-					/>
+					TickPlacement="None"/>
 
 			<ToggleButton Grid.Row="2" 
 						  Grid.Column="0"
 						  Margin="0 1.5 1.5 1.5"
 						  Content="Repeat Track"
 						  HorizontalAlignment="Stretch"
-						  VerticalAlignment="Stretch"
-						  HorizontalContentAlignment="Center"
-						  VerticalContentAlignment="Center"
-						  />
+						  VerticalAlignment="Stretch"/>
 
 			<Button Grid.Row="4" 
 					Grid.Column="0"
 					Margin="0 1.5 1.5 0"
 					Content="↩"
 					HorizontalAlignment="Stretch"
-					VerticalAlignment="Stretch"
-					HorizontalContentAlignment="Center"
-					VerticalContentAlignment="Center"
-					/>
+					VerticalAlignment="Stretch"/>
 
 			<Slider Grid.Row="2"
 					Grid.Column="1"
@@ -112,45 +105,35 @@
 					Margin="1.5 0 1.5 1.5"
 					Minimum="0"
 					Maximum="1"
-					Orientation="Horizontal"
-					HorizontalAlignment="Stretch"
-					VerticalAlignment="Center"/>
+					Orientation="Horizontal"/>
 
 			<Button Grid.Row="3" 
 					Grid.Column="1" 
 					Margin="1.5 1.5 1.5 0"
 					Content="▶"
 					HorizontalAlignment="Stretch"
-					VerticalAlignment="Stretch"
-					HorizontalContentAlignment="Center"
-					VerticalContentAlignment="Center"/>
+					VerticalAlignment="Stretch"/>
 
 			<Button Grid.Row="3" 
 					Grid.Column="2" 
 					Margin="1.5 1.5 1.5 0"
 					Content="❙❙"
 					HorizontalAlignment="Stretch"
-					VerticalAlignment="Stretch"
-					HorizontalContentAlignment="Center"
-					VerticalContentAlignment="Center"/>
+					VerticalAlignment="Stretch"/>
 
 			<ToggleButton Grid.Row="2" 
 						  Grid.Column="3" 
 						  Margin="1.5 1.5 0 1.5"
 						  Content="Shuffle"
 						  HorizontalAlignment="Stretch"
-						  VerticalAlignment="Stretch"
-						  HorizontalContentAlignment="Center"
-						  VerticalContentAlignment="Center"/>
+						  VerticalAlignment="Stretch"/>
 
 			<Button Grid.Row="4" 
 					Grid.Column="3" 
 					Margin="1.5 1.5 0 0"
 					Content="↪"
 					HorizontalAlignment="Stretch"
-					VerticalAlignment="Stretch"
-					HorizontalContentAlignment="Center"
-					VerticalContentAlignment="Center"/>
+					VerticalAlignment="Stretch"/>
 		</Grid>
 	</Grid>
 </Window>
