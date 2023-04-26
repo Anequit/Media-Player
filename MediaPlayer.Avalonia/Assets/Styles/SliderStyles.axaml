@@ -60,7 +60,6 @@
 			<Setter Property="Width" Value="10"/>
 		</Style>
 
-		<!-- Needs to be dynamic -->
 		<Style Selector="^ /template/ Thumb">
 			<Setter Property="Template">
 				<ControlTemplate>
