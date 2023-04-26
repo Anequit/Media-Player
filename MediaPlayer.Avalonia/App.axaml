@@ -12,6 +12,7 @@
     <Application.Styles>
         <FluentTheme />
 		<StyleInclude Source="/Assets/Styles/ButtonStyles.axaml"/>
+		<StyleInclude Source="/Assets/Styles/SliderStyles.axaml"/>
     </Application.Styles>
 	
 	<Application.Resources>
@@ -23,5 +24,8 @@
 		<SolidColorBrush x:Key="ButtonPressedBrush" Color="#273c75"/>
 		<SolidColorBrush x:Key="ToggleButtonSelectedBrush" Color="#384d87"/>
 		<SolidColorBrush x:Key="SliderTrackBrush" Color="#384d87"/>
+		<SolidColorBrush x:Key="SliderThumbBrush" Color="#273C75"/>
+		<SolidColorBrush x:Key="SliderThumbMouseOver" Color="#3855A5"/>
+		<SolidColorBrush x:Key="SliderThumbMouseDown" Color="#273c75"/>
 	</Application.Resources>
 </Application>
