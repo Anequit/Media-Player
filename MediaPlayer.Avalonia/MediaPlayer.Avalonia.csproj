@@ -29,6 +29,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MediaPlayer.Core\MediaPlayer.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <AvaloniaResource Update="Assets\Styles\SliderStyles.axaml">
       <SubType>Designer</SubType>
     </AvaloniaResource>
