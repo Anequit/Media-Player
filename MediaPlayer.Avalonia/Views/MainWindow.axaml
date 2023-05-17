@@ -34,7 +34,7 @@
 			   VerticalAlignment="Stretch"
 			   Background="{DynamicResource TitleBackgroundBrush}">
 			
-			<Label Content="Song Title"
+			<Label Content="{Binding CurrentSong.Name}"
 				   FontSize="20"
 				   VerticalAlignment="Center"
 				   HorizontalAlignment="Center"
@@ -58,7 +58,7 @@
 				<ColumnDefinition Width="0.4*"/>
 			</Grid.ColumnDefinitions>
 
-			<Label Content="Volume: 50"
+			<Label Content="{Binding Volume, StringFormat='Volume: {0}'}}"
 				   Grid.Column="0"
 				   Grid.Row="0"
 				   Margin="0"
@@ -82,7 +82,7 @@
 					Minimum="0"
 					Maximum="100"
 					TickFrequency="10"
-					Value="50"
+					Value="{Binding Volume}"
 					TickPlacement="None"/>
 
 			<ToggleButton Grid.Row="2" 
@@ -90,14 +90,16 @@
 						  Margin="0 1.5 1.5 1.5"
 						  Content="Repeat Track"
 						  HorizontalAlignment="Stretch"
-						  VerticalAlignment="Stretch"/>
+						  VerticalAlignment="Stretch"
+						  IsChecked="{Binding Repeating}"/>
 
 			<Button Grid.Row="4" 
 					Grid.Column="0"
 					Margin="0 1.5 1.5 0"
 					Content="↩"
 					HorizontalAlignment="Stretch"
-					VerticalAlignment="Stretch"/>
+					VerticalAlignment="Stretch"
+					Command="{Binding BackCommand}"/>
 
 			<Slider Grid.Row="2"
 					Grid.Column="1"
@@ -112,28 +114,32 @@
 					Margin="1.5 1.5 1.5 0"
 					Content="▶"
 					HorizontalAlignment="Stretch"
-					VerticalAlignment="Stretch"/>
+					VerticalAlignment="Stretch"
+					Command="{Binding PlayCommand}"/>
 
 			<Button Grid.Row="3" 
 					Grid.Column="2" 
 					Margin="1.5 1.5 1.5 0"
 					Content="❙❙"
 					HorizontalAlignment="Stretch"
-					VerticalAlignment="Stretch"/>
+					VerticalAlignment="Stretch"
+					Command="{Binding PauseCommand}"/>
 
 			<ToggleButton Grid.Row="2" 
 						  Grid.Column="3" 
 						  Margin="1.5 1.5 0 1.5"
 						  Content="Shuffle"
 						  HorizontalAlignment="Stretch"
-						  VerticalAlignment="Stretch"/>
+						  VerticalAlignment="Stretch"
+						  IsChecked="{Binding Shuffling}"/>
 
 			<Button Grid.Row="4" 
 					Grid.Column="3" 
 					Margin="1.5 1.5 0 0"
 					Content="↪"
 					HorizontalAlignment="Stretch"
-					VerticalAlignment="Stretch"/>
+					VerticalAlignment="Stretch"
+					Command="{Binding NextCommand}"/>
 		</Grid>
 	</Grid>
 </Window>
