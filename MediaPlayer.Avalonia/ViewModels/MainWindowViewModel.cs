@@ -1,9 +1,12 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.Input;
 using MediaPlayer.Core;
 using MediaPlayer.Core.Events;
 using MediaPlayer.Core.Models;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace MediaPlayer.Avalonia.ViewModels;
 
@@ -23,7 +26,7 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         _mainWindow = window;
 
-        _handler = new MediaHandler(GetFolderDirectory(), 50);
+        _handler = new MediaHandler(Task.Run(GetFolderDirectory).Result, 50);
 
         _handler.MediaOpenedEvent += OnMediaOpenedEvent;
     }
@@ -77,19 +80,17 @@ public partial class MainWindowViewModel : ViewModelBase
         OnPropertyChanged(nameof(CurrentSong));
     }
 
-    private string GetFolderDirectory()
+    private async Task<string> GetFolderDirectory()
     {
+        FolderPickerOpenOptions options = new FolderPickerOpenOptions()
+        {
+            AllowMultiple = true,
+            Title = "Media location.",
+            SuggestedStartLocation = await _mainWindow.StorageProvider.TryGetWellKnownFolderAsync(WellKnownFolder.Music)
+        };
 
-        // Not working in preview 5 of avalonia
-        /*      var folderPicker = _mainWindow.StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions()
-                {
-                    AllowMultiple = true,
-                    Title = "Media location.",
-                    SuggestedStartLocation = await _mainWindow.StorageProvider.TryGetWellKnownFolder(WellKnownFolder.Music)
-                }).Result;*/
+        IReadOnlyList<IStorageFolder> folderPicker = await _mainWindow.StorageProvider.OpenFolderPickerAsync(options);
 
-        return Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
-
-        //return folderPicker[0].Path.AbsolutePath;
+        return folderPicker[0].Path.LocalPath;
     }
 }
