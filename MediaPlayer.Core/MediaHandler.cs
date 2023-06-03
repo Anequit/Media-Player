@@ -34,9 +34,6 @@ public class MediaHandler
 
         // Load first song
         LoadFile(_songs.First().Path);
-
-        // Set state to stopped state
-        Playing = false;
     }
 
     public Song CurrentSong => _songs.ElementAt(_indexHandler.CurrentIndex);
