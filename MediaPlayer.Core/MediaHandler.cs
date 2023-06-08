@@ -9,9 +9,10 @@ namespace MediaPlayer.Core;
 public class MediaHandler
 {
     readonly private IndexHandler _indexHandler;
-    readonly private IEnumerable<Song> _songs;
+    readonly private IEnumerable<string> _songs;
     private WaveOutEvent? _waveOut;
     private AudioFileReader? _reader;
+    private int _volume;
 
     public event EventHandler? MediaChangedEvent;
     public event EventHandler? MediaPlayingEvent;
@@ -22,23 +23,24 @@ public class MediaHandler
     public MediaHandler(string folderPath, int volume = 100, bool repeating = false, bool shuffling = false)
     {
         // Set defaults
-        Volume = volume;
+        _volume = volume;
         Repeating = repeating;
         Shuffling = shuffling;
 
         // Create song objects out of folder path
-        _songs = FileHandler.BuildFileList(folderPath).Select(SongFactory.CreateSong);
+        _songs = FileHandler.BuildFileList(folderPath);
 
         // Index songs
         _indexHandler = new IndexHandler(_songs.Count());
 
+        // Suppress null warning
+        CurrentSong = null!;
+
         // Load first song
-        LoadFile(_songs.First().Path);
+        LoadFile(_songs.First());
     }
 
-    public Song CurrentSong => _songs.ElementAt(_indexHandler.CurrentIndex);
-
-    public TimeSpan SongLength => _reader.TotalTime;
+    public Song CurrentSong { get; private set; }
 
     public TimeSpan PlaybackPostition => _waveOut.GetPositionTimeSpan();
 
@@ -46,14 +48,25 @@ public class MediaHandler
 
     public bool Shuffling { get; set; }
 
-    public int Volume { get; private set; }
+    public int Volume
+    {
+        get => _volume;
+        set
+        {
+            _volume = value;
+
+            if (_waveOut is not null)
+                _waveOut.Volume = value / 100f;
+        }
+    }
 
     public bool Playing => _waveOut is not null && _waveOut?.PlaybackState == PlaybackState.Playing;
 
+    // Resume/start playback
     public void Play()
     {
         // Return early since we have no output
-        if(_waveOut is null)
+        if (_waveOut is null)
             return;
 
         _waveOut.Play();
@@ -64,7 +77,7 @@ public class MediaHandler
     public void Pause()
     {
         // Return early since we have no output
-        if(_waveOut is null)
+        if (_waveOut is null)
             return;
 
         _waveOut.Pause();
@@ -75,53 +88,44 @@ public class MediaHandler
     public void Seek(TimeSpan position)
     {
         // We can't set a position if we have no song loaded
-        if(_reader is null)
+        if (_reader is null)
             return;
 
         _reader.CurrentTime = position;
     }
 
-    public void SetVolume(int volume)
-    {
-        // Set the players volume
-        Volume = volume;
-
-        // Null check to make sure we have an output
-        if(_waveOut is not null)
-            _waveOut.Volume = volume / 100f;
-    }
-
     public void NextSong()
     {
-        // Update index or reset song position
-        if(Shuffling || (Shuffling && !Repeating))
+        // Note: Repeating should have priority over shuffling/
+        if (Shuffling && !Repeating)
             _indexHandler.RandomizeIndex();
 
-        else if(Repeating)
+        else if (Repeating)
             Seek(TimeSpan.Zero);
 
         else
             _indexHandler.IndexNext();
 
         // Load new file
-        LoadFile(_songs.ElementAt(_indexHandler.CurrentIndex).Path);
+        LoadFile(_songs.ElementAt(_indexHandler.CurrentIndex));
 
         MediaChangedEvent?.Invoke(this, new MediaEventArgs(CurrentSong));
     }
 
     public void PreviousSong()
     {
-        if(Shuffling)
+        if (Shuffling && !Repeating)
             _indexHandler.RandomizeIndex();
 
-        else if(Repeating)
+        else if (Repeating)
             Seek(TimeSpan.Zero);
 
         else
             _indexHandler.IndexBack();
 
-        LoadFile(_songs.ElementAt(_indexHandler.CurrentIndex).Path);
-        
+        // Load new file
+        LoadFile(_songs.ElementAt(_indexHandler.CurrentIndex));
+
         MediaChangedEvent?.Invoke(this, new MediaEventArgs(CurrentSong));
     }
 
@@ -144,16 +148,23 @@ public class MediaHandler
         _reader = new AudioFileReader(filePath);
 
         // Create new WaveOutEvent for playback
-        _waveOut = new WaveOutEvent();
-
-        // Set volume of playback
-        SetVolume(Volume);
+        _waveOut = new WaveOutEvent
+        {
+            // Set volume of playback
+            Volume = Volume / 100f
+        };
 
         // Initialize playback device with AudioFileReader
         _waveOut.Init(_reader);
 
         // Subscribe to playback stopped
         _waveOut.PlaybackStopped += OnPlaybackStopped;
+
+        // Update current song
+        CurrentSong = new Song(_songs.ElementAt(_indexHandler.CurrentIndex))
+        {
+            Length = _reader.TotalTime
+        };
 
         MediaOpenedEvent?.Invoke(this, new MediaEventArgs(CurrentSong));
     }
@@ -162,7 +173,7 @@ public class MediaHandler
     private void OnPlaybackStopped(object? sender, StoppedEventArgs e)
     {
         // Occurs when playback device is no longer available
-        if(e.Exception is not null)
+        if (e.Exception is not null)
         {
             Debug.WriteLine(e);
             MediaFailedEvent?.Invoke(this, new MediaEventArgs(CurrentSong));
