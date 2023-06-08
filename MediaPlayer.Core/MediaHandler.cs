@@ -179,6 +179,8 @@ public class MediaHandler
             MediaFailedEvent?.Invoke(this, new MediaEventArgs(CurrentSong));
         }
 
+        NextSong();
+
         // Play current song
         Play();
     }
