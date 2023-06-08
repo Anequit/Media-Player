@@ -2,12 +2,21 @@
 
 public class Song
 {
-    public Song(string path, string name)
+    public Song(string filePath)
     {
-        Path = path;
+        FilePath = filePath;
+        Name = Path.GetFileNameWithoutExtension(filePath);
+    }
+
+    public Song(string filePath, string name)
+    {
+        FilePath = filePath;
         Name = name;
     }
 
-    public string Path { get; set; }
-    public string Name { get; set; }
+    public string FilePath { get; set; }
+    public string Name { get; private set; }
+    public TimeSpan Length { get; internal set; }
+
+
 }
