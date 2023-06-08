@@ -51,6 +51,6 @@ public class IndexHandler
         do
         {
             CurrentIndex = _randomizer.Next(0, Maximum);
-        } while(_previousIndex == CurrentIndex && Maximum > 0);
+        } while (_previousIndex == CurrentIndex && Maximum > 0);
     }
 }
