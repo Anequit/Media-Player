@@ -42,7 +42,14 @@ public class MediaHandler
 
     public Song CurrentSong { get; private set; }
 
-    public TimeSpan PlaybackPostition => _waveOut.GetPositionTimeSpan();
+    public TimeSpan PlaybackPostition
+    {
+        get => _waveOut.GetPositionTimeSpan();
+        set 
+        {
+            Seek(value);
+        }
+    }
 
     public bool Repeating { get; set; }
 
