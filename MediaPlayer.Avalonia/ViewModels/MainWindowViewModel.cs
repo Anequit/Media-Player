@@ -1,5 +1,8 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
+using Avalonia.Controls.Templates;
 using Avalonia.Platform.Storage;
+using Avalonia.Threading;
 using CommunityToolkit.Mvvm.Input;
 using MediaPlayer.Core;
 using MediaPlayer.Core.Events;
@@ -14,21 +17,38 @@ public partial class MainWindowViewModel : ViewModelBase
 {
     readonly MediaHandler _handler;
     readonly Window _mainWindow;
+    readonly DispatcherTimer _timer;
+    readonly Slider _positionSlider;
 
     // For xaml previewer
     public MainWindowViewModel()
     {
         _mainWindow = null!;
         _handler = null!;
+
+        _timer = null!;
+        _positionSlider = null!;
     }
 
     public MainWindowViewModel(Window window)
     {
         _mainWindow = window;
 
+        _positionSlider = _mainWindow.GetControl<Slider>("PositionSlider");
+
         _handler = new MediaHandler(Task.Run(GetFolderDirectory).Result, 50);
 
         _handler.MediaOpenedEvent += OnMediaOpenedEvent;
+
+        _timer = new(DispatcherPriority.Background)
+        {
+            Interval = TimeSpan.FromMilliseconds(100),
+            IsEnabled = true
+        };
+
+        _timer.Tick += Timer_Tick;
+
+        _handler.Play();
     }
 
     public Song CurrentSong => _handler is not null ? _handler.CurrentSong : new Song("", "Nothing playing");
@@ -41,6 +61,16 @@ public partial class MainWindowViewModel : ViewModelBase
             if (_handler is not null)
                 _handler.Volume = value;
             OnPropertyChanged(nameof(Volume));
+        }
+    }
+
+    public double CurrentPosition
+    {
+        get => _handler.PlaybackPostition.TotalSeconds;
+        set
+        {
+            _handler.PlaybackPostition = TimeSpan.FromSeconds(value);
+            OnPropertyChanged(nameof(CurrentPosition));
         }
     }
 
@@ -79,6 +109,12 @@ public partial class MainWindowViewModel : ViewModelBase
     private void OnMediaOpenedEvent(object? sender, EventArgs e)
     {
         OnPropertyChanged(nameof(CurrentSong));
+        OnPropertyChanged(nameof(CurrentPosition));
+    }
+
+    private void Timer_Tick(object? sender, EventArgs e)
+    {
+        OnPropertyChanged(nameof(CurrentPosition));
     }
 
     private async Task<string> GetFolderDirectory()
