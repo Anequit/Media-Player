@@ -31,14 +31,15 @@ public partial class MainWindowViewModel : ViewModelBase
         _handler.MediaOpenedEvent += OnMediaOpenedEvent;
     }
 
-    public Song CurrentSong => _handler is not null ? _handler.CurrentSong : new Song("", "Nothing is playing");
+    public Song CurrentSong => _handler is not null ? _handler.CurrentSong : new Song("", "Nothing playing");
 
     public int Volume
     {
         get => _handler is not null ? _handler.Volume : 50;
         set
         {
-            _handler?.SetVolume(value);
+            if (_handler is not null)
+                _handler.Volume = value;
             OnPropertyChanged(nameof(Volume));
         }
     }
@@ -82,7 +83,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     private async Task<string> GetFolderDirectory()
     {
-        FolderPickerOpenOptions options = new FolderPickerOpenOptions()
+        FolderPickerOpenOptions options = new()
         {
             AllowMultiple = true,
             Title = "Media location.",
