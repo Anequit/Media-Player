@@ -143,7 +143,11 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     public void Back() => _handler?.PreviousSong();
 
-    private void OnMediaOpenedEvent(object? sender, EventArgs e) => OnPropertyChanged(nameof(CurrentSong));
+    private void OnMediaOpenedEvent(object? sender, EventArgs e)
+    {
+        _positionSlider.Value = 0;
+        OnPropertyChanged(nameof(CurrentSong));
+    }
 
     private async Task<string> GetFolderDirectory()
     {
