@@ -80,14 +80,25 @@ public partial class MainWindowViewModel : ViewModelBase
         _timer.Tick += (_, e) =>
         {
             if (!_seeking)
-                _positionSlider.Value = _handler.PlaybackPostition.TotalSeconds;
+                OnPropertyChanged(nameof(CurrentPosition));
         };
 
         _timer.Start();
         _handler.Play();
     }
 
+
     public Song CurrentSong => _handler is not null ? _handler.CurrentSong : new Song("", "Nothing playing");
+
+    public double CurrentPosition
+    {
+        get => _handler is not null ? _handler.PlaybackPostition.TotalSeconds : 0;
+        set
+        {
+            if (_handler is not null)
+                _handler.PlaybackPostition = TimeSpan.FromSeconds(_positionSlider.Value);
+        }
+    }
 
     public int Volume
     {
