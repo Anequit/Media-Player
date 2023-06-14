@@ -6,14 +6,15 @@ using System.Diagnostics;
 
 namespace MediaPlayer.Core;
 
-public class MediaHandler
+public class MediaHandler : IDisposable
 {
-    readonly private IndexHandler _indexHandler;
-    readonly private IEnumerable<string> _songs;
+    private IndexHandler _indexHandler;
+    private IEnumerable<string> _songs;
     readonly WaveOutEvent _playbackDevice;
     private AudioFileReader? _audioReader;
     private int _volume;
     private bool _isSkipping;
+    private bool disposedValue;
 
     public event EventHandler? MediaChangedEvent;
     public event EventHandler? MediaPlayingEvent;
@@ -49,6 +50,9 @@ public class MediaHandler
         if (_songs.Any())
             // Load first song
             LoadFile(_songs.First());
+
+        else
+            Dispose();
     }
 
     public Song CurrentSong { get; private set; }
@@ -185,5 +189,32 @@ public class MediaHandler
 
         // Reset skipping
         _isSkipping = false;
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!disposedValue)
+        {
+            if (disposing)
+            {
+                _audioReader?.Dispose();
+                _playbackDevice.Dispose();
+            }
+
+            _songs = null!;
+            _indexHandler = null!;
+            disposedValue = true;
+        }
+    }
+
+    ~MediaHandler()
+    {
+        Dispose(disposing: false);
+    }
+
+    public void Dispose()
+    {
+        Dispose(disposing: true);
+        GC.SuppressFinalize(this);
     }
 }
