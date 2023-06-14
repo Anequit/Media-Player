@@ -10,9 +10,10 @@ public class MediaHandler
 {
     readonly private IndexHandler _indexHandler;
     readonly private IEnumerable<string> _songs;
-    private WaveOutEvent? _waveOut;
-    private AudioFileReader? _reader;
+    readonly WaveOutEvent _playbackDevice;
+    private AudioFileReader? _audioReader;
     private int _volume;
+    private bool _isSkipping;    
 
     public event EventHandler? MediaChangedEvent;
     public event EventHandler? MediaPlayingEvent;
@@ -36,6 +37,16 @@ public class MediaHandler
         // Suppress null warning
         CurrentSong = null!;
 
+        // Initalize playback
+        _playbackDevice = new WaveOutEvent()
+        {
+            Volume = _volume / 100f,
+            DesiredLatency = 150
+        };
+
+        _playbackDevice.PlaybackStopped += OnPlaybackStopped;
+
+        // TODO: No songs will cause exception
         // Load first song
         LoadFile(_songs.First());
     }
@@ -44,11 +55,8 @@ public class MediaHandler
 
     public TimeSpan PlaybackPostition
     {
-        get => _waveOut.GetPositionTimeSpan();
-        set 
-        {
-            Seek(value);
-        }
+        get => _audioReader is not null ? _audioReader.CurrentTime : TimeSpan.Zero;
+        set => Seek(value);
     }
 
     public bool Repeating { get; set; }
@@ -62,21 +70,21 @@ public class MediaHandler
         {
             _volume = value;
 
-            if (_waveOut is not null)
-                _waveOut.Volume = value / 100f;
+            if (_playbackDevice is not null)
+                _playbackDevice.Volume = value / 100f;
         }
     }
 
-    public bool Playing => _waveOut is not null && _waveOut?.PlaybackState == PlaybackState.Playing;
+    public bool Playing => _playbackDevice is not null && _playbackDevice?.PlaybackState == PlaybackState.Playing;
 
     // Resume/start playback
     public void Play()
     {
         // Return early since we have no output
-        if (_waveOut is null)
+        if (_playbackDevice is null)
             return;
 
-        _waveOut.Play();
+        _playbackDevice.Play();
 
         MediaPlayingEvent?.Invoke(this, new MediaEventArgs(CurrentSong));
     }
@@ -84,10 +92,10 @@ public class MediaHandler
     public void Pause()
     {
         // Return early since we have no output
-        if (_waveOut is null)
+        if (_playbackDevice is null)
             return;
 
-        _waveOut.Pause();
+        _playbackDevice.Pause();
 
         MediaPausedEvent?.Invoke(this, new MediaEventArgs(CurrentSong));
     }
@@ -95,82 +103,64 @@ public class MediaHandler
     public void Seek(TimeSpan position)
     {
         // We can't set a position if we have no song loaded
-        if (_reader is null)
+        if (_audioReader is null)
             return;
 
-        _reader.CurrentTime = position;
+        _audioReader.CurrentTime = position;
     }
 
     public void NextSong()
     {
-        // Note: Repeating should have priority over shuffling/
-        if (Shuffling && !Repeating)
-            _indexHandler.RandomizeIndex();
-
-        else if (Repeating)
-            Seek(TimeSpan.Zero);
-
-        else
-            _indexHandler.IndexNext();
-
-        // Load new file
-        LoadFile(_songs.ElementAt(_indexHandler.CurrentIndex));
-
-        MediaChangedEvent?.Invoke(this, new MediaEventArgs(CurrentSong));
+        _isSkipping = true;
+        UpdateCurrentSong(true);
     }
 
     public void PreviousSong()
     {
-        if (Shuffling && !Repeating)
-            _indexHandler.RandomizeIndex();
-
-        else if (Repeating)
-            Seek(TimeSpan.Zero);
-
-        else
-            _indexHandler.IndexBack();
-
-        // Load new file
-        LoadFile(_songs.ElementAt(_indexHandler.CurrentIndex));
-
-        MediaChangedEvent?.Invoke(this, new MediaEventArgs(CurrentSong));
+        _isSkipping = true;
+        UpdateCurrentSong(false);
     }
 
     public void ToggleShuffle() => Shuffling = !Shuffling;
 
     public void ToggleRepeat() => Repeating = !Repeating;
 
-    internal void LoadFile(string filePath)
+    private void UpdateCurrentSong(bool moveForward)
     {
-        // Clean up old WaveOutEvent incase playback failed.
-        // WaveOutEvent will throw if we init twice, so this prevents that as well.
-        _waveOut?.Dispose();
-        _waveOut = null;
+        if (Shuffling && !Repeating)
+            _indexHandler.RandomizeIndex();
 
-        // Clean up old AudioFileReader
-        _reader?.Dispose();
-        _reader = null;
+        else if (Repeating)
+            Seek(TimeSpan.Zero);
 
-        // Create new reader with file path provided
-        _reader = new AudioFileReader(filePath);
+        else if (moveForward)
+            _indexHandler.IndexNext();
 
-        // Create new WaveOutEvent for playback
-        _waveOut = new WaveOutEvent
-        {
-            // Set volume of playback
-            Volume = Volume / 100f
-        };
+        else
+            _indexHandler.IndexBack();
 
-        // Initialize playback device with AudioFileReader
-        _waveOut.Init(_reader);
+        LoadFile(_songs.ElementAt(_indexHandler.CurrentIndex));
 
-        // Subscribe to playback stopped
-        _waveOut.PlaybackStopped += OnPlaybackStopped;
+        MediaChangedEvent?.Invoke(this, new MediaEventArgs(CurrentSong));
+    }
 
-        // Update current song
+    private void LoadFile(string filePath)
+    {
+        // Stop all playback
+        _playbackDevice.Stop();
+
+        // Cleanup old audio reader
+        _audioReader?.Dispose();
+        _audioReader = null;
+
+        // Initialize playback with new audio reader
+        _audioReader = new AudioFileReader(filePath);
+        _playbackDevice.Init(_audioReader);
+
+        // Update CurrentSong
         CurrentSong = new Song(_songs.ElementAt(_indexHandler.CurrentIndex))
         {
-            Length = _reader.TotalTime
+            Length = _audioReader.TotalTime
         };
 
         MediaOpenedEvent?.Invoke(this, new MediaEventArgs(CurrentSong));
@@ -186,9 +176,16 @@ public class MediaHandler
             MediaFailedEvent?.Invoke(this, new MediaEventArgs(CurrentSong));
         }
 
-        NextSong();
+        Debug.WriteLine("OnPlayackStopped Fired");
 
-        // Play current song
+        // If the user is not skipping the current song, then we automatically play the next song.
+        if(!_isSkipping)
+            UpdateCurrentSong(true);
+
+        // Autoplay
         Play();
+
+        // Reset skipping
+        _isSkipping = false;
     }
 }
