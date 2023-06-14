@@ -59,8 +59,8 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             Track? track = e.NameScope.Find<Track>("PART_Track") ?? throw new InvalidOperationException("Track not found");
 
-            if (track.Thumb is null)
-                throw new InvalidOperationException("Thumb not found");
+            if (track.Thumb is null || track.IncreaseButton is null)
+                throw new InvalidOperationException("Critical Track button not found");
 
             track.Thumb.DragStarted += (_, e) =>
             {
