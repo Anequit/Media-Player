@@ -7,7 +7,7 @@
 		x:Class="MediaPlayer.Avalonia.Views.MainWindow"
 		x:DataType="vm:MainWindowViewModel"
 		Icon="/Assets/icon.ico"
-		Title="MediaPlayer.Avalonia"
+		Title="Media Player"
 		Width="650" Height="350"
 		WindowStartupLocation="CenterScreen"
 		ShowInTaskbar="True"
