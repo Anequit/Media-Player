@@ -109,7 +109,7 @@
 					Minimum="0"
 					Maximum="{Binding CurrentSong.Length.TotalSeconds}"
 					Orientation="Horizontal"
-					/>
+					Value="{Binding CurrentPosition}"/>
 
 			<Button Grid.Row="3"
 					Grid.Column="1"
