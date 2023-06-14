@@ -13,7 +13,7 @@ namespace MediaPlayer.Avalonia.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    readonly MediaHandler _handler;
+    readonly MediaHandler? _handler;
     readonly Window _mainWindow;
     readonly DispatcherTimer _timer;
     readonly Slider _positionSlider;
@@ -37,9 +37,16 @@ public partial class MainWindowViewModel : ViewModelBase
 
         _positionSlider = _mainWindow.GetControl<Slider>("PositionSlider");
 
-        _handler = new MediaHandler(Task.Run(GetFolderDirectory).Result, 50);
+        try
+        {
+            _handler = new MediaHandler(Task.Run(GetFolderDirectory).Result, 50);
 
-        _handler.MediaOpenedEvent += OnMediaOpenedEvent;
+            _handler.MediaOpenedEvent += OnMediaOpenedEvent;
+        }
+        catch (InvalidOperationException)
+        {
+            _handler = null;
+        }
 
         _timer = new DispatcherTimer(DispatcherPriority.Default)
         {
@@ -49,7 +56,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
         _positionSlider.ValueChanged += (_, e) =>
         {
-            if (!_seeking)
+            if (!_seeking || _handler is null)
                 return;
 
             _handler.PlaybackPostition = TimeSpan.FromSeconds(e.NewValue);
@@ -84,7 +91,7 @@ public partial class MainWindowViewModel : ViewModelBase
         };
 
         _timer.Start();
-        _handler.Play();
+        _handler?.Play();
     }
 
     public Song CurrentSong => _handler is not null ? _handler.CurrentSong : new Song("", "No Songs Loaded");
@@ -148,7 +155,7 @@ public partial class MainWindowViewModel : ViewModelBase
         OnPropertyChanged(nameof(CurrentSong));
     }
 
-    private void OnWindowClosingEvent(object? sender, WindowClosingEventArgs e) => _handler.Dispose();
+    private void OnWindowClosingEvent(object? sender, WindowClosingEventArgs e) => _handler?.Dispose();
 
     private async Task<string> GetFolderDirectory()
     {
