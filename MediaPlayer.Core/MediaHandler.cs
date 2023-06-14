@@ -46,9 +46,9 @@ public class MediaHandler
 
         _playbackDevice.PlaybackStopped += OnPlaybackStopped;
 
-        // TODO: No songs will cause exception
-        // Load first song
-        LoadFile(_songs.First());
+        if (_songs.Any())
+            // Load first song
+            LoadFile(_songs.First());
     }
 
     public Song CurrentSong { get; private set; }
