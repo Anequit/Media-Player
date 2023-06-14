@@ -13,7 +13,7 @@ public class MediaHandler
     readonly WaveOutEvent _playbackDevice;
     private AudioFileReader? _audioReader;
     private int _volume;
-    private bool _isSkipping;    
+    private bool _isSkipping;
 
     public event EventHandler? MediaChangedEvent;
     public event EventHandler? MediaPlayingEvent;
@@ -179,7 +179,7 @@ public class MediaHandler
         Debug.WriteLine("OnPlayackStopped Fired");
 
         // If the user is not skipping the current song, then we automatically play the next song.
-        if(!_isSkipping)
+        if (!_isSkipping)
             UpdateCurrentSong(true);
 
         // Autoplay
