@@ -11,7 +11,7 @@
 	</Design.PreviewWith>
 
 	<Style Selector="Slider">
-		<Style Selector="^, ^:pointerover, ^:pressed /template/ RepeatButton">
+		<Style Selector="^, ^:pointerover /template/ RepeatButton, ^:pressed /template/ RepeatButton">
 			<Setter Property="Foreground" Value="{DynamicResource SliderTrackBrush}"/>
 			<Setter Property="Background" Value="{DynamicResource SliderTrackBrush}"/>
 		</Style>
