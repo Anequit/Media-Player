@@ -35,6 +35,8 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         _mainWindow = window;
 
+        _mainWindow.Closing += OnWindowClosingEvent;
+
         _positionSlider = _mainWindow.GetControl<Slider>("PositionSlider");
 
         _handler = new MediaHandler(Task.Run(GetFolderDirectory).Result, 50);
@@ -147,6 +149,8 @@ public partial class MainWindowViewModel : ViewModelBase
         _positionSlider.Value = 0;
         OnPropertyChanged(nameof(CurrentSong));
     }
+
+    private void OnWindowClosingEvent(object? sender, WindowClosingEventArgs e) => _handler.Dispose();
 
     private async Task<string> GetFolderDirectory()
     {
