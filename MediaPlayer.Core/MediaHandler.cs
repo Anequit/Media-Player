@@ -14,7 +14,7 @@ public class MediaHandler : IDisposable
     private AudioFileReader? _audioReader;
     private int _volume;
     private bool _isSkipping;
-    private bool disposedValue;
+    private bool _disposedValue;
 
     public event EventHandler? MediaChangedEvent;
     public event EventHandler? MediaPlayingEvent;
@@ -52,7 +52,7 @@ public class MediaHandler : IDisposable
             LoadFile(_songs.First());
 
         else
-            Dispose();
+            throw new InvalidOperationException("No Songs in folder path.");
     }
 
     public Song CurrentSong { get; private set; }
@@ -84,10 +84,6 @@ public class MediaHandler : IDisposable
     // Resume/start playback
     public void Play()
     {
-        // Return early since we have no output
-        if (_playbackDevice is null)
-            return;
-
         _playbackDevice.Play();
 
         MediaPlayingEvent?.Invoke(this, new MediaEventArgs(CurrentSong));
@@ -95,10 +91,6 @@ public class MediaHandler : IDisposable
 
     public void Pause()
     {
-        // Return early since we have no output
-        if (_playbackDevice is null)
-            return;
-
         _playbackDevice.Pause();
 
         MediaPausedEvent?.Invoke(this, new MediaEventArgs(CurrentSong));
@@ -193,7 +185,7 @@ public class MediaHandler : IDisposable
 
     protected virtual void Dispose(bool disposing)
     {
-        if (!disposedValue)
+        if (!_disposedValue)
         {
             if (disposing)
             {
@@ -203,7 +195,7 @@ public class MediaHandler : IDisposable
 
             _songs = null!;
             _indexHandler = null!;
-            disposedValue = true;
+            _disposedValue = true;
         }
     }
 
