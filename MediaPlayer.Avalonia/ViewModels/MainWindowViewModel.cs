@@ -1,15 +1,15 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
-using Avalonia.Controls.Templates;
 using Avalonia.Platform.Storage;
-using Avalonia.Threading;
 using CommunityToolkit.Mvvm.Input;
 using MediaPlayer.Core;
-using MediaPlayer.Core.Events;
 using MediaPlayer.Core.Models;
 using System;
 using System.Collections.Generic;
+using System.Timers;
 using System.Threading.Tasks;
+using Avalonia.Threading;
+using System.Diagnostics;
 
 namespace MediaPlayer.Avalonia.ViewModels;
 
@@ -19,6 +19,7 @@ public partial class MainWindowViewModel : ViewModelBase
     readonly Window _mainWindow;
     readonly DispatcherTimer _timer;
     readonly Slider _positionSlider;
+    bool _seeking = false;
 
     // For xaml previewer
     public MainWindowViewModel()
@@ -40,14 +41,49 @@ public partial class MainWindowViewModel : ViewModelBase
 
         _handler.MediaOpenedEvent += OnMediaOpenedEvent;
 
-        _timer = new(DispatcherPriority.Background)
+        _timer = new DispatcherTimer(DispatcherPriority.Default)
         {
-            Interval = TimeSpan.FromMilliseconds(100),
+            Interval = TimeSpan.FromMilliseconds(250),
             IsEnabled = true
         };
 
-        _timer.Tick += Timer_Tick;
+        _positionSlider.ValueChanged += (_, e) =>
+        {
+            if (!_seeking)
+                return;
 
+            _handler.PlaybackPostition = TimeSpan.FromSeconds(e.NewValue);
+        };
+
+        _positionSlider.TemplateApplied += (_, e) =>
+        {
+            Track? track = e.NameScope.Find<Track>("PART_Track") ?? throw new InvalidOperationException("Track not found");
+
+            if (track.Thumb is null)
+                throw new InvalidOperationException("Thumb not found");
+
+            track.Thumb.DragStarted += (_, e) =>
+            {
+                _timer.Stop();
+                _seeking = true;
+                Pause();
+            };
+
+            track.Thumb.DragCompleted += (_, e) =>
+            {
+                _timer.Start();
+                Play();
+                _seeking = false;
+            };
+        };
+
+        _timer.Tick += (_, e) =>
+        {
+            if (!_seeking)
+                _positionSlider.Value = _handler.PlaybackPostition.TotalSeconds;
+        };
+
+        _timer.Start();
         _handler.Play();
     }
 
@@ -61,16 +97,6 @@ public partial class MainWindowViewModel : ViewModelBase
             if (_handler is not null)
                 _handler.Volume = value;
             OnPropertyChanged(nameof(Volume));
-        }
-    }
-
-    public double CurrentPosition
-    {
-        get => _handler.PlaybackPostition.TotalSeconds;
-        set
-        {
-            _handler.PlaybackPostition = TimeSpan.FromSeconds(value);
-            OnPropertyChanged(nameof(CurrentPosition));
         }
     }
 
@@ -106,16 +132,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     public void Back() => _handler?.PreviousSong();
 
-    private void OnMediaOpenedEvent(object? sender, EventArgs e)
-    {
-        OnPropertyChanged(nameof(CurrentSong));
-        OnPropertyChanged(nameof(CurrentPosition));
-    }
-
-    private void Timer_Tick(object? sender, EventArgs e)
-    {
-        OnPropertyChanged(nameof(CurrentPosition));
-    }
+    private void OnMediaOpenedEvent(object? sender, EventArgs e) => OnPropertyChanged(nameof(CurrentSong));
 
     private async Task<string> GetFolderDirectory()
     {
