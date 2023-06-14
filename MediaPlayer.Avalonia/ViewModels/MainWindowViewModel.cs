@@ -87,8 +87,7 @@ public partial class MainWindowViewModel : ViewModelBase
         _handler.Play();
     }
 
-
-    public Song CurrentSong => _handler is not null ? _handler.CurrentSong : new Song("", "Nothing playing");
+    public Song CurrentSong => _handler is not null ? _handler.CurrentSong : new Song("", "No Songs Loaded");
 
     public double CurrentPosition
     {
