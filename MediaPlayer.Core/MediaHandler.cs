@@ -176,8 +176,6 @@ public class MediaHandler
             MediaFailedEvent?.Invoke(this, new MediaEventArgs(CurrentSong));
         }
 
-        Debug.WriteLine("OnPlayackStopped Fired");
-
         // If the user is not skipping the current song, then we automatically play the next song.
         if (!_isSkipping)
             UpdateCurrentSong(true);
