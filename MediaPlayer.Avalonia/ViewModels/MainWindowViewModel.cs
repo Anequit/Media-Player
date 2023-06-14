@@ -43,7 +43,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
         _timer = new DispatcherTimer(DispatcherPriority.Default)
         {
-            Interval = TimeSpan.FromMilliseconds(250),
+            Interval = TimeSpan.FromMilliseconds(500),
             IsEnabled = true
         };
 
