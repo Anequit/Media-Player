@@ -154,7 +154,7 @@ public partial class MainWindowViewModel : ViewModelBase
         FolderPickerOpenOptions options = new()
         {
             AllowMultiple = true,
-            Title = "Media location.",
+            Title = "Media Location",
             SuggestedStartLocation = await _mainWindow.StorageProvider.TryGetWellKnownFolderAsync(WellKnownFolder.Music)
         };
 
