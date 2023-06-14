@@ -6,10 +6,8 @@ using MediaPlayer.Core;
 using MediaPlayer.Core.Models;
 using System;
 using System.Collections.Generic;
-using System.Timers;
 using System.Threading.Tasks;
 using Avalonia.Threading;
-using System.Diagnostics;
 
 namespace MediaPlayer.Avalonia.ViewModels;
 
