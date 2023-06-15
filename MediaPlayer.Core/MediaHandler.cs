@@ -79,7 +79,8 @@ public class MediaHandler : IDisposable
         }
     }
 
-    public bool Playing => _playbackDevice is not null && _playbackDevice?.PlaybackState == PlaybackState.Playing;
+    // If not paused, then playing since we are never in stopped state.
+    public bool Playing => _playbackDevice.PlaybackState != PlaybackState.Paused;
 
     // Resume/start playback
     public void Play()
