@@ -8,7 +8,7 @@
 		x:DataType="vm:MainWindowViewModel"
 		Icon="/Assets/icon.ico"
 		Title="{Binding Title}"
-		Width="650" Height="310"
+		Width="630" Height="310"
 		WindowStartupLocation="CenterScreen"
 		ShowInTaskbar="True"
 		CanResize="False"
