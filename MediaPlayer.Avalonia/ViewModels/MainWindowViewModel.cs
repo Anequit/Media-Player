@@ -92,9 +92,26 @@ public partial class MainWindowViewModel : ViewModelBase
 
         _timer.Start();
         _handler?.Play();
+
+        OnPropertyChanged(nameof(Title));
     }
 
     public Song CurrentSong => _handler is not null ? _handler.CurrentSong : new Song("", "No Songs Loaded");
+
+    public string Title
+    {
+        get
+        {
+            if (_handler is null)
+                return "Media Player";
+
+            if (_handler.Playing)
+                return string.Format("Playing - {0}", _handler?.CurrentSong.Name);
+
+            else
+                return string.Format("Paused - {0}", _handler?.CurrentSong.Name);
+        }
+    }
 
     public double CurrentPosition
     {
@@ -138,10 +155,18 @@ public partial class MainWindowViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    public void Play() => _handler?.Play();
+    public void Play()
+    {
+        _handler?.Play();
+        OnPropertyChanged(nameof(Title));
+    }
 
     [RelayCommand]
-    public void Pause() => _handler?.Pause();
+    public void Pause()
+    {
+        _handler?.Pause();
+        OnPropertyChanged(nameof(Title));
+    }
 
     [RelayCommand]
     public void Next() => _handler?.NextSong();
@@ -152,6 +177,7 @@ public partial class MainWindowViewModel : ViewModelBase
     private void OnMediaOpenedEvent(object? sender, EventArgs e)
     {
         _positionSlider.Value = 0;
+        OnPropertyChanged(nameof(Title));
         OnPropertyChanged(nameof(CurrentSong));
     }
 
