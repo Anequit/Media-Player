@@ -1,0 +1,31 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:MediaPlayer.Avalonia"
+             x:Class="MediaPlayer.Avalonia.App"
+             RequestedThemeVariant="Light">
+             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+
+    <Application.Styles>
+        <FluentTheme />
+		<StyleInclude Source="/Assets/Styles/ButtonStyles.axaml"/>
+		<StyleInclude Source="/Assets/Styles/SliderStyles.axaml"/>
+    </Application.Styles>
+	
+	<Application.Resources>
+		<SolidColorBrush x:Key="GridBackgroundBrush" Color="#192a56"/>
+		<SolidColorBrush x:Key="TextForegroundBrush" Color="#FFFFFF"/>
+		<SolidColorBrush x:Key="TitleBackgroundBrush" Color="#273c75"/>
+		<SolidColorBrush x:Key="ButtonBackgroundBrush" Color="#273c75"/>
+		<SolidColorBrush x:Key="ButtonMouseOverBrush" Color="#3855a5"/>
+		<SolidColorBrush x:Key="ButtonPressedBrush" Color="#273c75"/>
+		<SolidColorBrush x:Key="ToggleButtonSelectedBrush" Color="#384d87"/>
+		<SolidColorBrush x:Key="SliderTrackBrush" Color="#384d87"/>
+		<SolidColorBrush x:Key="SliderThumbBrush" Color="#273C75"/>
+		<SolidColorBrush x:Key="SliderThumbMouseOver" Color="#3855A5"/>
+		<SolidColorBrush x:Key="SliderThumbMouseDown" Color="#273c75"/>
+	</Application.Resources>
+</Application>
