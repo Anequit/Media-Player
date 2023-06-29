@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Avalonia.Threading;
+using System.Diagnostics;
 
 namespace MediaPlayer.Avalonia.ViewModels;
 
@@ -29,7 +30,7 @@ public partial class MainWindowViewModel : ViewModelBase
         _positionSlider = null!;
     }
 
-    public MainWindowViewModel(Window window)
+    public MainWindowViewModel(Window window, string[]? args)
     {
         _mainWindow = window;
 
@@ -39,7 +40,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
         try
         {
-            _handler = new MediaHandler(Task.Run(GetFolderDirectory).Result, 50);
+            _handler = args is null || args.Length == 0 ? new MediaHandler(Task.Run(GetFolderDirectory).Result, 50) : new MediaHandler(args[0], 50);
 
             _handler.MediaOpenedEvent += OnMediaOpenedEvent;
         }

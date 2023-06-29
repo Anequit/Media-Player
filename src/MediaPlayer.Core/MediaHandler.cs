@@ -1,6 +1,5 @@
 ﻿using MediaPlayer.Core.Events;
 using MediaPlayer.Core.Models;
-using NAudio.Utils;
 using NAudio.Wave;
 using System.Diagnostics;
 
@@ -22,15 +21,19 @@ public class MediaHandler : IDisposable
     public event EventHandler? MediaFailedEvent;
     public event EventHandler? MediaOpenedEvent;
 
-    public MediaHandler(string folderPath, int volume = 100, bool repeating = false, bool shuffling = false)
+    public MediaHandler(string path, int volume = 100, bool repeating = false, bool shuffling = false)
     {
         // Set defaults
         _volume = volume;
         Repeating = repeating;
         Shuffling = shuffling;
 
-        // Create song objects out of folder path
-        _songs = FileHandler.BuildFileList(folderPath);
+        // Collect all files recursively in directory
+        if(File.GetAttributes(path) == FileAttributes.Directory)
+            _songs = FileHandler.BuildFileList(path);
+
+        else
+            _songs = Enumerable.Repeat(path, 1);
 
         // Index songs
         _indexHandler = new IndexHandler(_songs.Count());

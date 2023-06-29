@@ -23,7 +23,7 @@ public partial class App : Application
             BindingPlugins.DataValidators.RemoveAt(0);
 
             desktop.MainWindow = new MainWindow();
-            desktop.MainWindow.DataContext = new MainWindowViewModel(desktop.MainWindow);
+            desktop.MainWindow.DataContext = new MainWindowViewModel(desktop.MainWindow, desktop.Args);
         }
 
         base.OnFrameworkInitializationCompleted();
