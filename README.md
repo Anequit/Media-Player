@@ -1,6 +1,5 @@
 # Media Player
-
-Super low resource consuming Media player for those who can't use spotify or any other music platform.
+Media Player written in .NET 7 using [AvaloniaUI](https://github.com/AvaloniaUI/Avalonia) and [NAudio](https://github.com/naudio/NAudio). 
 
 _Controls_
 1. Forward/Back
@@ -10,4 +9,3 @@ _Controls_
 5. Seeking
 6. Volume control
 
-Choosing to open mp3 files with the Media Player by default will provide the same functionality as the classic windows media player, but with less resource usage.
