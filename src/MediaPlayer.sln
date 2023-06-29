@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaPlayer.Avalonia", "Med
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediaPlayer.Core", "MediaPlayer.Core\MediaPlayer.Core.csproj", "{B07B2D2A-BF15-49ED-8707-5A99814C0D83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaPlayer.Cli", "MediaPlayer.Cli\MediaPlayer.Cli.csproj", "{F41BD437-E0A3-4D42-BE0B-0CAB06689821}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,14 +31,6 @@ Global
 		{B07B2D2A-BF15-49ED-8707-5A99814C0D83}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B07B2D2A-BF15-49ED-8707-5A99814C0D83}.Release|x64.ActiveCfg = Release|Any CPU
 		{B07B2D2A-BF15-49ED-8707-5A99814C0D83}.Release|x64.Build.0 = Release|Any CPU
-		{F41BD437-E0A3-4D42-BE0B-0CAB06689821}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F41BD437-E0A3-4D42-BE0B-0CAB06689821}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F41BD437-E0A3-4D42-BE0B-0CAB06689821}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{F41BD437-E0A3-4D42-BE0B-0CAB06689821}.Debug|x64.Build.0 = Debug|Any CPU
-		{F41BD437-E0A3-4D42-BE0B-0CAB06689821}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F41BD437-E0A3-4D42-BE0B-0CAB06689821}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F41BD437-E0A3-4D42-BE0B-0CAB06689821}.Release|x64.ActiveCfg = Release|Any CPU
-		{F41BD437-E0A3-4D42-BE0B-0CAB06689821}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
