@@ -9,3 +9,4 @@ _Controls_
 5. Seeking
 6. Volume control
 
+Choosing to open mp3 files with the Media Player by default will open only the single file.
