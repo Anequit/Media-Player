@@ -29,7 +29,7 @@ public class MediaHandler : IDisposable
         Shuffling = shuffling;
 
         // Collect all files recursively in directory
-        if(File.GetAttributes(path) == FileAttributes.Directory)
+        if (File.GetAttributes(path) == FileAttributes.Directory)
             _songs = FileHandler.BuildFileList(path);
 
         else
