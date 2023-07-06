@@ -1,44 +1,46 @@
 <Styles xmlns="https://github.com/avaloniaui"
-		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <Design.PreviewWith>
-	<Border Padding="20">
-		<StackPanel>
-			<Button Height="32" Content="Button" />
-			<ToggleButton Height="32" Content="Toggle Button"/>
-		</StackPanel>
-	</Border>
-  </Design.PreviewWith>
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <StackPanel>
+                <Button Height="32" Content="Button" />
+                <ToggleButton Height="32" Content="Toggle Button" />
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
 
-  <!-- Add Styles Here -->
-	<Style Selector="Button">
-		<Setter Property="FontSize" Value="12"/>
-		<Setter Property="HorizontalContentAlignment" Value="Center"/>
-		<Setter Property="VerticalContentAlignment" Value="Center"/>
-	</Style>
+    <!-- Add Styles Here -->
+    <Style Selector="Button">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
 
-	<Style Selector="ToggleButton">
-		<Setter Property="FontSize" Value="14"/>
-		<Setter Property="HorizontalContentAlignment" Value="Center"/>
-		<Setter Property="VerticalContentAlignment" Value="Center"/>
-	</Style>
-	
-	<Style Selector="Button, ToggleButton">
-		<Setter Property="Background" Value="{DynamicResource ButtonBackgroundBrush}"/>
-		<Setter Property="Foreground" Value="{DynamicResource TextForegroundBrush}"/>
-		<Setter Property="CornerRadius" Value="0"/>
-	</Style>
+    <Style Selector="ToggleButton">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
 
-	<Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter, ToggleButton:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-		<Setter Property="Background" Value="{DynamicResource ButtonMouseOverBrush}"/>
-		<Setter Property="Foreground" Value="{DynamicResource TextForegroundBrush}"/>
-	</Style>
+    <Style Selector="Button, ToggleButton">
+        <Setter Property="Background" Value="{DynamicResource ButtonBackgroundBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextForegroundBrush}" />
+        <Setter Property="CornerRadius" Value="0" />
+    </Style>
 
-	<Style Selector="Button:pressed /template/ ContentPresenter#PART_ContentPresenter, ToggleButton:pressed /template/ ContentPresenter#PART_ContentPresenter">
-		<Setter Property="Background" Value="{DynamicResource ButtonPressedBrush}"/>
-		<Setter Property="Foreground" Value="{DynamicResource TextForegroundBrush}"/>
-	</Style>
+    <Style
+        Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter, ToggleButton:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource ButtonMouseOverBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextForegroundBrush}" />
+    </Style>
 
-	<Style Selector="ToggleButton:checked /template/ ContentPresenter#PART_ContentPresenter">
-		<Setter Property="Background" Value="{DynamicResource ToggleButtonSelectedBrush}"/>
-	</Style>
+    <Style
+        Selector="Button:pressed /template/ ContentPresenter#PART_ContentPresenter, ToggleButton:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource ButtonPressedBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextForegroundBrush}" />
+    </Style>
+
+    <Style Selector="ToggleButton:checked /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource ToggleButtonSelectedBrush}" />
+    </Style>
 </Styles>

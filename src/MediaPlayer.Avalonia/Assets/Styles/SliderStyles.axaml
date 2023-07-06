@@ -1,90 +1,90 @@
 <Styles xmlns="https://github.com/avaloniaui"
-		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-	<Design.PreviewWith>
-		<Border Padding="20">
-			<StackPanel Orientation="Horizontal">
-				<Slider Maximum="100" Minimum="0" Value="50" Width="200"/>
-				<Slider VerticalAlignment="Center" Orientation="Vertical" Maximum="100"
-						Minimum="0" Value="50" Height="200"/>
-			</StackPanel>
-		</Border>
-	</Design.PreviewWith>
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <StackPanel Orientation="Horizontal">
+                <Slider Maximum="100" Minimum="0" Value="50" Width="200" />
+                <Slider VerticalAlignment="Center" Orientation="Vertical" Maximum="100"
+                        Minimum="0" Value="50" Height="200" />
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
 
-	<Style Selector="Slider">
-		<Style Selector="^, ^:pointerover /template/ RepeatButton, ^:pressed /template/ RepeatButton">
-			<Setter Property="Foreground" Value="{DynamicResource SliderTrackBrush}"/>
-			<Setter Property="Background" Value="{DynamicResource SliderTrackBrush}"/>
-		</Style>
+    <Style Selector="Slider">
+        <Style Selector="^, ^:pointerover /template/ RepeatButton, ^:pressed /template/ RepeatButton">
+            <Setter Property="Foreground" Value="{DynamicResource SliderTrackBrush}" />
+            <Setter Property="Background" Value="{DynamicResource SliderTrackBrush}" />
+        </Style>
 
-		<Style Selector="^:vertical /template/ RepeatButton">
-			<Setter Property="Template">
-				<ControlTemplate>
-					<Grid>
-						<Border Name="FocusTarget" Margin="0,-10" Background="Transparent" />
-						<Border Name="TrackBackground"
-								Background="{Binding $parent[RepeatButton].Background}"
-								CornerRadius="2"
-								Width="4"
-								HorizontalAlignment="Center"/>
-					</Grid>
-				</ControlTemplate>
-			</Setter>
-		</Style>
+        <Style Selector="^:vertical /template/ RepeatButton">
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Grid>
+                        <Border Name="FocusTarget" Margin="0,-10" Background="Transparent" />
+                        <Border Name="TrackBackground"
+                                Background="{Binding $parent[RepeatButton].Background}"
+                                CornerRadius="2"
+                                Width="4"
+                                HorizontalAlignment="Center" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter>
+        </Style>
 
-		<Style Selector="^:horizontal /template/ RepeatButton">
-			<Setter Property="Template">
-				<ControlTemplate>
-					<Grid>
-						<Border Name="FocusTarget" Margin="0,-10" Background="Transparent" />
-						<Border Name="TrackBackground"
-								Background="{Binding $parent[RepeatButton].Background}"
-								CornerRadius="2"
-								Height="4"
-								VerticalAlignment="Center"/>
-					</Grid>
-				</ControlTemplate>
-			</Setter>
-		</Style>
+        <Style Selector="^:horizontal /template/ RepeatButton">
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Grid>
+                        <Border Name="FocusTarget" Margin="0,-10" Background="Transparent" />
+                        <Border Name="TrackBackground"
+                                Background="{Binding $parent[RepeatButton].Background}"
+                                CornerRadius="2"
+                                Height="4"
+                                VerticalAlignment="Center" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter>
+        </Style>
 
-		<Style Selector="^:vertical /template/ Thumb">
-			<Setter Property="MinHeight" Value="10"/>
-			<Setter Property="MinWidth" Value="20"/>
-			<Setter Property="Height" Value="10"/>
-			<Setter Property="Width" Value="20"/>
-		</Style>
+        <Style Selector="^:vertical /template/ Thumb">
+            <Setter Property="MinHeight" Value="10" />
+            <Setter Property="MinWidth" Value="20" />
+            <Setter Property="Height" Value="10" />
+            <Setter Property="Width" Value="20" />
+        </Style>
 
-		<Style Selector="^:horizontal /template/ Thumb">
-			<Setter Property="MinHeight" Value="20"/>
-			<Setter Property="MinWidth" Value="10"/>
-			<Setter Property="Height" Value="20"/>
-			<Setter Property="Width" Value="10"/>
-		</Style>
+        <Style Selector="^:horizontal /template/ Thumb">
+            <Setter Property="MinHeight" Value="20" />
+            <Setter Property="MinWidth" Value="10" />
+            <Setter Property="Height" Value="20" />
+            <Setter Property="Width" Value="10" />
+        </Style>
 
-		<Style Selector="^ /template/ Thumb">
-			<Setter Property="Template">
-				<ControlTemplate>
-					<Grid>
-						<Rectangle Fill="{Binding $parent[Thumb].Background}"
-								   Height="{Binding $parent.Height}"
-								   Width="{Binding $parent.Width}"/>
-					</Grid>
-				</ControlTemplate>
-			</Setter>
-		</Style>
+        <Style Selector="^ /template/ Thumb">
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Grid>
+                        <Rectangle Fill="{Binding $parent[Thumb].Background}"
+                                   Height="{Binding $parent.Height}"
+                                   Width="{Binding $parent.Width}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter>
+        </Style>
 
-		<!-- Default Color -->
-		<Style Selector="^:not(:pressed) /template/ Thumb">
-			<Setter Property="Background" Value="{DynamicResource SliderThumbBrush}"/>
-		</Style>
+        <!-- Default Color -->
+        <Style Selector="^:not(:pressed) /template/ Thumb">
+            <Setter Property="Background" Value="{DynamicResource SliderThumbBrush}" />
+        </Style>
 
-		<!-- Being clicked down -->
-		<Style Selector="^:pressed /template/ Thumb">
-			<Setter Property="Background" Value="{DynamicResource SliderThumbMouseDown}"/>
-		</Style>
+        <!-- Being clicked down -->
+        <Style Selector="^:pressed /template/ Thumb">
+            <Setter Property="Background" Value="{DynamicResource SliderThumbMouseDown}" />
+        </Style>
 
-		<!-- Pointer over only -->
-		<Style Selector="^:pointerover:not(:pressed) /template/ Thumb">
-			<Setter Property="Background" Value="{DynamicResource SliderThumbMouseOver}"/>
-		</Style>
-	</Style>
+        <!-- Pointer over only -->
+        <Style Selector="^:pointerover:not(:pressed) /template/ Thumb">
+            <Setter Property="Background" Value="{DynamicResource SliderThumbMouseOver}" />
+        </Style>
+    </Style>
 </Styles>

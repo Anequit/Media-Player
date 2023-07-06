@@ -1,5 +1,4 @@
 using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
@@ -7,7 +6,8 @@ using MediaPlayer.Avalonia.ViewModels;
 using MediaPlayer.Avalonia.Views;
 
 namespace MediaPlayer.Avalonia;
-public partial class App : Application
+
+public class App : Application
 {
     public override void Initialize()
     {

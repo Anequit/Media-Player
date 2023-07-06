@@ -1,24 +1,23 @@
-﻿using Avalonia.Controls;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Platform.Storage;
+using Avalonia.Threading;
 using CommunityToolkit.Mvvm.Input;
 using MediaPlayer.Core;
 using MediaPlayer.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Avalonia.Threading;
-using System.Diagnostics;
 
 namespace MediaPlayer.Avalonia.ViewModels;
 
-public partial class MainWindowViewModel : ViewModelBase
+public class MainWindowViewModel : ViewModelBase
 {
-    readonly MediaHandler? _handler;
-    readonly Window _mainWindow;
-    readonly DispatcherTimer _timer;
-    readonly Slider _positionSlider;
-    bool _seeking = false;
+    private readonly MediaHandler? _handler;
+    private readonly Window _mainWindow;
+    private readonly Slider _positionSlider;
+    private readonly DispatcherTimer _timer;
+    private bool _seeking;
 
     // For xaml previewer
     public MainWindowViewModel()
@@ -40,7 +39,9 @@ public partial class MainWindowViewModel : ViewModelBase
 
         try
         {
-            _handler = args is null || args.Length == 0 ? new MediaHandler(Task.Run(GetFolderDirectory).Result, 50) : new MediaHandler(args[0], 50);
+            _handler = args is null || args.Length == 0
+                ? new MediaHandler(Task.Run(GetFolderDirectory).Result, 50)
+                : new MediaHandler(args[0], 50);
 
             _handler.MediaOpenedEvent += OnMediaOpenedEvent;
         }
@@ -65,7 +66,8 @@ public partial class MainWindowViewModel : ViewModelBase
 
         _positionSlider.TemplateApplied += (_, e) =>
         {
-            Track? track = e.NameScope.Find<Track>("PART_Track") ?? throw new InvalidOperationException("Track not found");
+            Track? track = e.NameScope.Find<Track>("PART_Track") ??
+                           throw new InvalidOperationException("Track not found");
 
             if (track.Thumb is null || track.IncreaseButton is null)
                 throw new InvalidOperationException("Critical Track button not found");
@@ -109,8 +111,7 @@ public partial class MainWindowViewModel : ViewModelBase
             if (_handler.Playing)
                 return string.Format("Playing - {0}", _handler?.CurrentSong.Name);
 
-            else
-                return string.Format("Paused - {0}", _handler?.CurrentSong.Name);
+            return string.Format("Paused - {0}", _handler?.CurrentSong.Name);
         }
     }
 
@@ -131,7 +132,7 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             if (_handler is not null)
                 _handler.Volume = value;
-            OnPropertyChanged(nameof(Volume));
+            OnPropertyChanged();
         }
     }
 
@@ -141,7 +142,7 @@ public partial class MainWindowViewModel : ViewModelBase
         set
         {
             _handler?.ToggleRepeat();
-            OnPropertyChanged(nameof(Repeating));
+            OnPropertyChanged();
         }
     }
 
@@ -151,7 +152,7 @@ public partial class MainWindowViewModel : ViewModelBase
         set
         {
             _handler?.ToggleShuffle();
-            OnPropertyChanged(nameof(Shuffling));
+            OnPropertyChanged();
         }
     }
 
@@ -170,10 +171,16 @@ public partial class MainWindowViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    public void Next() => _handler?.NextSong();
+    public void Next()
+    {
+        _handler?.NextSong();
+    }
 
     [RelayCommand]
-    public void Back() => _handler?.PreviousSong();
+    public void Back()
+    {
+        _handler?.PreviousSong();
+    }
 
     private void OnMediaOpenedEvent(object? sender, EventArgs e)
     {
@@ -182,11 +189,14 @@ public partial class MainWindowViewModel : ViewModelBase
         OnPropertyChanged(nameof(CurrentSong));
     }
 
-    private void OnWindowClosingEvent(object? sender, WindowClosingEventArgs e) => _handler?.Dispose();
+    private void OnWindowClosingEvent(object? sender, WindowClosingEventArgs e)
+    {
+        _handler?.Dispose();
+    }
 
     private async Task<string> GetFolderDirectory()
     {
-        FolderPickerOpenOptions options = new()
+        FolderPickerOpenOptions options = new FolderPickerOpenOptions
         {
             AllowMultiple = true,
             Title = "Media Location",
