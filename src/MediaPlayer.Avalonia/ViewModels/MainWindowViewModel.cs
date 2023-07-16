@@ -61,7 +61,7 @@ public partial class MainWindowViewModel : ViewModelBase
             if (!_seeking || _handler is null)
                 return;
 
-            _handler.PlaybackPostition = TimeSpan.FromSeconds(e.NewValue);
+            _handler.PlaybackPosition = TimeSpan.FromSeconds(e.NewValue);
         };
 
         _positionSlider.TemplateApplied += (_, e) =>
@@ -105,11 +105,11 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public double CurrentPosition
     {
-        get => _handler is not null ? _handler.PlaybackPostition.TotalSeconds : 0;
+        get => _handler is not null ? _handler.PlaybackPosition.TotalSeconds : 0;
         set
         {
             if (_handler is not null)
-                _handler.PlaybackPostition = TimeSpan.FromSeconds(_positionSlider.Value);
+                _handler.PlaybackPosition = TimeSpan.FromSeconds(_positionSlider.Value);
         }
     }
 

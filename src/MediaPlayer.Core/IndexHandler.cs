@@ -1,8 +1,10 @@
-﻿namespace MediaPlayer.Core;
+﻿using System;
+
+namespace MediaPlayer.Core;
 
 public class IndexHandler
 {
-    readonly Random _randomizer;
+    private readonly Random _randomizer;
 
     private int _previousIndex;
 
@@ -18,7 +20,7 @@ public class IndexHandler
     /// Zero based maximum possible index.
     /// The maximum index of a set with 24 items would be 23.
     /// </summary>
-    public int Maximum { get; }
+    private int Maximum { get; }
 
     /// <summary>
     /// Moves index back by 1
@@ -45,7 +47,7 @@ public class IndexHandler
     /// </summary>
     public void RandomizeIndex()
     {
-        // Shuffle the index by generating a random index number between 0 and the max ammount and if the index is greater than 0
+        // Shuffle the index by generating a random index number between 0 and the max amount and if the index is greater than 0
         _previousIndex = CurrentIndex;
 
         do

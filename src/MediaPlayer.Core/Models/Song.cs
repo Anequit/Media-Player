@@ -1,4 +1,7 @@
-﻿namespace MediaPlayer.Core.Models;
+﻿using System;
+using System.IO;
+
+namespace MediaPlayer.Core.Models;
 
 public class Song
 {
@@ -17,6 +20,4 @@ public class Song
     public string FilePath { get; set; }
     public string Name { get; private set; }
     public TimeSpan Length { get; internal set; }
-
-
 }

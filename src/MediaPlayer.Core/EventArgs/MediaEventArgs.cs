@@ -1,8 +1,8 @@
 ﻿using MediaPlayer.Core.Models;
 
-namespace MediaPlayer.Core.Events;
+namespace MediaPlayer.Core.EventArgs;
 
-public class MediaEventArgs : EventArgs
+public class MediaEventArgs : System.EventArgs
 {
     public MediaEventArgs(Song song) => Song = song;
 

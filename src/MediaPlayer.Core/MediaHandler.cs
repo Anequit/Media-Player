@@ -1,11 +1,15 @@
-﻿using MediaPlayer.Core.Events;
+﻿using System;
+using System.Collections.Generic;
+using MediaPlayer.Core.EventArgs;
 using MediaPlayer.Core.Models;
 using NAudio.Wave;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
 
 namespace MediaPlayer.Core;
 
-public class MediaHandler : IDisposable
+public sealed class MediaHandler : IDisposable
 {
     private IndexHandler _indexHandler;
     private IEnumerable<string> _songs;
@@ -29,11 +33,7 @@ public class MediaHandler : IDisposable
         Shuffling = shuffling;
 
         // Collect all files recursively in directory
-        if (File.GetAttributes(path) == FileAttributes.Directory)
-            _songs = FileHandler.BuildFileList(path);
-
-        else
-            _songs = Enumerable.Repeat(path, 1);
+        _songs = File.GetAttributes(path) == FileAttributes.Directory ? FileHandler.BuildFileList(path) : Enumerable.Repeat(path, 1);
 
         // Index songs
         _indexHandler = new IndexHandler(_songs.Count());
@@ -41,7 +41,7 @@ public class MediaHandler : IDisposable
         // Suppress null warning
         CurrentSong = null!;
 
-        // Initalize playback
+        // Initialize playback
         _playbackDevice = new WaveOutEvent()
         {
             Volume = _volume / 100f,
@@ -60,9 +60,9 @@ public class MediaHandler : IDisposable
 
     public Song CurrentSong { get; private set; }
 
-    public TimeSpan PlaybackPostition
+    public TimeSpan PlaybackPosition
     {
-        get => _audioReader is not null ? _audioReader.CurrentTime : TimeSpan.Zero;
+        get => _audioReader?.CurrentTime ?? TimeSpan.Zero;
         set => Seek(value);
     }
 
@@ -187,20 +187,19 @@ public class MediaHandler : IDisposable
         _isSkipping = false;
     }
 
-    protected virtual void Dispose(bool disposing)
+    private void Dispose(bool disposing)
     {
-        if (!_disposedValue)
+        if (_disposedValue) return;
+        
+        if (disposing)
         {
-            if (disposing)
-            {
-                _audioReader?.Dispose();
-                _playbackDevice.Dispose();
-            }
-
-            _songs = null!;
-            _indexHandler = null!;
-            _disposedValue = true;
+            _audioReader?.Dispose();
+            _playbackDevice.Dispose();
         }
+
+        _songs = null!;
+        _indexHandler = null!;
+        _disposedValue = true;
     }
 
     ~MediaHandler()
