@@ -11,7 +11,7 @@ using MediaPlayer.Core.Models;
 
 namespace MediaPlayer.Avalonia.ViewModels;
 
-public class MainWindowViewModel : ViewModelBase
+public partial class MainWindowViewModel : ViewModelBase
 {
     private readonly MediaHandler? _handler;
     private readonly Window _mainWindow;
