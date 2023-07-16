@@ -101,19 +101,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public Song CurrentSong => _handler is not null ? _handler.CurrentSong : new Song("", "No Songs Loaded");
 
-    public string Title
-    {
-        get
-        {
-            if (_handler is null)
-                return "Media Player";
-
-            if (_handler.Playing)
-                return string.Format("Playing - {0}", _handler?.CurrentSong.Name);
-
-            return string.Format("Paused - {0}", _handler?.CurrentSong.Name);
-        }
-    }
+    public string Title => _handler is null ? "Media Player" : string.Format(_handler.Playing ? "Playing - {0}" : "Paused - {0}", _handler?.CurrentSong.Name);
 
     public double CurrentPosition
     {
@@ -127,7 +115,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public int Volume
     {
-        get => _handler is not null ? _handler.Volume : 50;
+        get => _handler?.Volume ?? 50;
         set
         {
             if (_handler is not null)
@@ -157,27 +145,27 @@ public partial class MainWindowViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    public void Play()
+    private void Play()
     {
         _handler?.Play();
         OnPropertyChanged(nameof(Title));
     }
 
     [RelayCommand]
-    public void Pause()
+    private void Pause()
     {
         _handler?.Pause();
         OnPropertyChanged(nameof(Title));
     }
 
     [RelayCommand]
-    public void Next()
+    private void Next()
     {
         _handler?.NextSong();
     }
 
     [RelayCommand]
-    public void Back()
+    private void Back()
     {
         _handler?.PreviousSong();
     }
