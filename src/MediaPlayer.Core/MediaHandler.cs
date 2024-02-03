@@ -33,7 +33,7 @@ public sealed class MediaHandler : IDisposable
         Shuffling = shuffling;
 
         // Collect all files recursively in directory
-        _songs = File.GetAttributes(path) == FileAttributes.Directory ? FileHandler.BuildFileList(path) : Enumerable.Repeat(path, 1);
+        _songs = File.GetAttributes(path).HasFlag(FileAttributes.Directory) ? FileHandler.BuildFileList(path) : Enumerable.Repeat(path, 1);
 
         // Index songs
         _indexHandler = new IndexHandler(_songs.Count());
